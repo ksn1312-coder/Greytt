@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Greytt Weekly Report — Mar 16–22, 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:       #0D4A7A;
+    --mid-blue:   #1565A0;
+    --sky:        #0288D1;
+    --sky-light:  #E3F2FD;
+    --sky-pale:   #F0F7FF;
+    --white:      #FFFFFF;
+    --slate:      #37474F;
+    --muted:      #78909C;
+    --border:     #B3D9F2;
+    --red:        #C62828;
+    --red-pale:   #FFEBEE;
+    --orange:     #E65100;
+    --orange-pale:#FFF3E0;
+    --amber:      #F9A825;
+    --green:      #2E7D32;
+    --green-pale: #E8F5E9;
+    --radius:     12px;
+    --radius-sm:  8px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--sky-pale);
+    color: var(--slate);
+    font-size: 14px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── HEADER ─────────────────────────────────────────────────── */
+  .site-header {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--mid-blue) 100%);
+    padding: 32px 20px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .site-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .brand-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    color: var(--border);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .site-header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(26px, 7vw, 38px);
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 6px;
+  }
+  .site-header h1 em {
+    font-style: italic;
+    color: var(--border);
+  }
+  .header-sub {
+    font-size: 13px;
+    color: var(--border);
+    margin-bottom: 20px;
+  }
+  .header-kpis {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .hkpi {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    min-width: 90px;
+    backdrop-filter: blur(8px);
+  }
+  .hkpi-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 3px;
+  }
+  .hkpi-label {
+    font-size: 10px;
+    color: var(--border);
+    letter-spacing: 0.5px;
+    line-height: 1.3;
+  }
+
+  /* ── NAV TABS ───────────────────────────────────────────────── */
+  .tab-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--white);
+    border-bottom: 2px solid var(--border);
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    box-shadow: 0 2px 8px rgba(13,74,122,0.08);
+  }
+  .tab-nav::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    flex-shrink: 0;
+    padding: 13px 18px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.4px;
+    cursor: pointer;
+    border: none;
+    background: none;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.2s;
+    white-space: nowrap;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .tab-btn.active {
+    color: var(--navy);
+    border-bottom-color: var(--sky);
+  }
+  .tab-btn:hover { color: var(--mid-blue); }
+
+  /* ── PANELS ─────────────────────────────────────────────────── */
+  .panel { display: none; padding: 16px; max-width: 800px; margin: 0 auto; }
+  .panel.active { display: block; }
+
+  /* ── SECTION HEADINGS ───────────────────────────────────────── */
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: var(--navy);
+    margin: 24px 0 4px;
+    line-height: 1.2;
+  }
+  .section-title:first-child { margin-top: 8px; }
+  .section-divider {
+    height: 2px;
+    background: linear-gradient(90deg, var(--sky) 0%, var(--border) 100%);
+    border-radius: 2px;
+    margin-bottom: 16px;
+  }
+  .subsection-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--mid-blue);
+    margin: 18px 0 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+  }
+
+  /* ── CARD ───────────────────────────────────────────────────── */
+  .card {
+    background: var(--white);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    padding: 16px;
+    margin-bottom: 12px;
+    box-shadow: 0 1px 4px rgba(13,74,122,0.06);
+  }
+
+  /* ── KPI GRID ───────────────────────────────────────────────── */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .kpi-grid.four { grid-template-columns: repeat(2, 1fr); }
+  @media(min-width: 480px) {
+    .kpi-grid.four { grid-template-columns: repeat(4, 1fr); }
+  }
+  .kpi-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 12px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(13,74,122,0.05);
+  }
+  .kpi-card .num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 30px;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .kpi-card .lbl {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.3;
+  }
+  .c-blue   { color: var(--sky); }
+  .c-navy   { color: var(--navy); }
+  .c-green  { color: var(--green); }
+  .c-red    { color: var(--red); }
+  .c-orange { color: var(--orange); }
+  .c-amber  { color: var(--amber); }
+
+  /* ── BAR CHART ──────────────────────────────────────────────── */
+  .bar-list { display: flex; flex-direction: column; gap: 7px; }
+  .bar-row {
+    display: grid;
+    grid-template-columns: 140px 1fr 40px;
+    gap: 8px;
+    align-items: center;
+    font-size: 12px;
+  }
+  @media(max-width: 400px) {
+    .bar-row { grid-template-columns: 110px 1fr 36px; }
+  }
+  .bar-label { color: var(--slate); line-height: 1.2; }
+  .bar-track {
+    height: 20px;
+    background: var(--sky-pale);
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.8s cubic-bezier(.4,0,.2,1);
+  }
+  .bar-value { color: var(--muted); font-size: 11px; text-align: right; font-family: 'JetBrains Mono', monospace; }
+
+  /* bar colours */
+  .bar-navy { background: var(--navy); }
+  .bar-sky  { background: var(--sky); }
+  .bar-mid  { background: var(--mid-blue); }
+  .bar-teal { background: #0277BD; }
+  .bar-green { background: var(--green); }
+  .bar-red  { background: var(--red); }
+
+  /* ── DATA TABLE ─────────────────────────────────────────────── */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    margin-bottom: 12px;
+  }
+  .data-table th {
+    background: var(--navy);
+    color: var(--white);
+    padding: 8px 10px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.3px;
+  }
+  .data-table th:first-child { border-radius: 8px 0 0 0; }
+  .data-table th:last-child  { border-radius: 0 8px 0 0; }
+  .data-table td {
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--sky-light);
+    color: var(--slate);
+    vertical-align: top;
+  }
+  .data-table tr:nth-child(even) td { background: var(--sky-pale); }
+  .data-table tr:last-child td { border-bottom: none; }
+  .table-wrap { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--border); margin-bottom: 12px; }
+
+  /* ── ALERT BOXES ─────────────────────────────────────────────── */
+  .alert {
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    margin-bottom: 10px;
+    border-left: 4px solid;
+  }
+  .alert-red    { background: var(--red-pale);   border-color: var(--red);    }
+  .alert-orange { background: var(--orange-pale); border-color: var(--orange); }
+  .alert-blue   { background: var(--sky-pale);    border-color: var(--sky);   }
+  .alert-green  { background: var(--green-pale);  border-color: var(--green); }
+  .alert-title  { font-weight: 600; font-size: 13px; margin-bottom: 4px; }
+  .alert-body   { font-size: 12px; color: var(--slate); line-height: 1.5; }
+
+  /* ── INSIGHT BOX ─────────────────────────────────────────────── */
+  .insight {
+    background: var(--sky-pale);
+    border-left: 4px solid var(--sky);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 12px 14px;
+    margin-bottom: 10px;
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: var(--slate);
+  }
+  .insight strong { color: var(--navy); }
+
+  /* ── STATUS BADGE ─────────────────────────────────────────────── */
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+  }
+  .badge-done    { background: #E8F5E9; color: var(--green); }
+  .badge-prog    { background: #E3F2FD; color: var(--mid-blue); }
+  .badge-hold    { background: #FFF3E0; color: var(--orange); }
+  .badge-open    { background: var(--red-pale); color: var(--red); }
+  .badge-crit    { background: #B71C1C; color: #fff; }
+  .badge-staging { background: #E8EAF6; color: #3949AB; }
+  .badge-prod    { background: #E8F5E9; color: var(--green); }
+  .badge-ns      { background: #F5F5F5; color: #9E9E9E; }
+
+  /* ── BODY TEXT ──────────────────────────────────────────────── */
+  p { margin-bottom: 10px; font-size: 13px; line-height: 1.65; }
+  p:last-child { margin-bottom: 0; }
+
+  /* ── PART DIVIDER ───────────────────────────────────────────── */
+  .part-divider {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--mid-blue) 100%);
+    border-radius: var(--radius);
+    padding: 24px 20px;
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .part-divider::after {
+    content: '';
+    position: absolute;
+    bottom: -20px; right: -20px;
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+  }
+  .part-divider .part-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    color: var(--border);
+    margin-bottom: 6px;
+  }
+  .part-divider h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+  .part-divider p {
+    font-size: 12px;
+    color: var(--border);
+    margin: 0;
+  }
+
+  /* ── SCROLLABLE NOTICE ───────────────────────────────────────── */
+  .scroll-hint {
+    font-size: 10px;
+    color: var(--muted);
+    text-align: right;
+    margin-bottom: 4px;
+    font-style: italic;
+  }
+
+  /* ── FOOTER ──────────────────────────────────────────────────── */
+  .site-footer {
+    background: var(--navy);
+    color: var(--border);
+    text-align: center;
+    padding: 20px;
+    font-size: 11px;
+    margin-top: 32px;
+  }
+
+  /* ── ANIMATIONS ─────────────────────────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .panel.active .card,
+  .panel.active .kpi-card,
+  .panel.active .alert,
+  .panel.active .insight,
+  .panel.active .part-divider {
+    animation: fadeUp 0.35s ease both;
+  }
+
+  /* ── PRINT HINT ──────────────────────────────────────────────── */
+  @media print {
+    .tab-nav { display: none; }
+    .panel { display: block !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════ HEADER ═══════ -->
+<header class="site-header">
+  <div class="brand-tag">Greytt · Internal Report</div>
+  <h1>Weekly <em>Report</em></h1>
+  <div class="header-sub">Itinerary Analytics &amp; Tech Project Status · March 16–22, 2026</div>
+  <div class="header-kpis">
+    <div class="hkpi"><div class="hkpi-num">434</div><div class="hkpi-label">Itineraries</div></div>
+    <div class="hkpi"><div class="hkpi-num">83%</div><div class="hkpi-label">Completion Rate</div></div>
+    <div class="hkpi"><div class="hkpi-num">17</div><div class="hkpi-label">Open Bugs</div></div>
+    <div class="hkpi"><div class="hkpi-num">45</div><div class="hkpi-label">Countries</div></div>
+  </div>
+</header>
+
+<!-- ═══════ TABS ═══════ -->
+<nav class="tab-nav" role="tablist">
+  <button class="tab-btn active" onclick="showTab('summary')" role="tab">Summary</button>
+  <button class="tab-btn" onclick="showTab('itinerary')" role="tab">Itinerary</button>
+  <button class="tab-btn" onclick="showTab('destinations')" role="tab">Destinations</button>
+  <button class="tab-btn" onclick="showTab('users')" role="tab">Users</button>
+  <button class="tab-btn" onclick="showTab('tech-overview')" role="tab">Tech Overview</button>
+  <button class="tab-btn" onclick="showTab('bugs')" role="tab">Bugs</button>
+  <button class="tab-btn" onclick="showTab('risks')" role="tab">Risks</button>
+</nav>
+
+<!-- ═══════ PANEL: SUMMARY ═══════ -->
+<div id="tab-summary" class="panel active">
+
+  <p style="margin-top:12px; color:var(--muted); font-size:12px;">Combined weekly snapshot — tap tabs to drill in.</p>
+
+  <!-- Part 1 -->
+  <div class="section-title">Part 1 — Itinerary Analytics</div>
+  <div class="section-divider"></div>
+
+  <div class="kpi-grid four">
+    <div class="kpi-card"><div class="num c-blue">434</div><div class="lbl">Total Itineraries</div></div>
+    <div class="kpi-card"><div class="num c-navy">78%</div><div class="lbl">Plan Mode Share</div></div>
+    <div class="kpi-card"><div class="num c-green">7.3</div><div class="lbl">Avg Trip Days</div></div>
+    <div class="kpi-card"><div class="num c-orange">21%</div><div class="lbl">Registered Users</div></div>
+  </div>
+
+  <div class="alert alert-blue">
+    <div class="alert-title">📊 Itinerary Highlights</div>
+    <div class="alert-body">Bali dominates at 37% of all plans. India accounts for 62% of users. April–May holds 67% of near-term travel intent. Couples (2 adults) make up 79% of all groups. 5-star hotels in 83.5% of recommendations.</div>
+  </div>
+
+  <!-- Part 2 -->
+  <div class="section-title" style="margin-top:20px;">Part 2 — Tech Project Status</div>
+  <div class="section-divider"></div>
+
+  <div class="kpi-grid four">
+    <div class="kpi-card"><div class="num c-navy">142</div><div class="lbl">Work Items</div></div>
+    <div class="kpi-card"><div class="num c-green">83%</div><div class="lbl">Completed</div></div>
+    <div class="kpi-card"><div class="num c-blue">13</div><div class="lbl">In Progress</div></div>
+    <div class="kpi-card"><div class="num c-red">6</div><div class="lbl">Critical Bugs Open</div></div>
+  </div>
+
+  <div class="alert alert-red">
+    <div class="alert-title">🔴 Immediate Attention Required</div>
+    <div class="alert-body">7 critical-severity bugs open in Hotels &amp; Itinerary modules. LLM failover stalled since Oct 2025. 6 foundational items unstarted and 5–7 months overdue. Partner Pack submission 12 days overdue.</div>
+  </div>
+
+  <div class="alert alert-orange">
+    <div class="alert-title">⚠ Due This Week (Mar 25)</div>
+    <div class="alert-body">Site Monitoring Tool, Voice Concierge, Hotel Finder, and Greytt Score Automation all share a March 25 deadline — 4 items at risk simultaneously.</div>
+  </div>
+
+</div>
+
+<!-- ═══════ PANEL: ITINERARY ═══════ -->
+<div id="tab-itinerary" class="panel">
+
+  <div class="section-title">Volume &amp; Activity</div>
+  <div class="section-divider"></div>
+
+  <div class="subsection-title">Daily Creation — Mar 16–22</div>
+  <div class="card">
+    <div class="bar-list">
+      <div class="bar-row"><span class="bar-label">Mon Mar 16</span><div class="bar-track"><div class="bar-fill bar-mid" style="width:82%"></div></div><span class="bar-value">73</span></div>
+      <div class="bar-row"><span class="bar-label">Tue Mar 17</span><div class="bar-track"><div class="bar-fill bar-navy" style="width:93%"></div></div><span class="bar-value">83</span></div>
+      <div class="bar-row"><span class="bar-label">Wed Mar 18</span><div class="bar-track"><div class="bar-fill bar-sky" style="width:47%"></div></div><span class="bar-value">42</span></div>
+      <div class="bar-row"><span class="bar-label">Thu Mar 19</span><div class="bar-track"><div class="bar-fill bar-teal" style="width:58%"></div></div><span class="bar-value">52</span></div>
+      <div class="bar-row"><span class="bar-label">Fri Mar 20 🔝</span><div class="bar-track"><div class="bar-fill bar-navy" style="width:100%"></div></div><span class="bar-value">89</span></div>
+      <div class="bar-row"><span class="bar-label">Sat Mar 21</span><div class="bar-track"><div class="bar-fill bar-sky" style="width:52%"></div></div><span class="bar-value">46</span></div>
+      <div class="bar-row"><span class="bar-label">Sun Mar 22</span><div class="bar-track"><div class="bar-fill bar-mid" style="width:55%"></div></div><span class="bar-value">49</span></div>
+    </div>
+  </div>
+  <p>Friday March 20 was the peak day at 89 itineraries — 44% above the weekly average of 62. Mid-week Wednesday saw the lowest activity.</p>
+
+  <div class="subsection-title">Generation Method</div>
+  <div class="table-wrap">
+    <table class="data-table">
+      <tr><th>Method</th><th>Count</th><th>Share</th></tr>
+      <tr><td>Plan (guided wizard)</td><td>340</td><td>78.3%</td></tr>
+      <tr><td>Chat (conversational AI)</td><td>94</td><td>21.7%</td></tr>
+    </table>
+  </div>
+
+  <div class="subsection-title">Experience Types</div>
+  <div class="card">
+    <div class="bar-list">
+      <div class="bar-row"><span class="bar-label">Top Attractions</span><div class="bar-track"><div class="bar-fill bar-navy" style="width:100%"></div></div><span class="bar-value">116</span></div>
+      <div class="bar-row"><span class="bar-label">Relaxed &amp; Chill</span><div class="bar-track"><div class="bar-fill bar-mid" style="width:99%"></div></div><span class="bar-value">115</span></div>
+      <div class="bar-row"><span class="bar-label">Adventure &amp; Sport</span><div class="bar-track"><div class="bar-fill bar-sky" style="width:63%"></div></div><span class="bar-value">73</span></div>
+      <div class="bar-row"><span class="bar-label">Natural Wonders</span><div class="bar-track"><div class="bar-fill bar-teal" style="width:37%"></div></div><span class="bar-value">43</span></div>
+      <div class="bar-row"><span class="bar-label">Foodie Explorations</span><div class="bar-track"><div class="bar-fill bar-mid" style="width:28%"></div></div><span class="bar-value">32</span></div>
+      <div class="bar-row"><span class="bar-label">Culture &amp; History</span><div class="bar-track"><div class="bar-fill bar-sky" style="width:25%"></div></div><span class="bar-value">29</span></div>
+    </div>
+  </div>
+
+  <div class="subsection-title">Top Traveller Preferences</div>
+  <div class="card">
+    <div class="bar-list">
+      <div class="bar-row"><span class="bar-label">Easy Transport</span><div class="bar-track"><div class="bar-fill bar-navy" style="width:100%"></div></div><span class="bar-value">343</span></div>
+      <div class="bar-row"><span class="bar-label">Dining Flexibility</span><div class="bar-track"><div class="bar-fill bar-mid" style="width:81%"></div></div><span class="bar-value">278</span></div>
+      <div class="bar-row"><span class="bar-label">Room Comfort</span><div class="bar-track"><div class="bar-fill bar-sky" style="width:77%"></div></div><span class="bar-value">263</span></div>
+      <div class="bar-row"><span class="bar-label">Quiet &amp; Relaxing</span><div class="bar-track"><div class="bar-fill bar-teal" style="width:71%"></div></div><span class="bar-value">243</span></div>
+      <div class="bar-row"><span class="bar-label">Effortless Access</span><div class="bar-track"><div class="bar-fill bar-mid" style="width:62%"></div></div><span class="bar-value">214</span></div>
+      <div class="bar-row"><span class="bar-label">Human Assistance</span><div class="bar-track"><div class="bar-fill bar-sky" style="width:53%"></div></div><span class="bar-value">183</span></div>
+    </div>
+  </div>
+
+  <div class="subsection-title">Trip Duration &amp; Group Size</div>
+  <div class="kpi-grid">
+    <div class="kpi-card"><div class="num c-blue">7.3</div><div class="lbl">Avg days</div></div>
+    <div class="kpi-card"><div class="num c-navy">5</div><div class="lbl">Median days</div></div>
+    <div class="kpi-card"><div class="num c-navy">79%</div><div class="lbl">Couples (2 adults)</div></div>
+    <div class="kpi-card"><div class="num c-blue">7%</div><div class="lbl">With children</div></div>
+  </div>
+
+</div>
+
+<!-- ═══════ PANEL: DESTINATIONS ═══════ -->
+<div id="tab-destinations" class="panel">
+
+  <div class="section-title">Destination Analysis</div>
+  <div class="section-divider"></div>
+
+  <div class="subsection-title">Top Destinations by Volume</div>
+  <div class="card">
+    <div class="bar-list">
+      <div class="bar-row"><span class="bar-label">Bali, Indonesia</span><div class="bar-track"><div class="bar-fill bar-navy" style="width:100%"></div></div><span class="bar-value">160</span></div>
+      <div class="bar-row"><span class="bar-label">Bangkok, Thailand</span><div class="bar-track"><div class="bar-fill bar-mid" style="width:49%"></div></div><span class="bar-value">78</span></div>
+      <div class="bar-row"><span class="bar-label">Seoul, S. Korea</span><div class="bar-track"><div class="bar-fill bar-sky" style="width:31%"></div></div><span class="bar-value">49</span></div>
+      <div class="bar-row"><span class="bar-label">Singapore</span><div class="bar-track"><div class="bar-fill bar-teal" style="width:16%"></div></div><span class="bar-value">26</span></div>
+      <div class="bar-row"><span class="bar-label">Phuket, Thailand</span><div class="bar-track"><div class="bar-fill bar-mid" style="width:14%"></div></div><span class="bar-value">23</span></div>
+      <div class="bar-row"><span class="bar-label">Tokyo, Japan</span><div class="bar-track"><div class="bar-fill bar-sky" style="width:14%"></div></div><span class="bar-value">23</span></div>
+      <div class="bar-row"><span class="bar-label">Kuala Lumpur</span><div class="bar-track"><div class="bar-fill bar-teal" style="width:13%"></div></div><span class="bar-value">20</span></div>
+      <div class="bar-row"><span class="bar-label">Ho Chi Minh</span><div class="bar-track"><div class="bar-fill bar-mid" style="width:10%"></div></div><span class="bar-value">16</span></div>
+      <div class="bar-row"><span class="bar-label">Mumbai, India</span><div class="bar-track"><div class="bar-fill bar-sky" style="width:9%"></div></div><span class="bar-value">14</span></div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">← scroll table →</div>
+  <div class="table-wrap">
+    <table class="data-table">
+      <tr><th>Destination</th><th>Count</th><th>Share</th></tr>
+      <tr><td>Bali, Indonesia</td><td>160</td><td>36.9%</td></tr>
+      <tr><td>Bangkok, Thailand</td><td>78</td><td>18.0%</td></tr>
+      <tr><td>Seoul, South Korea</td><td>49</td><td>11.3%</td></tr>
+      <tr><td>Singapore</td><td>26</td><td>6.0%</td></tr>
+      <tr><td>Phuket, Thailand</td><td>23</td><td>5.3%</td></tr>
+      <tr><td>Tokyo, Japan</td><td>23</td><td>5.3%</td></tr>
+      <tr><td>Kuala Lumpur</td><td>20</td><td>4.6%</td></tr>
+      <tr><td>Ho Chi Minh, Vietnam</td><td>16</td><td>3.7%</td></tr>
+      <tr><td>Mumbai, India</td><td>14</td><td>3.2%</td></tr>
+      <tr><td>Melbourne + Sydney</td><td>15</td><td>3.4%</td></tr>
+      <tr><td>Siem Reap + Jakarta + Phu Quoc</td><td>10</td><td>2.3%</td></tr>
+    </table>
+  </div>
+
+  <div class="subsection-title">Planned Travel Months</div>
+  <div class="card">
+    <div class="bar-list">
+      <div class="bar-row"><span class="bar-label">April 2026 🔝</span><div class="bar-track"><div class="bar-fill bar-navy" style="width:100%"></div></div><span class="bar-value">116</span></div>
+      <div class="bar-row"><span class="bar-label">March 2026</span><div class="bar-track"><div class="bar-fill bar-mid" style="width:77%"></div></div><span class="bar-value">89</span></div>
+      <div class="bar-row"><span class="bar-label">May 2026</span><div class="bar-track"><div class="bar-fill bar-sky" style="width:72%"></div></div><span class="bar-value">83</span></div>
+      <div class="bar-row"><span class="bar-label">June 2026</span><div class="bar-track"><div class="bar-fill bar-teal" style="width:29%"></div></div><span class="bar-value">34</span></div>
+      <div class="bar-row"><span class="bar-label">July 2026</span><div class="bar-track"><div class="bar-fill bar-mid" style="width:22%"></div></div><span class="bar-value">25</span></div>
+      <div class="bar-row"><span class="bar-label">Aug–Oct 2026</span><div class="bar-track"><div class="bar-fill bar-sky" style="width:28%"></div></div><span class="bar-value">49</span></div>
+    </div>
+  </div>
+  <p>April–May 2026 represents 67% of near-term travel intent — the critical conversion window.</p>
+
+  <div class="alert alert-blue">
+    <div class="alert-title">🏨 Accommodation</div>
+    <div class="alert-body"><strong>83.5%</strong> of all hotel slots are 5-star properties — confirming premium positioning. 4-star appears as value comparison options only.</div>
+  </div>
+
+</div>
+
+<!-- ═══════ PANEL: USERS ═══════ -->
+<div id="tab-users" class="panel">
+
+  <div class="section-title">User Geography</div>
+  <div class="section-divider"></div>
+
+  <div class="subsection-title">Top Source Countries</div>
+  <div class="card">
+    <div class="bar-list">
+      <div class="bar-row"><span class="bar-label">India 🇮🇳</span><div class="bar-track"><div class="bar-fill bar-navy" style="width:100%"></div></div><span class="bar-value">270</span></div>
+      <div class="bar-row"><span class="bar-label">Philippines 🇵🇭</span><div class="bar-track"><div class="bar-fill bar-mid" style="width:10%"></div></div><span class="bar-value">26</span></div>
+      <div class="bar-row"><span class="bar-label">Malaysia 🇲🇾</span><div class="bar-track"><div class="bar-fill bar-sky" style="width:6%"></div></div><span class="bar-value">15</span></div>
+      <div class="bar-row"><span class="bar-label">Indonesia 🇮🇩</span><div class="bar-track"><div class="bar-fill bar-teal" style="width:5%"></div></div><span class="bar-value">14</span></div>
+      <div class="bar-row"><span class="bar-label">Australia 🇦🇺</span><div class="bar-track"><div class="bar-fill bar-mid" style="width:3%"></div></div><span class="bar-value">9</span></div>
+      <div class="bar-row"><span class="bar-label">South Africa 🇿🇦</span><div class="bar-track"><div class="bar-fill bar-sky" style="width:3%"></div></div><span class="bar-value">8</span></div>
+      <div class="bar-row"><span class="bar-label">US / UK / SG</span><div class="bar-track"><div class="bar-fill bar-teal" style="width:3%"></div></div><span class="bar-value">7/6/6</span></div>
+    </div>
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi-card"><div class="num c-navy">45</div><div class="lbl">Countries Represented</div></div>
+    <div class="kpi-card"><div class="num" style="color:#C62828">62%</div><div class="lbl">India Share</div></div>
+    <div class="kpi-card"><div class="num c-blue">90</div><div class="lbl">Registered Users</div></div>
+    <div class="kpi-card"><div class="num c-orange">344</div><div class="lbl">Anonymous Users</div></div>
+  </div>
+
+  <div class="alert alert-orange">
+    <div class="alert-title">⚠ Registration Gap</div>
+    <div class="alert-body">79% of itinerary creators are anonymous — a major CRM capture opportunity. A post-itinerary save &amp; register prompt could significantly improve retention.</div>
+  </div>
+
+  <div class="alert alert-blue">
+    <div class="alert-title">🌏 Geographic Concentration Risk</div>
+    <div class="alert-body">62% from India is a strong base but a concentration risk. SE Asia (PH, MY, ID, SG) adds 14%. Deliberate diversification into these markets is the near-term priority.</div>
+  </div>
+
+</div>
+
+<!-- ═══════ PANEL: TECH OVERVIEW ═══════ -->
+<div id="tab-tech-overview" class="panel">
+
+  <div class="part-divider">
+    <div class="part-label">Part 2 · Tech Status</div>
+    <h2>Project Status Overview</h2>
+    <p>Week of March 16–22, 2026</p>
+  </div>
+
+  <div class="subsection-title">Overall Status</div>
+  <div class="card">
+    <div class="bar-list">
+      <div class="bar-row"><span class="bar-label">Completed</span><div class="bar-track"><div class="bar-fill bar-green" style="width:100%"></div></div><span class="bar-value">118</span></div>
+      <div class="bar-row"><span class="bar-label">In Progress</span><div class="bar-track"><div class="bar-fill bar-sky" style="width:11%"></div></div><span class="bar-value">13</span></div>
+      <div class="bar-row"><span class="bar-label">Prod / Staging</span><div class="bar-track"><div class="bar-fill bar-mid" style="width:5%"></div></div><span class="bar-value">6</span></div>
+      <div class="bar-row"><span class="bar-label">On Hold</span><div class="bar-track"><div class="bar-fill bar-red" style="width:3%"></div></div><span class="bar-value">3</span></div>
+      <div class="bar-row"><span class="bar-label">Not Started</span><div class="bar-track"><div class="bar-fill bar-red" style="width:2%"></div></div><span class="bar-value">2</span></div>
+    </div>
+  </div>
+
+  <div class="subsection-title">In-Progress Items</div>
+  <div class="scroll-hint">← scroll table →</div>
+  <div class="table-wrap">
+    <table class="data-table">
+      <tr><th>Build</th><th>Item</th><th>Priority</th><th>Deadline</th></tr>
+      <tr><td>Journeys</td><td>Site Monitoring Notification</td><td>High</td><td style="color:var(--orange)">Mar 25 ⚠</td></tr>
+      <tr><td>greytt.ai</td><td>Voice Concierge Integration</td><td>Moderate</td><td style="color:var(--orange)">Mar 25 ⚠</td></tr>
+      <tr><td>greytt.ai</td><td>Greytt Hotel Finder Tool</td><td>Moderate</td><td style="color:var(--orange)">Mar 25 ⚠</td></tr>
+      <tr><td>greytt.ai</td><td>Greytt Score Automation</td><td>High</td><td style="color:var(--orange)">Mar 25 ⚠</td></tr>
+      <tr><td>greytt.ai</td><td>Campaign Automated Tracker</td><td>Moderate</td><td style="color:var(--red)">Mar 20 🔴</td></tr>
+      <tr><td>greytt.ai</td><td>Klook Experiences Integration</td><td>Moderate</td><td>—</td></tr>
+      <tr><td>greytt.ai</td><td>Sanity Test Cases</td><td>High</td><td>—</td></tr>
+      <tr><td>greytt.ai</td><td>Defect Triage</td><td>High</td><td>—</td></tr>
+      <tr><td>greytt.ai</td><td>URL Thumbnails &amp; Title Names</td><td>—</td><td>—</td></tr>
+      <tr><td>Moves</td><td>Automated Session Emails</td><td>High</td><td>—</td></tr>
+      <tr><td>greytt.ai</td><td>SuperGryd Integration</td><td>High</td><td>—</td></tr>
+      <tr><td>Others</td><td>Monthly Partner Pack</td><td>High</td><td style="color:var(--red)">Mar 11 🔴</td></tr>
+    </table>
+  </div>
+
+  <div class="subsection-title">Foundational Backlog — All Overdue</div>
+  <div class="table-wrap">
+    <table class="data-table">
+      <tr><th>Item</th><th>Priority</th><th>Was Due</th></tr>
+      <tr><td>Security Infrastructure</td><td>High</td><td style="color:var(--red)">Aug 2025</td></tr>
+      <tr><td>AI Model &amp; Redundancies</td><td>High</td><td style="color:var(--red)">Aug 2025</td></tr>
+      <tr><td>Automated Sentiment Module</td><td>High</td><td style="color:var(--red)">Aug 2025</td></tr>
+      <tr><td>Agentic AI Logic Framework</td><td>Moderate</td><td style="color:var(--red)">Aug 2025</td></tr>
+      <tr><td>AWS Account Merging</td><td>Low</td><td style="color:var(--red)">Aug 2025</td></tr>
+      <tr><td>Greytt Score for Sights</td><td>High</td><td style="color:var(--red)">Oct 2025</td></tr>
+    </table>
+  </div>
+
+  <div class="subsection-title">AI Work Items — LLM Pipeline</div>
+  <div class="table-wrap">
+    <table class="data-table">
+      <tr><th>Item</th><th>Status</th><th>Was Due</th></tr>
+      <tr><td>LLM Observability &amp; Understanding</td><td><span class="badge badge-done">Done</span></td><td>Oct 2025</td></tr>
+      <tr><td>LLM Output Stability (Failover)</td><td><span class="badge badge-prog">In Progress</span></td><td style="color:var(--red)">Oct 2025</td></tr>
+      <tr><td>LLM Stability — DB Prompt Tables</td><td><span class="badge badge-ns">—</span></td><td style="color:var(--red)">Oct 2025</td></tr>
+      <tr><td>LLM Governance Dashboard (×3 phases)</td><td><span class="badge badge-ns">—</span></td><td style="color:var(--red)">Nov 2025</td></tr>
+      <tr><td>Site Status Monitoring (×4 phases)</td><td><span class="badge badge-ns">—</span></td><td style="color:var(--red)">Dec 2025</td></tr>
+    </table>
+  </div>
+
+  <div class="subsection-title">Recently Deployed</div>
+  <div class="table-wrap">
+    <table class="data-table">
+      <tr><th>Item</th><th>Status</th></tr>
+      <tr><td>SEO Optimisation</td><td><span class="badge badge-prod">Production</span></td></tr>
+      <tr><td>Lifetime Access IDs (greytt.ai)</td><td><span class="badge badge-prod">Production</span></td></tr>
+      <tr><td>Greytt.com Content Porting</td><td><span class="badge badge-prod">Production</span></td></tr>
+      <tr><td>Cross-Channel Personalisation</td><td><span class="badge badge-staging">Staging</span></td></tr>
+      <tr><td>Aqua Expeditions Page</td><td><span class="badge badge-staging">Staging</span></td></tr>
+      <tr><td>Auto Email — Transactions</td><td><span class="badge badge-staging">Staging</span></td></tr>
+    </table>
+  </div>
+
+</div>
+
+<!-- ═══════ PANEL: BUGS ═══════ -->
+<div id="tab-bugs" class="panel">
+
+  <div class="section-title">Bug Queue Status</div>
+  <div class="section-divider"></div>
+
+  <div class="kpi-grid four">
+    <div class="kpi-card"><div class="num c-navy">53</div><div class="lbl">Total Logged</div></div>
+    <div class="kpi-card"><div class="num c-red">17</div><div class="lbl">Open</div></div>
+    <div class="kpi-card"><div class="num c-green">31</div><div class="lbl">Resolved</div></div>
+    <div class="kpi-card"><div class="num" style="color:#BF360C">7</div><div class="lbl">Critical Open</div></div>
+  </div>
+
+  <div class="subsection-title">Critical Open Bugs — 24hr SLA</div>
+  <div class="table-wrap">
+    <table class="data-table">
+      <tr><th>ID</th><th>Module</th><th>Issue</th></tr>
+      <tr><td style="color:var(--red);font-weight:600">BUG_023</td><td>Hotels</td><td>Hotels not generated for high adult count</td></tr>
+      <tr><td style="color:var(--red);font-weight:600">BUG_028</td><td>Traveler</td><td>Traveler change not affecting hotel recs</td></tr>
+      <tr><td style="color:var(--red);font-weight:600">BUG_030</td><td>Hotels</td><td>Hotels not generated after editing preferences</td></tr>
+      <tr><td style="color:var(--red);font-weight:600">BUG_031</td><td>Itinerary</td><td>Duplicate places displayed in itinerary</td></tr>
+      <tr><td style="color:var(--red);font-weight:600">BUG_035</td><td>Chatbot</td><td>Chatbot stuck &gt;5 min during response</td></tr>
+      <tr><td style="color:var(--red);font-weight:600">BUG_041</td><td>External</td><td>Viator link points to wrong location</td></tr>
+      <tr><td style="color:var(--red);font-weight:600">BUG_052</td><td>Itinerary</td><td>Image not generated during creation</td></tr>
+    </table>
+  </div>
+
+  <div class="subsection-title">All Open Bugs</div>
+  <div class="scroll-hint">← scroll table →</div>
+  <div class="table-wrap">
+    <table class="data-table">
+      <tr><th>ID</th><th>Module</th><th>Priority</th><th>Severity</th></tr>
+      <tr><td>BUG_009</td><td>Itinerary Edit</td><td>High</td><td><span class="badge badge-open">Major</span></td></tr>
+      <tr><td>BUG_014</td><td>Hotels</td><td>High</td><td><span class="badge badge-open">Major</span></td></tr>
+      <tr><td>BUG_015</td><td>Hotels</td><td>Medium</td><td>Minor</td></tr>
+      <tr><td>BUG_016</td><td>Hotels</td><td>Medium</td><td>Minor</td></tr>
+      <tr><td>BUG_017</td><td>Hotels</td><td>Low</td><td>Minor</td></tr>
+      <tr><td>BUG_023</td><td>Rec. Hotels</td><td>High</td><td><span class="badge badge-crit">Critical</span></td></tr>
+      <tr><td>BUG_024</td><td>Traveler</td><td>High</td><td><span class="badge badge-open">Major</span></td></tr>
+      <tr><td>BUG_027</td><td>Hotels Cache</td><td>High</td><td><span class="badge badge-open">Major</span></td></tr>
+      <tr><td>BUG_028</td><td>Traveler</td><td>High</td><td><span class="badge badge-crit">Critical</span></td></tr>
+      <tr><td>BUG_030</td><td>Rec. Hotels</td><td>High</td><td><span class="badge badge-crit">Critical</span></td></tr>
+      <tr><td>BUG_031</td><td>Itinerary Gen</td><td>High</td><td><span class="badge badge-crit">Critical</span></td></tr>
+      <tr><td>BUG_033</td><td>AI Output</td><td>High</td><td><span class="badge badge-open">Major</span></td></tr>
+      <tr><td>BUG_034</td><td>Itinerary Edit</td><td>High</td><td><span class="badge badge-open">Major</span></td></tr>
+      <tr><td>BUG_035</td><td>Chatbot</td><td>High</td><td><span class="badge badge-crit">Critical</span></td></tr>
+      <tr><td>BUG_041</td><td>External</td><td>High</td><td><span class="badge badge-crit">Critical</span></td></tr>
+      <tr><td>BUG_051</td><td>Experience</td><td>Medium</td><td>Minor</td></tr>
+      <tr><td>BUG_052</td><td>Itinerary</td><td>High</td><td><span class="badge badge-crit">Critical</span></td></tr>
+    </table>
+  </div>
+
+  <div class="alert alert-orange">
+    <div class="alert-title">⚠ Ownership Bottleneck</div>
+    <div class="alert-body">100% of open bugs are assigned to Rithick and/or Bharath. Vishnu (5 prior bugs resolved) should be brought in to distribute the load. BUG_001 and BUG_044 are on Hold with no reassignment.</div>
+  </div>
+
+</div>
+
+<!-- ═══════ PANEL: RISKS ═══════ -->
+<div id="tab-risks" class="panel">
+
+  <div class="section-title">Key Risks &amp; Recommendations</div>
+  <div class="section-divider"></div>
+
+  <div class="alert alert-red">
+    <div class="alert-title">🔴 LLM Single Point of Failure</div>
+    <div class="alert-body">LLM Output Stability (fallback on model downtime) has been In Progress since October 2025. No completion date. The platform has zero resilience if the primary LLM provider goes down. <strong>Treat as P0.</strong></div>
+  </div>
+
+  <div class="alert alert-red">
+    <div class="alert-title">🔴 7 Critical Bugs — Core Journey Broken</div>
+    <div class="alert-body">Hotels not generating, traveler changes not reflecting, chatbot stalling, duplicate places in itinerary, broken Viator links — all carry 24-hour SLAs that appear unmet. <strong>Requires dedicated sprint.</strong></div>
+  </div>
+
+  <div class="alert alert-orange">
+    <div class="alert-title">🟠 Foundational Items 5–7 Months Overdue</div>
+    <div class="alert-body">Security Infrastructure, AI Model Redundancies, Sentiment Module, and Agentic AI Framework were all due Aug–Oct 2025. No assignee updates or revised deadlines visible. Needs re-scheduling with explicit ownership.</div>
+  </div>
+
+  <div class="alert alert-orange">
+    <div class="alert-title">🟠 AI Governance Dashboard — Entirely Unbuilt</div>
+    <div class="alert-body">All 3 phases of LLM Governance and all 4 phases of Site Status Monitoring are unstarted — 3–4 months overdue. No observability into LLM behaviour or platform health. Significant ops and compliance gap.</div>
+  </div>
+
+  <div class="alert alert-blue">
+    <div class="alert-title">🟡 Bug Ownership Concentration</div>
+    <div class="alert-body">All open bugs assigned to Rithick &amp; Bharath. Single-team bottleneck. Vishnu should be assigned to reduce risk. QA ownership needs to be formalised with Sowmya taking a lead role.</div>
+  </div>
+
+  <div class="alert alert-blue">
+    <div class="alert-title">🟡 3 Items On Hold — No Documented Reason</div>
+    <div class="alert-body">Guided On-boarding Flow, Post-Edit URL Change, and Being Sattvaa are on hold with no rationale or review date. The On-boarding Flow directly impacts anonymous-to-registered conversion.</div>
+  </div>
+
+  <div class="alert alert-blue">
+    <div class="alert-title">🟡 Campaign Tracker &amp; March Deadlines at Risk</div>
+    <div class="alert-body">Campaign Tracker missed Mar 20 deadline. Four items share a Mar 25 deadline — all in progress simultaneously. Daily standups or a dedicated war-room session recommended.</div>
+  </div>
+
+  <div class="subsection-title" style="margin-top:20px">Itinerary Insights</div>
+
+  <div class="insight"><strong>India Concentration Risk:</strong> 62% of users from a single country. Deliberate diversification into SE Asia (PH, MY, ID) is the near-term priority where Greytt's destination portfolio is highly relevant.</div>
+
+  <div class="insight"><strong>Anonymous-to-Registered Funnel Gap:</strong> 79% anonymous creators. A post-itinerary save &amp; register prompt could significantly improve CRM capture for the 344 anonymous users this week alone.</div>
+
+  <div class="insight"><strong>April–May Conversion Window:</strong> 67% of near-term travel intent is March–May 2026. This 6-week window is Greytt's peak commercial opportunity for tour upsell, hotel partnerships, and Greytt Score activations.</div>
+
+  <div class="insight"><strong>Human Assistance Preference (42%):</strong> Directly supports the case for a concierge or specialist callback feature — a potential Greytt Gigs synergy that should be scoped in the next planning cycle.</div>
+
+</div>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer class="site-footer">
+  <div>Greytt · Internal Analytics · Confidential</div>
+  <div style="margin-top:4px; opacity:0.6">Generated March 23, 2026 · Data: Mar 16–22, 2026</div>
+</footer>
+
+<script>
+  function showTab(id) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    event.currentTarget.classList.add('active');
+    window.scrollTo({ top: document.querySelector('.tab-nav').offsetTop - 2, behavior: 'smooth' });
+  }
+
+  // Animate bars on panel activation
+  function animateBars(panel) {
+    panel.querySelectorAll('.bar-fill').forEach(bar => {
+      const w = bar.style.width;
+      bar.style.width = '0';
+      requestAnimationFrame(() => {
+        setTimeout(() => { bar.style.width = w; }, 80);
+      });
+    });
+  }
+
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const activePanel = document.querySelector('.panel.active');
+      if (activePanel) animateBars(activePanel);
+    });
+  });
+
+  // Initial bar animation
+  animateBars(document.querySelector('.panel.active'));
+</script>
+</body>
+</html>
