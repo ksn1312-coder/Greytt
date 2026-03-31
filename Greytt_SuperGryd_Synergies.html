@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Greytt × SuperGryd — Partnership Analysis</title>
+<style>
+  :root {
+    --blue-dark: #0C447C;
+    --blue-mid: #185FA5;
+    --blue-light: #378ADD;
+    --blue-pale: #E6F1FB;
+    --blue-pale2: #B5D4F4;
+    --green-dark: #27500A;
+    --green-mid: #3B6D11;
+    --green-pale: #EAF3DE;
+    --amber-dark: #633806;
+    --amber-pale: #FAEEDA;
+    --red-dark: #791F1F;
+    --red-pale: #FCEBEB;
+    --gray-dark: #2C2C2A;
+    --gray-mid: #5F5E5A;
+    --gray-light: #D3D1C7;
+    --gray-pale: #F1EFE8;
+    --text: #1a1a18;
+    --text2: #5F5E5A;
+    --text3: #888780;
+    --border: #e0ddd6;
+    --bg: #ffffff;
+    --bg2: #f8f7f4;
+    --bg3: #f1efe8;
+    --radius: 10px;
+    --shadow: 0 1px 4px rgba(0,0,0,0.07);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.6; }
+
+  /* HEADER */
+  .header { background: var(--blue-dark); color: #fff; padding: 28px 20px 24px; }
+  .header-logos { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .logo-pill { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 6px; padding: 5px 12px; font-size: 13px; font-weight: 600; letter-spacing: .02em; }
+  .logo-x { color: rgba(255,255,255,0.5); font-size: 16px; }
+  .header h1 { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+  .header-sub { font-size: 12px; color: rgba(255,255,255,0.65); margin-bottom: 18px; }
+  .header-kpis { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .hkpi { background: rgba(255,255,255,0.1); border-radius: 8px; padding: 10px 12px; }
+  .hkpi-num { font-size: 19px; font-weight: 700; }
+  .hkpi-label { font-size: 11px; color: rgba(255,255,255,0.7); margin-top: 1px; }
+
+  /* TABS */
+  .tab-nav { display: flex; overflow-x: auto; background: var(--bg2); border-bottom: 1px solid var(--border); padding: 0 16px; gap: 2px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .tab-nav::-webkit-scrollbar { display: none; }
+  .tab-btn { flex-shrink: 0; padding: 12px 14px; font-size: 13px; font-weight: 500; color: var(--text2); background: none; border: none; border-bottom: 2px solid transparent; cursor: pointer; white-space: nowrap; transition: all .15s; }
+  .tab-btn.active { color: var(--blue-mid); border-bottom-color: var(--blue-mid); }
+
+  /* CONTENT */
+  .content { padding: 16px; max-width: 700px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* NOTE BOXES */
+  .note { border-left: 3px solid var(--blue-mid); background: var(--blue-pale); color: var(--blue-dark); padding: 10px 14px; border-radius: 0 6px 6px 0; font-size: 12px; margin-bottom: 16px; line-height: 1.7; }
+  .note.green { border-color: var(--green-mid); background: var(--green-pale); color: var(--green-dark); }
+  .note.amber { border-color: #BA7517; background: var(--amber-pale); color: var(--amber-dark); }
+  .note.red { border-color: #A32D2D; background: var(--red-pale); color: var(--red-dark); }
+
+  /* KPI CARDS */
+  .kpi-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 20px; }
+  .kpi { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 14px; }
+  .kpi-val { font-size: 18px; font-weight: 700; margin-bottom: 2px; color: var(--blue-mid); }
+  .kpi-val.green { color: var(--green-mid); }
+  .kpi-val.red { color: #A32D2D; }
+  .kpi-val.gray { color: var(--gray-dark); }
+  .kpi-lbl { font-size: 11px; color: var(--text2); font-weight: 500; }
+  .kpi-note { font-size: 10px; color: var(--text3); margin-top: 3px; }
+
+  /* TABLES */
+  .tbl-wrap { overflow-x: auto; margin-bottom: 20px; border-radius: var(--radius); border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; min-width: 420px; font-size: 12px; }
+  thead tr { background: var(--bg2); }
+  th { padding: 9px 12px; text-align: left; font-weight: 600; font-size: 11px; color: var(--text2); border-bottom: 1px solid var(--border); white-space: nowrap; }
+  td { padding: 8px 12px; border-bottom: 1px solid var(--border); color: var(--text); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr.section-row td { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--text3); background: var(--bg3); padding: 5px 12px; }
+  tr.total-row td { font-weight: 700; background: var(--blue-pale); color: var(--blue-dark); border-top: 2px solid var(--blue-pale2); }
+  .num-cell { text-align: right; font-variant-numeric: tabular-nums; }
+  .bold { font-weight: 600; }
+  .c-blue { color: var(--blue-mid); font-weight: 700; }
+  .c-green { color: var(--green-mid); font-weight: 700; }
+  .c-red { color: #A32D2D; font-weight: 700; }
+
+  /* BAR CHART */
+  .section-head { font-size: 13px; font-weight: 600; color: var(--text); margin: 16px 0 10px; }
+  .bar-wrap { margin-bottom: 20px; }
+  .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .bar-lbl { width: 80px; flex-shrink: 0; font-size: 11px; color: var(--text2); }
+  .bar-track { flex: 1; height: 16px; background: var(--bg3); border-radius: 4px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 4px; transition: width .6s ease; }
+  .bar-val { width: 72px; text-align: right; font-size: 11px; font-weight: 600; color: var(--text); }
+
+  /* ASSUMPTIONS */
+  .ass-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; margin-bottom: 14px; }
+  .ass-card h3 { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--text3); margin-bottom: 10px; }
+  .ass-item { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid var(--border); font-size: 12px; gap: 12px; }
+  .ass-item:last-child { border-bottom: none; }
+  .ass-key { color: var(--text); flex: 1; }
+  .ass-val { font-weight: 600; color: var(--text2); flex-shrink: 0; text-align: right; }
+
+  /* SCENARIO SUMMARY */
+  .scenario-summary { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 20px; }
+  .sc-card { border-radius: var(--radius); padding: 12px; border: 1px solid var(--border); text-align: center; cursor: pointer; transition: all .15s; }
+  .sc-card:hover { border-color: var(--blue-mid); }
+  .sc-val { font-size: 15px; font-weight: 700; margin-bottom: 3px; }
+  .sc-lbl { font-size: 10px; color: var(--text2); font-weight: 500; }
+  .sc-base { background: var(--blue-pale); }
+  .sc-bull { background: var(--green-pale); }
+  .sc-bear { background: var(--red-pale); }
+
+  /* TIMELINE */
+  .timeline { margin-bottom: 20px; }
+  .tl-item { display: flex; gap: 12px; margin-bottom: 2px; }
+  .tl-dot-col { display: flex; flex-direction: column; align-items: center; width: 20px; flex-shrink: 0; }
+  .tl-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+  .tl-line { flex: 1; width: 1px; background: var(--border); }
+  .tl-content { padding-bottom: 14px; flex: 1; }
+  .tl-period { font-size: 11px; font-weight: 600; color: var(--text2); margin-bottom: 2px; }
+  .tl-desc { font-size: 12px; color: var(--text); }
+  .tl-metric { font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+  /* SYNERGIES */
+  .syn-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+  .syn-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 13px 14px; }
+  .syn-card-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+  .tag { display: inline-block; padding: 2px 9px; border-radius: 99px; font-size: 11px; font-weight: 600; margin-bottom: 7px; }
+  .tag-blue  { background: var(--blue-pale);  color: var(--blue-dark); }
+  .tag-teal  { background: #E1F5EE; color: #085041; }
+  .tag-amber { background: var(--amber-pale); color: var(--amber-dark); }
+  .tag-purple{ background: #EEEDFE; color: #3C3489; }
+  .tag-green { background: var(--green-pale); color: var(--green-dark); }
+  .tag-coral { background: #FAECE7; color: #712B13; }
+  .syn-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 5px; }
+  .syn-body  { font-size: 12px; color: var(--text2); line-height: 1.6; }
+  .match-row { display: flex; gap: 8px; align-items: stretch; margin-bottom: 8px; }
+  .match-cell { flex: 1; background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 12px; font-size: 12px; }
+  .match-cell-title { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--text3); margin-bottom: 4px; }
+  .match-cell-body  { color: var(--text); line-height: 1.5; }
+  .match-arrow { display: flex; align-items: center; color: var(--text3); font-size: 18px; flex-shrink: 0; }
+  .flywheel { border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; background: var(--bg); margin-bottom: 20px; }
+  .fw-row { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 11px; }
+  .fw-row:last-child { margin-bottom: 0; }
+  .fw-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+  .fw-text { font-size: 12px; color: var(--text); line-height: 1.6; }
+  .fw-text strong { font-weight: 600; }
+  .stat-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 20px; }
+  .stat-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 13px 14px; }
+  .stat-val  { font-size: 17px; font-weight: 700; margin-bottom: 2px; }
+  .stat-sub  { font-size: 10px; color: var(--text3); margin-bottom: 8px; }
+  .stat-body { font-size: 12px; color: var(--text2); line-height: 1.55; }
+
+  /* COMPARISON TABLE */
+  .cmp-tbl-wrap { overflow-x: auto; margin-bottom: 20px; border-radius: var(--radius); border: 1px solid var(--border); }
+  .cmp-tbl { width: 100%; border-collapse: collapse; min-width: 500px; font-size: 12px; }
+  .cmp-tbl th { padding: 9px 12px; text-align: left; font-weight: 600; font-size: 11px; color: var(--text2); background: var(--bg2); border-bottom: 1px solid var(--border); white-space: nowrap; }
+  .cmp-tbl th.sg { background: var(--blue-pale); color: var(--blue-dark); }
+  .cmp-tbl th.ag { background: var(--green-pale); color: var(--green-dark); }
+  .cmp-tbl td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: top; color: var(--text); }
+  .cmp-tbl tr:last-child td { border-bottom: none; }
+  .cmp-tbl tr.cmp-section td { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--text3); background: var(--bg3); padding: 5px 12px; }
+  .cmp-tbl tr.cmp-winner td { background: var(--blue-pale); }
+  .pill { display: inline-block; padding: 1px 8px; border-radius: 99px; font-size: 11px; font-weight: 600; white-space: nowrap; }
+  .pill-green  { background: var(--green-pale);  color: var(--green-dark); }
+  .pill-blue   { background: var(--blue-pale);   color: var(--blue-dark); }
+  .pill-amber  { background: var(--amber-pale);  color: var(--amber-dark); }
+  .pill-red    { background: var(--red-pale);    color: #A32D2D; }
+  .pill-gray   { background: var(--gray-pale);   color: var(--gray-mid); }
+  .divider { height: 1px; background: var(--border); margin: 20px 0; }
+
+  /* SUB-TABS (revenue projection) */
+  .sub-nav { display: flex; overflow-x: auto; background: var(--bg3); border-bottom: 1px solid var(--border); border-top: 1px solid var(--border); margin: 0 -16px 16px; padding: 0 16px; gap: 2px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .sub-nav::-webkit-scrollbar { display: none; }
+  .sub-btn { flex-shrink: 0; padding: 9px 13px; font-size: 12px; font-weight: 500; color: var(--text2); background: none; border: none; border-bottom: 2px solid transparent; cursor: pointer; white-space: nowrap; transition: all .15s; }
+  .sub-btn.active { color: var(--blue-mid); border-bottom-color: var(--blue-mid); }
+  .sub-panel { display: none; }
+  .sub-panel.active { display: block; }
+
+  /* FOOTER */
+  .footer { background: var(--bg3); border-top: 1px solid var(--border); padding: 16px; text-align: center; font-size: 11px; color: var(--text3); margin-top: 8px; }
+
+  /* PRINT */
+  @media print {
+    .tab-nav { display: none; }
+    .panel { display: block !important; page-break-inside: avoid; }
+    .panel + .panel { page-break-before: always; }
+    body { font-size: 12px; }
+    .header { background: #0C447C !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+
+  @media (max-width: 400px) {
+    .kpi-row { grid-template-columns: 1fr 1fr; }
+    .scenario-summary { grid-template-columns: 1fr; }
+    .hkpi-num { font-size: 16px; }
+    .syn-grid { grid-template-columns: 1fr; }
+    .syn-card-2 { grid-template-columns: 1fr; }
+    .stat-grid { grid-template-columns: 1fr; }
+    .match-row { flex-direction: column; }
+    .match-arrow { transform: rotate(90deg); align-self: center; }
+  }
+  @media (max-width: 480px) {
+    [style*="grid-template-columns:repeat(4,1fr)"] { grid-template-columns: repeat(2,1fr) !important; }
+    [style*="grid-template-columns:repeat(3,1fr)"] { grid-template-columns: 1fr !important; }
+    [style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
+  }
+  @media (max-width: 520px) {
+    .syn-grid { grid-template-columns: 1fr 1fr; }
+    .stat-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-logos">
+    <div class="logo-pill">SuperGryd</div>
+    <div class="logo-x">×</div>
+    <div class="logo-pill">Greytt.ai</div>
+  </div>
+  <h1>Partnership Analysis</h1>
+  <div class="header-sub">March 2026 · Synergies · Integration Comparison · 1-Year Revenue Projection · Confidential</div>
+
+  <div style="margin-bottom:14px;font-size:12px;line-height:1.7;color:rgba(255,255,255,0.85);">
+    SuperGryd's single API unlocks bookable Transport and eSIM across 130+ countries — filling the biggest gap in Greytt's itinerary platform. With 79% of Greytt's 50+ travellers citing Easy Transport as their #1 preference and 434 itineraries generated weekly, the demand is present and unmonetised. Unlike Agoda's affiliate model, SuperGryd gives Greytt full margin control, in-app booking ownership, and a Phase 2 path to Activities and Tours — transforming Greytt from an itinerary tool into a travel commerce platform.
+  </div>
+
+  <div class="header-kpis">
+    <div class="hkpi"><div class="hkpi-num">79%</div><div class="hkpi-label">Travellers want Easy Transport</div></div>
+    <div class="hkpi"><div class="hkpi-num">130+</div><div class="hkpi-label">Countries via SuperGryd API</div></div>
+    <div class="hkpi"><div class="hkpi-num">USD 55K</div><div class="hkpi-label">Base case Year 1 margin</div></div>
+    <div class="hkpi"><div class="hkpi-num">~Month 6</div><div class="hkpi-label">Break-even point</div></div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tab-nav">
+  <button class="tab-btn active" onclick="showTab('synergies', this)">Synergies</button>
+  <button class="tab-btn" onclick="showTab('comparison', this)">Agoda vs SuperGryd</button>
+  <button class="tab-btn" onclick="showTab('revenue', this)">1-Year Revenue Projection</button>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- 1-YEAR REVENUE PROJECTION — single scrollable panel -->
+  <div class="panel" id="p-revenue">
+    <div style="height:12px"></div>
+
+    <!-- EXEC SUMMARY -->
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;margin-bottom:20px;">
+      <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text3);margin-bottom:8px;">Executive summary</div>
+      <div style="font-size:13px;color:var(--text);line-height:1.75;">
+        Based on Greytt's March 2026 baseline of <strong>434 itineraries/week</strong> and the SuperGryd proposal terms dated 30 March 2026, the partnership generates between <strong style="color:#A32D2D">USD 20K</strong> (bear) and <strong style="color:var(--green-mid)">USD 184K</strong> (bull) in gross margin over Year 1, with a <strong style="color:var(--blue-mid)">USD 55K base case</strong> and break-even by Month 6. The single most critical lever is UI placement — embedding transport booking inside the day-plan view rather than a deals page is a 3× swing in conversion and the difference between all three scenarios. The <strong>₹3.75L integration fee is non-refundable</strong> regardless of outcome, making early execution quality the decisive factor.
+      </div>
+    </div>
+
+    <!-- TOP METRICS ROW -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:24px;">
+      <div class="kpi"><div class="kpi-val" style="color:var(--blue-mid)">434/wk</div><div class="kpi-lbl">Itinerary baseline</div><div class="kpi-note">Mar 2026 actual</div></div>
+      <div class="kpi"><div class="kpi-val" style="color:var(--blue-mid)">79%</div><div class="kpi-lbl">Want Easy Transport</div><div class="kpi-note">Demand already present</div></div>
+      <div class="kpi"><div class="kpi-val" style="color:var(--blue-mid)">~Month 6</div><div class="kpi-lbl">Break-even (base)</div><div class="kpi-note">Oct 2026</div></div>
+      <div class="kpi"><div class="kpi-val" style="color:var(--blue-mid)">USD 12.5K</div><div class="kpi-lbl">Total cost to go live</div><div class="kpi-note">Fee + dev estimate</div></div>
+    </div>
+
+    <!-- SCENARIO COMPARISON CARDS -->
+    <div class="section-head">Scenario comparison — Year 1 outcomes</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px;">
+
+      <!-- BEAR -->
+      <div style="background:var(--red-pale);border:1px solid #F09595;border-radius:var(--radius);padding:14px 16px;">
+        <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#A32D2D;margin-bottom:10px;">Bear case</div>
+        <div style="font-size:22px;font-weight:700;color:#A32D2D;margin-bottom:2px;">USD 19,700</div>
+        <div style="font-size:11px;color:#791F1F;margin-bottom:12px;">Gross margin · Year 1 loss after costs</div>
+        <div style="font-size:11px;color:#791F1F;line-height:1.7;border-top:1px solid #F09595;padding-top:10px;">
+          <div style="margin-bottom:4px;">Transport conversion: <strong>4%</strong></div>
+          <div style="margin-bottom:4px;">eSIM conversion: <strong>3%</strong></div>
+          <div style="margin-bottom:4px;">Margin applied: <strong>15%</strong></div>
+          <div style="margin-bottom:4px;">Go-live delay: <strong>+6 weeks</strong></div>
+          <div>Break-even: <strong>Mid-Year 2</strong></div>
+        </div>
+      </div>
+
+      <!-- BASE -->
+      <div style="background:var(--blue-pale);border:2px solid var(--blue-mid);border-radius:var(--radius);padding:14px 16px;position:relative;">
+        <div style="position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--blue-mid);color:#fff;font-size:10px;font-weight:600;padding:2px 10px;border-radius:0 0 6px 6px;letter-spacing:.04em;">MOST LIKELY</div>
+        <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--blue-dark);margin-bottom:10px;margin-top:8px;">Base case</div>
+        <div style="font-size:22px;font-weight:700;color:var(--blue-mid);margin-bottom:2px;">USD 54,940</div>
+        <div style="font-size:11px;color:var(--blue-dark);margin-bottom:12px;">Gross margin · Net +USD 42K after costs</div>
+        <div style="font-size:11px;color:var(--blue-dark);line-height:1.7;border-top:1px solid var(--blue-pale2);padding-top:10px;">
+          <div style="margin-bottom:4px;">Transport conversion: <strong>8%</strong></div>
+          <div style="margin-bottom:4px;">eSIM conversion: <strong>6%</strong></div>
+          <div style="margin-bottom:4px;">Margin applied: <strong>20%</strong></div>
+          <div style="margin-bottom:4px;">Volume growth: <strong>~15%</strong></div>
+          <div>Break-even: <strong>Month 6 (Oct)</strong></div>
+        </div>
+      </div>
+
+      <!-- BULL -->
+      <div style="background:var(--green-pale);border:1px solid #97C459;border-radius:var(--radius);padding:14px 16px;">
+        <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--green-mid);margin-bottom:10px;">Bull case</div>
+        <div style="font-size:22px;font-weight:700;color:var(--green-mid);margin-bottom:2px;">USD 183,600</div>
+        <div style="font-size:11px;color:var(--green-dark);margin-bottom:12px;">Gross margin · Net +USD 153K after costs</div>
+        <div style="font-size:11px;color:var(--green-dark);line-height:1.7;border-top:1px solid #C0DD97;padding-top:10px;">
+          <div style="margin-bottom:4px;">Transport conversion: <strong>14%</strong></div>
+          <div style="margin-bottom:4px;">eSIM conversion: <strong>10%</strong></div>
+          <div style="margin-bottom:4px;">Margin applied: <strong>25%</strong></div>
+          <div style="margin-bottom:4px;">Volume growth: <strong>~30%</strong></div>
+          <div>Break-even: <strong>Month 3 (Jul)</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MONTHLY MARGIN BARS — all 3 side by side -->
+    <div class="section-head">Monthly gross margin ramp — all scenarios</div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:24px;">
+      <div style="display:grid;grid-template-columns:60px 1fr 1fr 1fr;gap:6px;font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--border);">
+        <div></div><div style="color:#A32D2D;">Bear</div><div style="color:var(--blue-mid);">Base</div><div style="color:var(--green-mid);">Bull</div>
+      </div>
+      <div style="display:grid;grid-template-columns:60px 1fr 1fr 1fr;gap:6px;align-items:center;margin-bottom:6px;font-size:11px;">
+        <div style="color:var(--text2);">May M1</div>
+        <div><div style="height:12px;border-radius:3px;background:#F09595;width:12%"></div></div>
+        <div><div style="height:12px;border-radius:3px;background:#B5D4F4;width:34%"></div></div>
+        <div><div style="height:12px;border-radius:3px;background:#C0DD97;width:26%"></div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:60px 1fr 1fr 1fr;gap:6px;align-items:center;margin-bottom:6px;font-size:11px;">
+        <div style="color:var(--text2);">Jun M2</div>
+        <div><div style="height:12px;border-radius:3px;background:#F09595;width:22%"></div></div>
+        <div><div style="height:12px;border-radius:3px;background:#85B7EB;width:71%"></div></div>
+        <div><div style="height:12px;border-radius:3px;background:#97C459;width:54%"></div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:60px 1fr 1fr 1fr;gap:6px;align-items:center;margin-bottom:6px;font-size:11px;">
+        <div style="color:var(--text2);">Jul–Oct</div>
+        <div><div style="height:12px;border-radius:3px;background:#F09595;width:26%"></div></div>
+        <div><div style="height:12px;border-radius:3px;background:#378ADD;width:76%"></div></div>
+        <div><div style="height:12px;border-radius:3px;background:#639922;width:67%"></div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:60px 1fr 1fr 1fr;gap:6px;align-items:center;margin-bottom:6px;font-size:11px;">
+        <div style="color:var(--text2);">Nov–Dec</div>
+        <div><div style="height:12px;border-radius:3px;background:#F09595;width:28%"></div></div>
+        <div><div style="height:12px;border-radius:3px;background:#185FA5;width:91%"></div></div>
+        <div><div style="height:12px;border-radius:3px;background:#3B6D11;width:76%"></div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:60px 1fr 1fr 1fr;gap:6px;align-items:center;font-size:11px;">
+        <div style="color:var(--text2);">Jan–Apr</div>
+        <div><div style="height:12px;border-radius:3px;background:#F09595;width:30%"></div></div>
+        <div><div style="height:12px;border-radius:3px;background:#0C447C;width:100%"></div></div>
+        <div><div style="height:12px;border-radius:3px;background:#27500A;width:87%"></div></div>
+      </div>
+      <div style="font-size:10px;color:var(--text3);margin-top:10px;">Bar widths are relative within each scenario column. Base case peak (Jan–Apr) = USD 5,330/month · Bull peak = USD 15,900/month · Bear peak = USD 1,600/month</div>
+    </div>
+
+    <!-- FULL MONTHLY TABLE — BASE CASE -->
+    <div class="section-head">Base case — monthly detail</div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Period</th><th class="num-cell">Itineraries</th><th class="num-cell">Transport</th><th class="num-cell">eSIM</th><th class="num-cell">Margin</th><th class="num-cell">Cumulative</th></tr></thead>
+        <tbody>
+          <tr class="section-row"><td colspan="6">3-Month Pilot</td></tr>
+          <tr><td>M1 May — Go-live</td><td class="num-cell">1,850</td><td class="num-cell">74</td><td class="num-cell">49</td><td class="num-cell">$1,980</td><td class="num-cell">$1,980</td></tr>
+          <tr><td>M2 Jun — Observation</td><td class="num-cell">1,920</td><td class="num-cell">154</td><td class="num-cell">102</td><td class="num-cell">$4,100</td><td class="num-cell">$6,080</td></tr>
+          <tr><td>M3 Jul — Review</td><td class="num-cell">2,000</td><td class="num-cell">160</td><td class="num-cell">107</td><td class="num-cell">$4,270</td><td class="num-cell">$10,350</td></tr>
+          <tr class="section-row"><td colspan="6">Post-Pilot Scale</td></tr>
+          <tr><td>M4 Aug</td><td class="num-cell">2,050</td><td class="num-cell">164</td><td class="num-cell">109</td><td class="num-cell">$4,370</td><td class="num-cell">$14,720</td></tr>
+          <tr><td>M5 Sep</td><td class="num-cell">2,100</td><td class="num-cell">168</td><td class="num-cell">112</td><td class="num-cell">$4,480</td><td class="num-cell">$19,200</td></tr>
+          <tr><td>M6 Oct — Break-even</td><td class="num-cell">2,150</td><td class="num-cell">172</td><td class="num-cell">115</td><td class="num-cell">$4,590</td><td class="num-cell" style="color:var(--green-mid);font-weight:600;">$23,790</td></tr>
+          <tr><td>M7 Nov</td><td class="num-cell">2,250</td><td class="num-cell">180</td><td class="num-cell">120</td><td class="num-cell">$4,800</td><td class="num-cell">$28,590</td></tr>
+          <tr><td>M8 Dec — Peak travel</td><td class="num-cell">2,450</td><td class="num-cell">196</td><td class="num-cell">131</td><td class="num-cell">$5,230</td><td class="num-cell">$33,820</td></tr>
+          <tr><td>M9 Jan</td><td class="num-cell">2,300</td><td class="num-cell">184</td><td class="num-cell">123</td><td class="num-cell">$4,910</td><td class="num-cell">$38,730</td></tr>
+          <tr><td>M10 Feb</td><td class="num-cell">2,400</td><td class="num-cell">192</td><td class="num-cell">128</td><td class="num-cell">$5,120</td><td class="num-cell">$43,850</td></tr>
+          <tr><td>M11 Mar</td><td class="num-cell">2,500</td><td class="num-cell">200</td><td class="num-cell">133</td><td class="num-cell">$5,330</td><td class="num-cell">$49,180</td></tr>
+          <tr><td>M12 Apr — Peak</td><td class="num-cell">2,700</td><td class="num-cell">216</td><td class="num-cell">144</td><td class="num-cell">$5,760</td><td class="num-cell">$54,940</td></tr>
+          <tr class="total-row"><td class="bold">Year 1 Total</td><td class="num-cell bold">25,670</td><td class="num-cell bold">2,060</td><td class="num-cell bold">1,373</td><td class="num-cell c-blue">$54,940</td><td class="num-cell c-blue">$54,940</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- BEAR RISK TABLE -->
+    <div class="section-head">Bear case — risk drivers &amp; mitigations</div>
+    <div class="tbl-wrap" style="margin-bottom:24px;">
+      <table>
+        <thead><tr><th>Risk driver</th><th>Impact</th><th>Mitigation</th></tr></thead>
+        <tbody>
+          <tr><td class="bold">6-week integration delay</td><td>Go-live mid-June; pilot ends Sep not Jul</td><td>Dedicate dev resource from Day 1</td></tr>
+          <tr><td class="bold">Low conversion (4%)</td><td>Transport stuck on deals page, not day-plan</td><td>Embed CTA in itinerary day-plan view</td></tr>
+          <tr><td class="bold">Flat platform growth</td><td>Booking volume ceiling at ~1,900/month</td><td>Activate paid acquisition Q3</td></tr>
+          <tr><td class="bold">48-hr settlement pressure</td><td>Cash flow strain; operational overhead</td><td>Negotiate monthly net settlement post-pilot</td></tr>
+          <tr class="total-row"><td class="bold">Year 1 gross margin</td><td class="c-red bold">~USD 19,700</td><td class="bold">Break-even mid-Year 2</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ASSUMPTIONS -->
+    <div class="section-head">Key assumptions</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;">
+      <div class="ass-card">
+        <h3>Demand baseline</h3>
+        <div class="ass-item"><span class="ass-key">Weekly itineraries (Mar 2026)</span><span class="ass-val">434</span></div>
+        <div class="ass-item"><span class="ass-key">Easy Transport preference</span><span class="ass-val">79%</span></div>
+        <div class="ass-item"><span class="ass-key">User profile</span><span class="ass-val">79% couples, India 62%</span></div>
+        <div class="ass-item"><span class="ass-key">Hotel preference</span><span class="ass-val">83.5% 5-star</span></div>
+        <div class="ass-item"><span class="ass-key">Top destinations</span><span class="ass-val">Bali, Bangkok, Seoul, SG</span></div>
+      </div>
+      <div class="ass-card">
+        <h3>Pricing &amp; costs</h3>
+        <div class="ass-item"><span class="ass-key">Avg transport net price</span><span class="ass-val">USD 45</span></div>
+        <div class="ass-item"><span class="ass-key">Avg eSIM net price</span><span class="ass-val">USD 18</span></div>
+        <div class="ass-item"><span class="ass-key">Blended margin (base)</span><span class="ass-val">20% → ~USD 7.20/bkg</span></div>
+        <div class="ass-item"><span class="ass-key">Integration fee</span><span class="ass-val">₹3.75L (~USD 4,490)</span></div>
+        <div class="ass-item"><span class="ass-key">Dev estimate</span><span class="ass-val">~USD 8,000</span></div>
+      </div>
+    </div>
+    <div class="note amber"><strong>Critical variable:</strong> UI placement is the single biggest lever. Embedding transport inside the day-plan view (not a deals tab) is a 3× swing in conversion — the difference between all three scenarios.</div>
+    <div class="note" style="margin-top:10px;">All projections are forward-looking estimates based on available data as of March 2026. Actual results will vary. Confidential — internal use only.</div>
+  </div>
+
+
+  <!-- SYNERGIES -->
+  <div class="panel active" id="p-synergies">
+    <div style="height:12px"></div>
+    <div class="note">Both parties bring something the other cannot replicate. SuperGryd has breadth — 130+ countries, a full experiences catalogue — but no direct access to premium 50+ travellers at the planning stage. Greytt has that exact audience, unmonetised at the point of highest intent.</div>
+
+    <div class="section-head">Core strategic fit</div>
+    <div class="syn-grid">
+      <div class="syn-card">
+        <div class="tag tag-blue">Audience</div>
+        <div class="syn-title">Premium 50+ traveller</div>
+        <div class="syn-body">Greytt's users — 83.5% choose 5-star hotels, 79% couples — are exactly the segment that converts on reliable, quality transport and seamless connectivity.</div>
+      </div>
+      <div class="syn-card">
+        <div class="tag tag-teal">Inventory</div>
+        <div class="syn-title">130+ countries, one API</div>
+        <div class="syn-body">SuperGryd covers every destination Greytt serves — Bali, Bangkok, Seoul, Singapore — with no need for Greytt to build individual supplier relationships.</div>
+      </div>
+      <div class="syn-card">
+        <div class="tag tag-purple">Intent signal</div>
+        <div class="syn-title">Highest preference match</div>
+        <div class="syn-body">"Easy Transport" is the #1 traveller preference at 79% of all itinerary sessions — demand is present and unmet on the platform today.</div>
+      </div>
+    </div>
+
+    <div class="section-head">What each side brings</div>
+    <div class="match-row">
+      <div class="match-cell">
+        <div class="match-cell-title">Greytt brings</div>
+        <div class="match-cell-body">Qualified, high-intent 50+ travellers at the planning stage — before any purchase decision is made. 434+ itineraries/week, April–May peak at 67% of near-term travel intent.</div>
+      </div>
+      <div class="match-arrow">→</div>
+      <div class="match-cell">
+        <div class="match-cell-title">SuperGryd brings</div>
+        <div class="match-cell-body">Bookable transport and eSIM inventory across 130+ countries, net-priced, via a single REST API — zero supplier management overhead for Greytt.</div>
+      </div>
+    </div>
+    <div class="match-row">
+      <div class="match-cell">
+        <div class="match-cell-title">Greytt brings</div>
+        <div class="match-cell-body">AI-curated itinerary context — day-by-day plans, Greytt Score, wellness hotel picks — giving transport recommendations meaningful placement and timing.</div>
+      </div>
+      <div class="match-arrow">→</div>
+      <div class="match-cell">
+        <div class="match-cell-title">SuperGryd brings</div>
+        <div class="match-cell-body">Soft exclusivity during the 3-month pilot — no proactive onboarding of rival 50+ platforms in the same destination markets. First-mover protection at zero extra cost.</div>
+      </div>
+    </div>
+    <div class="match-row">
+      <div class="match-cell">
+        <div class="match-cell-title">Greytt brings</div>
+        <div class="match-cell-body">Full margin control — sets its own selling price on SuperGryd net inventory. Can price at 20–30% above net cost and retain the spread, vs affiliate models where the OTA sets the price.</div>
+      </div>
+      <div class="match-arrow">→</div>
+      <div class="match-cell">
+        <div class="match-cell-title">SuperGryd brings</div>
+        <div class="match-cell-body">A structured 3-month pilot with hypercare in Month 1, observation in Month 2, and a mutual review in Month 3 — low-risk entry with a defined exit if performance disappoints.</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <div class="section-head">Product-level synergies</div>
+    <div class="syn-card-2">
+      <div class="syn-card">
+        <div class="tag tag-green">Transport</div>
+        <div class="syn-title">Closes the itinerary gap</div>
+        <div class="syn-body">Greytt builds day-by-day plans but has no bookable transport layer. Airport transfers, intercity routes, and private cars are natural day-1 items — SuperGryd fills this gap immediately, making itineraries actionable rather than advisory.</div>
+      </div>
+      <div class="syn-card">
+        <div class="tag tag-amber">eSIM</div>
+        <div class="syn-title">Solves a 50+ pain point</div>
+        <div class="syn-body">International connectivity anxiety is disproportionately high in the 50+ segment. An eSIM offer at itinerary creation — before the trip — is high-relevance, low-friction, and directly addresses the "confidence" pillar of Greytt's value proposition.</div>
+      </div>
+      <div class="syn-card">
+        <div class="tag tag-coral">Booking ownership</div>
+        <div class="syn-title">Keeps users in-app</div>
+        <div class="syn-body">Unlike Agoda/Viator affiliates where users leave Greytt to complete the purchase, SuperGryd's API keeps the entire booking flow on-platform. Greytt owns the transaction data, the confirmation experience, and the post-booking relationship.</div>
+      </div>
+      <div class="syn-card">
+        <div class="tag tag-purple">Phase 2 runway</div>
+        <div class="syn-title">Activities, Tours, Attractions</div>
+        <div class="syn-body">SuperGryd's full catalogue — currently scoped to transport and eSIM — covers activities, attractions, and tours across 130+ countries. A successful pilot creates a clear path to replacing Viator/GYG affiliate dependency with an owned, margined booking layer.</div>
+      </div>
+    </div>
+
+    <div class="section-head">Value creation flywheel</div>
+    <div class="flywheel">
+      <div class="fw-row"><div class="fw-dot" style="background:#185FA5"></div><div class="fw-text"><strong>More itineraries</strong> → more transport and eSIM intent signals → higher booking volume → higher gross margin for Greytt</div></div>
+      <div class="fw-row"><div class="fw-dot" style="background:#1D9E75"></div><div class="fw-text"><strong>In-app bookings</strong> → Greytt retains user data and post-trip relationship → better personalisation → stronger Greytt Score differentiation</div></div>
+      <div class="fw-row"><div class="fw-dot" style="background:#BA7517"></div><div class="fw-text"><strong>Margin on net prices</strong> → Greytt sets selling price above SuperGryd net → scales non-linearly as volume grows, unlike fixed affiliate commission rates</div></div>
+      <div class="fw-row"><div class="fw-dot" style="background:#534AB7"></div><div class="fw-text"><strong>Pilot success</strong> → justifies Phase 2 (Activities, Tours) → reduces Viator/GYG dependence → Greytt moves from affiliate referrer to genuine travel commerce platform</div></div>
+      <div class="fw-row"><div class="fw-dot" style="background:#993C1D"></div><div class="fw-text"><strong>SuperGryd gains</strong> a premium, high-intent 50+ audience with strong booking conversion — a differentiated distribution channel they cannot easily replicate independently</div></div>
+    </div>
+
+    <div class="section-head">What makes this structurally different</div>
+    <div class="stat-grid">
+      <div class="stat-card"><div class="stat-val" style="color:var(--blue-mid)">Net pricing</div><div class="stat-sub">vs affiliate commission</div><div class="stat-body">Greytt controls margin and selling price. Scales with volume, not capped by OTA-set commission rates.</div></div>
+      <div class="stat-card"><div class="stat-val" style="color:#1D9E75">Owned data</div><div class="stat-sub">vs referral traffic</div><div class="stat-body">Every SuperGryd booking stays in Greytt's system. No user exits to a third-party to complete the transaction.</div></div>
+      <div class="stat-card"><div class="stat-val" style="color:#534AB7">Expandable</div><div class="stat-sub">vs single-category affiliates</div><div class="stat-body">One API unlocks the full SuperGryd catalogue. Transport + eSIM today; activities and tours in Phase 2 — no new integrations required.</div></div>
+    </div>
+  </div>
+
+  <!-- AGODA VS SUPERGRYD -->
+  <div class="panel" id="p-comparison">
+    <div style="height:12px"></div>
+    <div class="note">Agoda is a live affiliate integration (zero cost, commission-based). SuperGryd is a proposed paid API partnership (₹3.75L upfront, net pricing). They are not mutually exclusive — Agoda covers hotels, SuperGryd covers transport + eSIM — but they represent fundamentally different business models.</div>
+
+    <div class="cmp-tbl-wrap">
+      <table class="cmp-tbl">
+        <thead>
+          <tr>
+            <th style="width:24%">Dimension</th>
+            <th class="sg" style="width:38%">SuperGryd (proposed)</th>
+            <th class="ag" style="width:38%">Agoda (live)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="cmp-section"><td colspan="3">Partnership model</td></tr>
+          <tr>
+            <td class="bold">Model type</td>
+            <td><span class="pill pill-amber">Paid API partnership</span><br><span style="font-size:11px;color:var(--text2)">Formal bilateral contract with INR fee</span></td>
+            <td><span class="pill pill-green">Affiliate / deals listing</span><br><span style="font-size:11px;color:var(--text2)">No upfront cost; commission on bookings</span></td>
+          </tr>
+          <tr>
+            <td class="bold">Product category</td>
+            <td>Transportation + eSIM (Phase 1)<br><span style="font-size:11px;color:var(--text2)">Activities, Tours, Attractions in Phase 2</span></td>
+            <td>Hotel recommendations + deals page<br><span style="font-size:11px;color:var(--text2)">Also Viator and GYG live in same section</span></td>
+          </tr>
+          <tr>
+            <td class="bold">Geographic reach</td>
+            <td>130+ countries, single unified API</td>
+            <td>Southeast Asia focus via deals page</td>
+          </tr>
+          <tr>
+            <td class="bold">Live status</td>
+            <td><span class="pill pill-gray">Not started</span></td>
+            <td><span class="pill pill-green">Live since Jan 2026</span></td>
+          </tr>
+
+          <tr class="cmp-section"><td colspan="3">Financial terms</td></tr>
+          <tr>
+            <td class="bold">Upfront cost</td>
+            <td><span class="pill pill-red">₹3,75,000</span> pilot rate (vs ₹5L standard)<br><span style="font-size:11px;color:var(--text2)">Tranche 1: ₹2L at signing · Tranche 2: ₹1.75L pre go-live</span></td>
+            <td><span class="pill pill-green">₹0</span><br><span style="font-size:11px;color:var(--text2)">No integration fee whatsoever</span></td>
+          </tr>
+          <tr>
+            <td class="bold">Revenue model</td>
+            <td>Net pricing — Greytt sets own selling price, retains the margin<br><span style="font-size:11px;color:var(--text2)">Unlimited upside; Greytt holds pricing risk</span></td>
+            <td>Affiliate commission on completed bookings<br><span style="font-size:11px;color:var(--text2)">No revenue until booking; OTA sets all terms</span></td>
+          </tr>
+          <tr>
+            <td class="bold">Settlement</td>
+            <td>Greytt remits net amount to SuperGryd in USD within 48 hrs per booking<br><span style="font-size:11px;color:var(--text2)">1.5%/week late fee if overdue</span></td>
+            <td>Agoda settles commission to Greytt periodically<br><span style="font-size:11px;color:var(--text2)">No cash flow obligation on Greytt</span></td>
+          </tr>
+          <tr>
+            <td class="bold">Non-refundable fee</td>
+            <td><span class="pill pill-red">Yes</span> — integration fee non-refundable on exit</td>
+            <td><span class="pill pill-green">N/A</span></td>
+          </tr>
+
+          <tr class="cmp-section"><td colspan="3">Technical integration</td></tr>
+          <tr>
+            <td class="bold">Integration effort</td>
+            <td><span class="pill pill-amber">High</span> — full REST API build required<br><span style="font-size:11px;color:var(--text2)">Search, availability, booking, confirmation; Greytt tech team owns build</span></td>
+            <td><span class="pill pill-green">Low</span> — affiliate link / widget embed<br><span style="font-size:11px;color:var(--text2)">Already live in production</span></td>
+          </tr>
+          <tr>
+            <td class="bold">Booking flow</td>
+            <td>Greytt owns end-to-end<br><span style="font-size:11px;color:var(--text2)">Payment, UX, confirmation, support all on-platform</span></td>
+            <td>User leaves Greytt to complete booking on Agoda<br><span style="font-size:11px;color:var(--text2)">Greytt is a traffic source, not a commerce platform</span></td>
+          </tr>
+
+          <tr class="cmp-section"><td colspan="3">Strategic value</td></tr>
+          <tr>
+            <td class="bold">User & data retention</td>
+            <td><span class="pill pill-blue">Keeps user in-app</span><br><span style="font-size:11px;color:var(--text2)">Booking + transaction data owned by Greytt</span></td>
+            <td><span class="pill pill-red">User exits to Agoda</span><br><span style="font-size:11px;color:var(--text2)">No booking data returned to Greytt</span></td>
+          </tr>
+          <tr>
+            <td class="bold">50+ segment fit</td>
+            <td>Transport directly addresses the #1 preference (Easy Transport, 79%). eSIM addresses connectivity anxiety unique to older solo international travellers.</td>
+            <td>Hotels are relevant but undifferentiated — every OTA offers the same inventory. Greytt Score adds a thin layer of curation on top.</td>
+          </tr>
+          <tr>
+            <td class="bold">Exclusivity</td>
+            <td><span class="pill pill-blue">Soft exclusivity</span> — SuperGryd won't onboard rival 50+ platforms in same markets during pilot</td>
+            <td>None — Agoda partners with every platform</td>
+          </tr>
+          <tr>
+            <td class="bold">Phase 2 potential</td>
+            <td>Activities, Attractions, Tours across 130+ countries via the same API integration — no incremental build required</td>
+            <td>Limited to hotels only; no path to transport, eSIM, or experiences</td>
+          </tr>
+
+          <tr class="cmp-section"><td colspan="3">Risk profile</td></tr>
+          <tr>
+            <td class="bold">Financial risk</td>
+            <td><span class="pill pill-red">High</span> — ₹3.75L sunk cost + 48-hr settlement obligation per booking going forward</td>
+            <td><span class="pill pill-green">Low</span> — zero downside; earns only on completed bookings</td>
+          </tr>
+          <tr>
+            <td class="bold">Execution risk</td>
+            <td><span class="pill pill-amber">Medium</span> — tech team must build + maintain full API integration; risk of delayed go-live</td>
+            <td><span class="pill pill-green">None</span> — already built and live since Jan 2026</td>
+          </tr>
+          <tr>
+            <td class="bold">Exit terms</td>
+            <td>14-day written notice before end of Month 3; API stays up 14 days post-notice; integration fee not returned</td>
+            <td>Standard affiliate terms; can be paused or removed anytime</td>
+          </tr>
+
+          <tr class="cmp-section"><td colspan="3">Verdict</td></tr>
+          <tr style="background:var(--blue-pale)">
+            <td class="bold" style="color:var(--blue-dark)">Best for</td>
+            <td style="color:var(--blue-dark)">Greytt's next stage of evolution — owning the booking flow, building margin, and accumulating user data. The right choice if volumes justify the investment and the team has dev capacity.</td>
+            <td style="color:var(--green-dark)">Quick, zero-risk monetisation on hotels. The right choice as a parallel stream — not a substitute for a booking commerce layer. Already earning and should be maintained.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note amber"><strong>Key insight:</strong> SuperGryd and Agoda are complementary, not competitive. Agoda covers hotels (affiliate). SuperGryd covers transport + eSIM (owned booking flow). Running both in parallel is the optimal strategy — Agoda provides immediate hotel revenue with zero overhead; SuperGryd builds the commerce infrastructure for everything else.</div>
+  </div>
+
+</div><!-- /content -->
+
+<div class="footer">
+  Greytt × SuperGryd · Partnership Analysis · March 2026 · Confidential<br>
+  Synergies · Agoda vs SuperGryd Comparison · 1-Year Revenue Projection
+</div>
+
+<script>
+  function showTab(id, btn) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
+    document.getElementById('p-' + id).classList.add('active');
+    if (btn) {
+      btn.classList.add('active');
+    } else {
+      const tabs = ['synergies','comparison','revenue'];
+      const idx = tabs.indexOf(id);
+      if (idx > -1) document.querySelectorAll('.tab-btn')[idx].classList.add('active');
+    }
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+</script>
+</body>
+</html>
