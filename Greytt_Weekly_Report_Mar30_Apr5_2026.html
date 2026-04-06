@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Greytt Weekly Report — Mar 30 – Apr 5, 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:        #0D4A7A;
+  --mid:         #1565A0;
+  --sky:         #0288D1;
+  --sky-light:   #E3F2FD;
+  --sky-pale:    #F0F7FF;
+  --white:       #FFFFFF;
+  --slate:       #37474F;
+  --muted:       #78909C;
+  --border:      #B3D9F2;
+  --red:         #C62828;
+  --red-pale:    #FFEBEE;
+  --orange:      #E65100;
+  --orange-pale: #FFF3E0;
+  --green:       #2E7D32;
+  --green-pale:  #E8F5E9;
+  --teal:        #00695C;
+  --teal-pale:   #E0F2F1;
+  --r: 12px;
+  --r-sm: 8px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--sky-pale);color:var(--slate);font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
+
+/* ── HEADER ── */
+.hdr{background:linear-gradient(140deg,var(--navy) 0%,var(--mid) 60%,#0277BD 100%);padding:28px 20px 22px;text-align:center;position:relative;overflow:hidden}
+.hdr::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 20% 50%,rgba(255,255,255,.05) 0%,transparent 60%),radial-gradient(circle at 80% 20%,rgba(2,136,209,.2) 0%,transparent 50%)}
+.hdr-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:3px;color:var(--border);text-transform:uppercase;margin-bottom:8px}
+.hdr h1{font-family:'DM Serif Display',serif;font-size:clamp(24px,6vw,36px);color:#fff;line-height:1.1;margin-bottom:4px}
+.hdr h1 em{font-style:italic;color:var(--border)}
+.hdr-sub{font-size:12px;color:var(--border);margin-bottom:18px}
+.hdr-kpis{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.hkpi{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:var(--r-sm);padding:10px 14px;min-width:80px;backdrop-filter:blur(8px)}
+.hkpi-n{font-family:'DM Serif Display',serif;font-size:24px;color:#fff;line-height:1;margin-bottom:2px}
+.hkpi-l{font-size:10px;color:var(--border);line-height:1.3}
+.wow-up{color:#69F0AE;font-size:9px;font-weight:600}
+.wow-dn{color:#FF8A65;font-size:9px;font-weight:600}
+
+/* ── TABS ── */
+.tabs{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:2px solid var(--border);display:flex;overflow-x:auto;scrollbar-width:none;box-shadow:0 2px 8px rgba(13,74,122,.08)}
+.tabs::-webkit-scrollbar{display:none}
+.tb{flex-shrink:0;padding:12px 16px;font-size:11.5px;font-weight:600;color:var(--muted);letter-spacing:.4px;cursor:pointer;border:none;background:none;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;white-space:nowrap;font-family:'DM Sans',sans-serif}
+.tb.on{color:var(--navy);border-bottom-color:var(--sky)}
+.tb:hover{color:var(--mid)}
+
+/* ── PANELS ── */
+.pnl{display:none;padding:16px;max-width:820px;margin:0 auto}
+.pnl.on{display:block}
+
+/* ── SECTION ── */
+.sec-t{font-family:'DM Serif Display',serif;font-size:21px;color:var(--navy);margin:22px 0 4px;line-height:1.2}
+.sec-t:first-child{margin-top:8px}
+.sec-div{height:2px;background:linear-gradient(90deg,var(--sky) 0%,var(--border) 100%);border-radius:2px;margin-bottom:14px}
+.sub-t{font-size:11.5px;font-weight:600;color:var(--mid);margin:16px 0 8px;text-transform:uppercase;letter-spacing:.7px}
+
+/* ── CARDS ── */
+.card{background:var(--white);border-radius:var(--r);border:1px solid var(--border);padding:14px;margin-bottom:10px;box-shadow:0 1px 4px rgba(13,74,122,.05)}
+
+/* ── KPI GRID ── */
+.kg{display:grid;gap:8px;margin-bottom:14px}
+.kg2{grid-template-columns:repeat(2,1fr)}
+.kg4{grid-template-columns:repeat(2,1fr)}
+@media(min-width:480px){.kg4{grid-template-columns:repeat(4,1fr)}}
+.kc{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:12px 10px;text-align:center;box-shadow:0 1px 3px rgba(13,74,122,.04)}
+.kc .n{font-family:'DM Serif Display',serif;font-size:28px;line-height:1;margin-bottom:3px}
+.kc .l{font-size:10.5px;color:var(--muted);line-height:1.3}
+.kc .delta{font-size:10px;font-weight:600;margin-top:3px}
+.delta-up{color:var(--green)}
+.delta-dn{color:var(--red)}
+.delta-neu{color:var(--muted)}
+.c-blue{color:var(--sky)} .c-navy{color:var(--navy)} .c-green{color:var(--green)}
+.c-red{color:var(--red)} .c-orange{color:var(--orange)} .c-teal{color:var(--teal)}
+
+/* ── BAR CHART ── */
+.bars{display:flex;flex-direction:column;gap:6px}
+.br{display:grid;grid-template-columns:130px 1fr 38px;gap:6px;align-items:center;font-size:11.5px}
+@media(max-width:380px){.br{grid-template-columns:100px 1fr 34px}}
+.b-lbl{color:var(--slate);line-height:1.2}
+.b-trk{height:18px;background:var(--sky-pale);border-radius:4px;overflow:hidden;border:1px solid var(--border)}
+.b-fil{height:100%;border-radius:4px;transition:width .9s cubic-bezier(.4,0,.2,1)}
+.b-val{color:var(--muted);font-size:10.5px;text-align:right;font-family:'JetBrains Mono',monospace}
+.bn{background:var(--navy)} .bm{background:var(--mid)} .bs{background:var(--sky)}
+.bt{background:#0277BD} .bg{background:var(--green)} .br2{background:var(--red)}
+
+/* ── TABLE ── */
+.tw{overflow-x:auto;border-radius:var(--r);border:1px solid var(--border);margin-bottom:10px}
+table{width:100%;border-collapse:collapse;font-size:11.5px}
+th{background:var(--navy);color:#fff;padding:7px 10px;text-align:left;font-weight:600;font-size:11px;letter-spacing:.3px;white-space:nowrap}
+th:first-child{border-radius:8px 0 0 0} th:last-child{border-radius:0 8px 0 0}
+td{padding:7px 10px;border-bottom:1px solid var(--sky-light);color:var(--slate);vertical-align:top}
+tr:nth-child(even) td{background:var(--sky-pale)}
+tr:last-child td{border-bottom:none}
+
+/* ── BADGES ── */
+.badge{display:inline-block;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:600;letter-spacing:.2px;white-space:nowrap}
+.bd{background:#E8F5E9;color:var(--green)} .bp{background:#E3F2FD;color:var(--mid)}
+.bh{background:#FFF3E0;color:var(--orange)} .bo{background:var(--red-pale);color:var(--red)}
+.bc{background:#B71C1C;color:#fff} .bst{background:#E8EAF6;color:#3949AB}
+.bpp{background:#F3E5F5;color:#6A1B9A} .bpr{background:var(--green-pale);color:var(--green)}
+.bns{background:#F5F5F5;color:#9E9E9E}
+
+/* ── ALERTS ── */
+.al{border-radius:var(--r-sm);padding:11px 13px;margin-bottom:9px;border-left:4px solid}
+.al-r{background:var(--red-pale);border-color:var(--red)}
+.al-o{background:var(--orange-pale);border-color:var(--orange)}
+.al-b{background:var(--sky-pale);border-color:var(--sky)}
+.al-g{background:var(--green-pale);border-color:var(--green)}
+.al-t{background:var(--teal-pale);border-color:var(--teal)}
+.al-tt{font-weight:600;font-size:12.5px;margin-bottom:3px}
+.al-bd{font-size:11.5px;color:var(--slate);line-height:1.5}
+
+/* ── INSIGHT ── */
+.ins{background:var(--sky-pale);border-left:4px solid var(--sky);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:11px 13px;margin-bottom:9px;font-size:12px;line-height:1.55;color:var(--slate)}
+.ins strong{color:var(--navy)}
+
+/* ── WoW CARD ── */
+.wow-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.wow-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 12px}
+.wow-metric{font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:4px}
+.wow-vals{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.wow-prev{font-size:11px;color:var(--muted);text-decoration:line-through}
+.wow-curr{font-family:'DM Serif Display',serif;font-size:20px;color:var(--navy)}
+.wow-chg{font-size:10.5px;font-weight:600;padding:1px 6px;border-radius:20px}
+.wow-chg.up{background:var(--green-pale);color:var(--green)}
+.wow-chg.dn{background:var(--red-pale);color:var(--red)}
+.wow-chg.neu{background:#ECEFF1;color:var(--muted)}
+
+/* ── PART BANNER ── */
+.part-banner{background:linear-gradient(135deg,var(--navy),var(--mid));border-radius:var(--r);padding:20px;text-align:center;margin-bottom:18px;overflow:hidden;position:relative}
+.part-banner::after{content:'';position:absolute;bottom:-24px;right:-24px;width:90px;height:90px;border-radius:50%;background:rgba(255,255,255,.05)}
+.pb-tag{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:3px;color:var(--border);margin-bottom:5px}
+.pb-h{font-family:'DM Serif Display',serif;font-size:20px;color:#fff;margin-bottom:3px}
+.pb-s{font-size:11px;color:var(--border)}
+
+/* ── SCROLL HINT ── */
+.sh{font-size:10px;color:var(--muted);text-align:right;margin-bottom:3px;font-style:italic}
+
+/* ── BODY TEXT ── */
+p{margin-bottom:9px;font-size:12.5px;line-height:1.65} p:last-child{margin-bottom:0}
+
+/* ── FOOTER ── */
+footer{background:var(--navy);color:var(--border);text-align:center;padding:18px;font-size:11px;margin-top:28px}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.pnl.on .card,.pnl.on .kc,.pnl.on .al,.pnl.on .ins,.pnl.on .wow-card,.pnl.on .part-banner{animation:fadeUp .3s ease both}
+
+/* ── PRINT ── */
+@media print{.tabs{display:none}.pnl{display:block!important}}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="hdr">
+  <div class="hdr-eyebrow">Greytt · Internal Analytics · Confidential</div>
+  <h1>Weekly <em>Report</em></h1>
+  <div class="hdr-sub">Itinerary Analytics &amp; Tech Project Status &nbsp;·&nbsp; March 30 – April 5, 2026</div>
+  <div class="hdr-kpis">
+    <div class="hkpi">
+      <div class="hkpi-n">301</div>
+      <div class="hkpi-l">Itineraries <span class="wow-dn">↓31%</span></div>
+    </div>
+    <div class="hkpi">
+      <div class="hkpi-n">24%</div>
+      <div class="hkpi-l">Registered <span class="wow-up">↑3pp</span></div>
+    </div>
+    <div class="hkpi">
+      <div class="hkpi-n">4</div>
+      <div class="hkpi-l">Open Bugs <span class="wow-up">↓13</span></div>
+    </div>
+    <div class="hkpi">
+      <div class="hkpi-n">17</div>
+      <div class="hkpi-l">In Progress <span class="wow-dn">↑4</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- TABS -->
+<nav class="tabs" role="tablist">
+  <button class="tb on" onclick="showTab('summary')">Summary</button>
+  <button class="tb" onclick="showTab('wow')">Week-on-Week</button>
+  <button class="tb" onclick="showTab('itinerary')">Itinerary</button>
+  <button class="tb" onclick="showTab('destinations')">Destinations</button>
+  <button class="tb" onclick="showTab('users')">Users</button>
+  <button class="tb" onclick="showTab('tech')">Tech Overview</button>
+  <button class="tb" onclick="showTab('bugs')">Bugs</button>
+  <button class="tb" onclick="showTab('risks')">Risks</button>
+</nav>
+
+<!-- ══════════════════════════════════════════════
+     SUMMARY
+══════════════════════════════════════════════ -->
+<div id="tab-summary" class="pnl on">
+
+  <p style="margin-top:10px;color:var(--muted);font-size:11.5px">Week ending April 5, 2026 · All figures compared to Mar 16–22 prior week.</p>
+
+  <div class="sec-t">Part 1 — Itinerary Analytics</div>
+  <div class="sec-div"></div>
+
+  <div class="kg kg4">
+    <div class="kc"><div class="n c-navy">301</div><div class="l">Itineraries</div><div class="delta delta-dn">↓ 31% vs last week</div></div>
+    <div class="kc"><div class="n c-blue">69%</div><div class="l">Plan Mode</div><div class="delta delta-dn">↓ 9pp vs last week</div></div>
+    <div class="kc"><div class="n c-green">8.1</div><div class="l">Avg Trip Days</div><div class="delta delta-up">↑ 0.8 days</div></div>
+    <div class="kc"><div class="n c-orange">24%</div><div class="l">Registered Users</div><div class="delta delta-up">↑ 3pp vs last week</div></div>
+  </div>
+
+  <div class="al al-b">
+    <div class="al-tt">📊 Itinerary Highlights</div>
+    <div class="al-bd">Bali remains #1 at 21% share (down from 37%). <strong>Tokyo surges to #2</strong> (13%). Japan and SE Asia gaining share vs prior week. India still leads at 60% of users, but Indonesia now a strong #2 at 11%. April 2026 is the peak travel month with 39% of planned trips.</div>
+  </div>
+
+  <div class="sec-t" style="margin-top:18px">Part 2 — Tech Project Status</div>
+  <div class="sec-div"></div>
+
+  <div class="kg kg4">
+    <div class="kc"><div class="n c-navy">153</div><div class="l">Work Items</div><div class="delta delta-up">↑ 11 added</div></div>
+    <div class="kc"><div class="n c-green">79%</div><div class="l">Completed</div><div class="delta delta-dn">↓ 4pp (backlog growing)</div></div>
+    <div class="kc"><div class="n c-blue">17</div><div class="l">In Progress</div><div class="delta delta-dn">↑ 4 more active</div></div>
+    <div class="kc"><div class="n c-green">4</div><div class="l">Open Bugs</div><div class="delta delta-up">↓ 13 resolved!</div></div>
+  </div>
+
+  <div class="al al-g">
+    <div class="al-tt">✅ Major Bug Resolution This Week</div>
+    <div class="al-bd">Open bugs dropped from <strong>17 → 4</strong> and critical-severity bugs from <strong>7 → 1</strong>. Hotels module, Chatbot, and Itinerary Generation bugs largely cleared. Outstanding: BUG_058 Personalization not clickable (Critical), BUG_060 Traveler-hotel sync (Major).</div>
+  </div>
+
+  <div class="al al-o">
+    <div class="al-tt">⚠ Active Risks This Week</div>
+    <div class="al-bd">17 items in progress simultaneously — 6 are already past their deadlines (Hotel Finder, Score Automation, SuperGryd, Partner Pack, Pop Quiz, Preprod Access). Foundational backlog and AI pipeline remain entirely unaddressed.</div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════
+     WEEK-ON-WEEK
+══════════════════════════════════════════════ -->
+<div id="tab-wow" class="pnl">
+
+  <div class="sec-t">Week-on-Week Comparison</div>
+  <div class="sec-div"></div>
+  <p style="color:var(--muted);font-size:11.5px">Mar 16–22 (prior) vs Mar 30–Apr 5 (current)</p>
+
+  <div class="sub-t">Itinerary Metrics</div>
+  <div class="wow-grid">
+    <div class="wow-card">
+      <div class="wow-metric">Total Itineraries</div>
+      <div class="wow-vals"><span class="wow-prev">434</span><span class="wow-curr">301</span><span class="wow-chg dn">↓ 31%</span></div>
+    </div>
+    <div class="wow-card">
+      <div class="wow-metric">Plan Mode Share</div>
+      <div class="wow-vals"><span class="wow-prev">78%</span><span class="wow-curr">69%</span><span class="wow-chg dn">↓ 9pp</span></div>
+    </div>
+    <div class="wow-card">
+      <div class="wow-metric">Avg Trip Duration</div>
+      <div class="wow-vals"><span class="wow-prev">7.3d</span><span class="wow-curr">8.1d</span><span class="wow-chg up">↑ 11%</span></div>
+    </div>
+    <div class="wow-card">
+      <div class="wow-metric">Registered Users</div>
+      <div class="wow-vals"><span class="wow-prev">21%</span><span class="wow-curr">24%</span><span class="wow-chg up">↑ 3pp</span></div>
+    </div>
+    <div class="wow-card">
+      <div class="wow-metric">India Share</div>
+      <div class="wow-vals"><span class="wow-prev">62%</span><span class="wow-curr">60%</span><span class="wow-chg neu">→ stable</span></div>
+    </div>
+    <div class="wow-card">
+      <div class="wow-metric">Countries</div>
+      <div class="wow-vals"><span class="wow-prev">45</span><span class="wow-curr">33</span><span class="wow-chg dn">↓ 12</span></div>
+    </div>
+    <div class="wow-card">
+      <div class="wow-metric">With Children</div>
+      <div class="wow-vals"><span class="wow-prev">32</span><span class="wow-curr">35</span><span class="wow-chg up">↑ 9%</span></div>
+    </div>
+    <div class="wow-card">
+      <div class="wow-metric">5-Star Hotel Share</div>
+      <div class="wow-vals"><span class="wow-prev">83.5%</span><span class="wow-curr">77.8%</span><span class="wow-chg dn">↓ 5.7pp</span></div>
+    </div>
+  </div>
+
+  <div class="sub-t">Top Destination Shift</div>
+  <div class="tw">
+    <table>
+      <tr><th>Destination</th><th>Prior Week</th><th>This Week</th><th>Change</th></tr>
+      <tr><td>Bali, Indonesia</td><td>160 (36.9%)</td><td>62 (20.6%)</td><td style="color:var(--red)">↓ 61%</td></tr>
+      <tr><td>Tokyo, Japan</td><td>23 (5.3%)</td><td>39 (13.0%)</td><td style="color:var(--green)">↑ 70%</td></tr>
+      <tr><td>Bangkok, Thailand</td><td>78 (18.0%)</td><td>32 (10.6%)</td><td style="color:var(--red)">↓ 59%</td></tr>
+      <tr><td>Seoul, South Korea</td><td>49 (11.3%)</td><td>30 (10.0%)</td><td style="color:var(--red)">↓ 39%</td></tr>
+      <tr><td>Phuket, Thailand</td><td>23 (5.3%)</td><td>27 (9.0%)</td><td style="color:var(--green)">↑ 17%</td></tr>
+      <tr><td>Mumbai, India</td><td>14 (3.2%)</td><td>21 (7.0%)</td><td style="color:var(--green)">↑ 50%</td></tr>
+      <tr><td>Ho Chi Minh, Vietnam</td><td>16 (3.7%)</td><td>19 (6.3%)</td><td style="color:var(--green)">↑ 19%</td></tr>
+      <tr><td>Singapore</td><td>26 (6.0%)</td><td>19 (6.3%)</td><td style="color:var(--muted)">→ stable</td></tr>
+      <tr><td>Siem Reap / Jakarta</td><td>9 (2.1%)</td><td>18 (6.0%)</td><td style="color:var(--green)">↑ 100%</td></tr>
+    </table>
+  </div>
+  <div class="ins"><strong>Destination shift:</strong> Bali's dominance has weakened significantly (37% → 21%). Tokyo is the stand-out gainer — up 70% to become the #2 destination. This may reflect seasonal demand or a new campaign. Mumbai and Siem Reap / Jakarta are also gaining meaningfully.</div>
+
+  <div class="sub-t">Tech Metrics</div>
+  <div class="wow-grid">
+    <div class="wow-card">
+      <div class="wow-metric">Open Bugs</div>
+      <div class="wow-vals"><span class="wow-prev">17</span><span class="wow-curr">4</span><span class="wow-chg up">↓ 76%</span></div>
+    </div>
+    <div class="wow-card">
+      <div class="wow-metric">Critical Bugs</div>
+      <div class="wow-vals"><span class="wow-prev">7</span><span class="wow-curr">1</span><span class="wow-chg up">↓ 86%</span></div>
+    </div>
+    <div class="wow-card">
+      <div class="wow-metric">Work Items</div>
+      <div class="wow-vals"><span class="wow-prev">142</span><span class="wow-curr">153</span><span class="wow-chg neu">↑ 11</span></div>
+    </div>
+    <div class="wow-card">
+      <div class="wow-metric">In Progress</div>
+      <div class="wow-vals"><span class="wow-prev">13</span><span class="wow-curr">17</span><span class="wow-chg dn">↑ 4</span></div>
+    </div>
+    <div class="wow-card">
+      <div class="wow-metric">Deployed (Prod)</div>
+      <div class="wow-vals"><span class="wow-prev">3</span><span class="wow-curr">4</span><span class="wow-chg up">↑ 1</span></div>
+    </div>
+    <div class="wow-card">
+      <div class="wow-metric">Pre-Prod Items</div>
+      <div class="wow-vals"><span class="wow-prev">0</span><span class="wow-curr">3</span><span class="wow-chg up">New stage</span></div>
+    </div>
+  </div>
+
+  <div class="al al-g">
+    <div class="al-tt">🏆 Biggest Win: Bug Clearance</div>
+    <div class="al-bd">The team resolved 13 open bugs in the week — from 17 down to 4. Critical-severity count dropped from 7 to 1. Hotels module, Chatbot, Itinerary Generation, and External Integration bugs are now mostly cleared.</div>
+  </div>
+  <div class="al al-o">
+    <div class="al-tt">⚠ Watch: Volume Decline</div>
+    <div class="al-bd">Itinerary volume dropped 31% week-on-week (434 → 301). This could reflect a natural calendar effect (Easter week / end-of-month), but warrants monitoring next week to confirm it is not a sustained trend.</div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════
+     ITINERARY
+══════════════════════════════════════════════ -->
+<div id="tab-itinerary" class="pnl">
+
+  <div class="sec-t">Volume &amp; Activity</div>
+  <div class="sec-div"></div>
+
+  <div class="sub-t">Daily Itinerary Creation — Mar 30 – Apr 5</div>
+  <div class="card">
+    <div class="bars">
+      <div class="br"><span class="b-lbl">Mon Mar 30</span><div class="b-trk"><div class="b-fil bm" style="width:69%"></div></div><span class="b-val">36</span></div>
+      <div class="br"><span class="b-lbl">Tue Mar 31</span><div class="b-trk"><div class="b-fil bn" style="width:88%"></div></div><span class="b-val">46</span></div>
+      <div class="br"><span class="b-lbl">Wed Apr 1</span><div class="b-trk"><div class="b-fil bs" style="width:94%"></div></div><span class="b-val">49</span></div>
+      <div class="br"><span class="b-lbl">Thu Apr 2</span><div class="b-trk"><div class="b-fil bt" style="width:73%"></div></div><span class="b-val">38</span></div>
+      <div class="br"><span class="b-lbl">Fri Apr 3</span><div class="b-trk"><div class="b-fil bm" style="width:77%"></div></div><span class="b-val">40</span></div>
+      <div class="br"><span class="b-lbl">Sat Apr 4</span><div class="b-trk"><div class="b-fil bs" style="width:77%"></div></div><span class="b-val">40</span></div>
+      <div class="br"><span class="b-lbl">Sun Apr 5 🔝</span><div class="b-trk"><div class="b-fil bn" style="width:100%"></div></div><span class="b-val">52</span></div>
+    </div>
+  </div>
+  <p>Sunday April 5 was the peak day at 52 — unlike the prior week where Friday dominated. Daily distribution is more even this week (avg 43/day), with no single day below 36.</p>
+
+  <div class="sub-t">Generation Method</div>
+  <div class="tw">
+    <table>
+      <tr><th>Method</th><th>This Week</th><th>Prior Week</th><th>Change</th></tr>
+      <tr><td>Plan (guided wizard)</td><td>209 (69.4%)</td><td>340 (78.3%)</td><td style="color:var(--red)">↓ 9pp</td></tr>
+      <tr><td>Chat (conversational AI)</td><td>92 (30.6%)</td><td>94 (21.7%)</td><td style="color:var(--green)">↑ 9pp</td></tr>
+    </table>
+  </div>
+  <p>Chat mode share jumped from 22% to 31% — the largest single-week shift. This may indicate growing comfort with the conversational interface or improved discoverability.</p>
+
+  <div class="sub-t">Experience Types</div>
+  <div class="card">
+    <div class="bars">
+      <div class="br"><span class="b-lbl">Top Attractions</span><div class="b-trk"><div class="b-fil bn" style="width:100%"></div></div><span class="b-val">78</span></div>
+      <div class="br"><span class="b-lbl">Relaxed &amp; Chill</span><div class="b-trk"><div class="b-fil bm" style="width:78%"></div></div><span class="b-val">61</span></div>
+      <div class="br"><span class="b-lbl">Adventure &amp; Sport</span><div class="b-trk"><div class="b-fil bs" style="width:55%"></div></div><span class="b-val">43</span></div>
+      <div class="br"><span class="b-lbl">Natural Wonders</span><div class="b-trk"><div class="b-fil bt" style="width:44%"></div></div><span class="b-val">34</span></div>
+      <div class="br"><span class="b-lbl">Culture &amp; History</span><div class="b-trk"><div class="b-fil bm" style="width:32%"></div></div><span class="b-val">25</span></div>
+      <div class="br"><span class="b-lbl">Foodie Explorations</span><div class="b-trk"><div class="b-fil bs" style="width:24%"></div></div><span class="b-val">19</span></div>
+      <div class="br"><span class="b-lbl">Off the Beaten Path</span><div class="b-trk"><div class="b-fil bt" style="width:24%"></div></div><span class="b-val">19</span></div>
+      <div class="br"><span class="b-lbl">Shopping Fantasy</span><div class="b-trk"><div class="b-fil bm" style="width:17%"></div></div><span class="b-val">13</span></div>
+      <div class="br"><span class="b-lbl">Arts &amp; Theatre</span><div class="b-trk"><div class="b-fil bs" style="width:9%"></div></div><span class="b-val">7</span></div>
+    </div>
+  </div>
+  <p>Top Attractions holds the #1 spot. Notably <strong>Arts &amp; Theatre</strong> jumped to 7 (from 2) and <strong>Off the Beaten Path</strong> doubled to 19 — both consistent with Tokyo's rise as a destination.</p>
+
+  <div class="sub-t">Top Traveller Preferences</div>
+  <div class="card">
+    <div class="bars">
+      <div class="br"><span class="b-lbl">Easy Transport</span><div class="b-trk"><div class="b-fil bn" style="width:100%"></div></div><span class="b-val">218</span></div>
+      <div class="br"><span class="b-lbl">Dining Flexibility</span><div class="b-trk"><div class="b-fil bm" style="width:85%"></div></div><span class="b-val">185</span></div>
+      <div class="br"><span class="b-lbl">Room Comfort</span><div class="b-trk"><div class="b-fil bs" style="width:83%"></div></div><span class="b-val">181</span></div>
+      <div class="br"><span class="b-lbl">Quiet &amp; Relaxing</span><div class="b-trk"><div class="b-fil bt" style="width:76%"></div></div><span class="b-val">166</span></div>
+      <div class="br"><span class="b-lbl">Environmental Cond.</span><div class="b-trk"><div class="b-fil bm" style="width:74%"></div></div><span class="b-val">161</span></div>
+      <div class="br"><span class="b-lbl">Effortless Access</span><div class="b-trk"><div class="b-fil bs" style="width:69%"></div></div><span class="b-val">151</span></div>
+      <div class="br"><span class="b-lbl">Safety &amp; Support</span><div class="b-trk"><div class="b-fil bt" style="width:69%"></div></div><span class="b-val">150</span></div>
+      <div class="br"><span class="b-lbl">Human Assistance</span><div class="b-trk"><div class="b-fil bm" style="width:56%"></div></div><span class="b-val">121</span></div>
+    </div>
+  </div>
+
+  <div class="sub-t">Group Size &amp; Trip Duration</div>
+  <div class="kg kg4">
+    <div class="kc"><div class="n c-blue">8.1</div><div class="l">Avg trip days</div><div class="delta delta-up">↑ from 7.3</div></div>
+    <div class="kc"><div class="n c-navy">6</div><div class="l">Median days</div><div class="delta delta-up">↑ from 5</div></div>
+    <div class="kc"><div class="n c-navy">72%</div><div class="l">Couples (2 adults)</div><div class="delta delta-dn">↓ from 79%</div></div>
+    <div class="kc"><div class="n c-blue">12%</div><div class="l">With children</div><div class="delta delta-up">↑ from 7%</div></div>
+  </div>
+  <div class="al al-b">
+    <div class="al-tt">⚠ Data Note: Adult Count Outliers</div>
+    <div class="al-bd">Two records show 50 adults — almost certainly data entry errors. If cleaned, the average group size and room count would be closer to prior week norms. Recommend adding input validation on adult count.</div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════
+     DESTINATIONS
+══════════════════════════════════════════════ -->
+<div id="tab-destinations" class="pnl">
+
+  <div class="sec-t">Destination Analysis</div>
+  <div class="sec-div"></div>
+
+  <div class="sub-t">Volume by Destination</div>
+  <div class="card">
+    <div class="bars">
+      <div class="br"><span class="b-lbl">Bali, Indonesia</span><div class="b-trk"><div class="b-fil bn" style="width:100%"></div></div><span class="b-val">62</span></div>
+      <div class="br"><span class="b-lbl">Tokyo, Japan 🔝</span><div class="b-trk"><div class="b-fil bg" style="width:63%"></div></div><span class="b-val">39</span></div>
+      <div class="br"><span class="b-lbl">Bangkok, Thailand</span><div class="b-trk"><div class="b-fil bm" style="width:52%"></div></div><span class="b-val">32</span></div>
+      <div class="br"><span class="b-lbl">Seoul, South Korea</span><div class="b-trk"><div class="b-fil bs" style="width:48%"></div></div><span class="b-val">30</span></div>
+      <div class="br"><span class="b-lbl">Phuket, Thailand</span><div class="b-trk"><div class="b-fil bt" style="width:44%"></div></div><span class="b-val">27</span></div>
+      <div class="br"><span class="b-lbl">Mumbai, India</span><div class="b-trk"><div class="b-fil bm" style="width:34%"></div></div><span class="b-val">21</span></div>
+      <div class="br"><span class="b-lbl">Ho Chi Minh, VN</span><div class="b-trk"><div class="b-fil bs" style="width:31%"></div></div><span class="b-val">19</span></div>
+      <div class="br"><span class="b-lbl">Singapore</span><div class="b-trk"><div class="b-fil bt" style="width:31%"></div></div><span class="b-val">19</span></div>
+      <div class="br"><span class="b-lbl">Kuala Lumpur</span><div class="b-trk"><div class="b-fil bm" style="width:29%"></div></div><span class="b-val">18</span></div>
+      <div class="br"><span class="b-lbl">Siem Reap / Jakarta</span><div class="b-trk"><div class="b-fil bs" style="width:29%"></div></div><span class="b-val">18</span></div>
+    </div>
+  </div>
+
+  <div class="sh">← scroll →</div>
+  <div class="tw">
+    <table>
+      <tr><th>Destination</th><th>Count</th><th>Share</th></tr>
+      <tr><td>Bali, Indonesia</td><td>62</td><td>20.6%</td></tr>
+      <tr><td>Tokyo, Japan</td><td>39</td><td>13.0%</td></tr>
+      <tr><td>Bangkok, Thailand</td><td>32</td><td>10.6%</td></tr>
+      <tr><td>Seoul, South Korea</td><td>30</td><td>10.0%</td></tr>
+      <tr><td>Phuket, Thailand</td><td>27</td><td>9.0%</td></tr>
+      <tr><td>Mumbai, India</td><td>21</td><td>7.0%</td></tr>
+      <tr><td>Ho Chi Minh, Vietnam</td><td>19</td><td>6.3%</td></tr>
+      <tr><td>Singapore</td><td>19</td><td>6.3%</td></tr>
+      <tr><td>Kuala Lumpur, Malaysia</td><td>18</td><td>6.0%</td></tr>
+      <tr><td>Sydney, Australia</td><td>10</td><td>3.3%</td></tr>
+      <tr><td>Siem Reap, Cambodia</td><td>9</td><td>3.0%</td></tr>
+      <tr><td>Jakarta, Indonesia</td><td>9</td><td>3.0%</td></tr>
+      <tr><td>Melbourne, Australia</td><td>6</td><td>2.0%</td></tr>
+    </table>
+  </div>
+
+  <div class="ins"><strong>Portfolio is broadening:</strong> Top destination share fell from 37% to 21%. The next 4 destinations (Tokyo, Bangkok, Seoul, Phuket) are now in a tight 9–13% band — a healthier distribution. Siem Reap and Jakarta are emerging meaningfully.</div>
+
+  <div class="sub-t">Planned Travel Months</div>
+  <div class="card">
+    <div class="bars">
+      <div class="br"><span class="b-lbl">April 2026 🔝</span><div class="b-trk"><div class="b-fil bn" style="width:100%"></div></div><span class="b-val">117</span></div>
+      <div class="br"><span class="b-lbl">May 2026</span><div class="b-trk"><div class="b-fil bm" style="width:68%"></div></div><span class="b-val">80</span></div>
+      <div class="br"><span class="b-lbl">June 2026</span><div class="b-trk"><div class="b-fil bs" style="width:24%"></div></div><span class="b-val">28</span></div>
+      <div class="br"><span class="b-lbl">October 2026</span><div class="b-trk"><div class="b-fil bt" style="width:12%"></div></div><span class="b-val">14</span></div>
+      <div class="br"><span class="b-lbl">November 2026</span><div class="b-trk"><div class="b-fil bm" style="width:9%"></div></div><span class="b-val">11</span></div>
+      <div class="br"><span class="b-lbl">September 2026</span><div class="b-trk"><div class="b-fil bs" style="width:9%"></div></div><span class="b-val">10</span></div>
+      <div class="br"><span class="b-lbl">Dec 2026 – Mar 2027</span><div class="b-trk"><div class="b-fil bt" style="width:8%"></div></div><span class="b-val">10</span></div>
+    </div>
+  </div>
+  <p>April–May 2026 accounts for <strong>66%</strong> of near-term demand — nearly identical to prior week. Conversion focus should remain on this 4–8 week window. Emerging demand for Oct–Nov 2026 could signal early autumn/winter planning.</p>
+
+  <div class="sub-t">Accommodation Star Ratings</div>
+  <div class="tw">
+    <table>
+      <tr><th>Stars</th><th>Count</th><th>Share</th><th>vs Prior Week</th></tr>
+      <tr><td>5 Stars</td><td>639</td><td>77.8%</td><td style="color:var(--red)">↓ 5.7pp</td></tr>
+      <tr><td>4 Stars</td><td>152</td><td>18.5%</td><td style="color:var(--green)">↑ 4pp</td></tr>
+      <tr><td>4.5 Stars</td><td>30</td><td>3.7%</td><td style="color:var(--green)">↑ 1.7pp</td></tr>
+    </table>
+  </div>
+  <p>5-star share dipped 5.7pp to 78%. This may reflect destination mix shift — Tokyo and Phuket have more diverse hotel tiers compared to Bali's premium-only supply.</p>
+
+</div>
+
+<!-- ══════════════════════════════════════════════
+     USERS
+══════════════════════════════════════════════ -->
+<div id="tab-users" class="pnl">
+
+  <div class="sec-t">User Geography</div>
+  <div class="sec-div"></div>
+
+  <div class="sub-t">Top Source Countries</div>
+  <div class="card">
+    <div class="bars">
+      <div class="br"><span class="b-lbl">India 🇮🇳</span><div class="b-trk"><div class="b-fil bn" style="width:100%"></div></div><span class="b-val">181</span></div>
+      <div class="br"><span class="b-lbl">Indonesia 🇮🇩</span><div class="b-trk"><div class="b-fil bm" style="width:18%"></div></div><span class="b-val">32</span></div>
+      <div class="br"><span class="b-lbl">Malaysia 🇲🇾</span><div class="b-trk"><div class="b-fil bs" style="width:14%"></div></div><span class="b-val">25</span></div>
+      <div class="br"><span class="b-lbl">Singapore 🇸🇬</span><div class="b-trk"><div class="b-fil bt" style="width:3%"></div></div><span class="b-val">6</span></div>
+      <div class="br"><span class="b-lbl">Philippines 🇵🇭</span><div class="b-trk"><div class="b-fil bm" style="width:3%"></div></div><span class="b-val">6</span></div>
+      <div class="br"><span class="b-lbl">US / Thailand</span><div class="b-trk"><div class="b-fil bs" style="width:3%"></div></div><span class="b-val">5 ea</span></div>
+    </div>
+  </div>
+
+  <div class="kg kg4">
+    <div class="kc"><div class="n c-navy">33</div><div class="l">Countries</div><div class="delta delta-dn">↓ from 45</div></div>
+    <div class="kc"><div class="n" style="color:#B71C1C">60%</div><div class="l">India Share</div><div class="delta delta-neu">→ stable (↓2pp)</div></div>
+    <div class="kc"><div class="n c-blue">73</div><div class="l">Registered</div><div class="delta delta-up">↑ 24% share</div></div>
+    <div class="kc"><div class="n c-orange">228</div><div class="l">Anonymous</div><div class="delta delta-up">76% share</div></div>
+  </div>
+
+  <div class="ins"><strong>Indonesia rises to #2:</strong> Indonesia jumped from #4 (14 users, 3.2%) to #2 (32 users, 11%) — a 129% increase. Combined with Malaysia at 25, SE Asia (ex-India) now accounts for 21% of users, up from 11% prior week.</div>
+
+  <div class="al al-g">
+    <div class="al-tt">✅ Registration Rate Improving</div>
+    <div class="al-bd">Registered user share rose from 21% to 24% — the highest rate recorded. If sustained, this suggests the platform's retention hooks are beginning to work. Still leaves 76% (228 users) anonymous this week.</div>
+  </div>
+
+  <div class="al al-b">
+    <div class="al-tt">📉 Country Breadth Narrowed</div>
+    <div class="al-bd">Countries represented dropped from 45 → 33. This may be a natural fluctuation in a smaller volume week, but warrants monitoring. The Philippines (26 → 6) and South Africa (8 → 2) saw notable drops.</div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════
+     TECH OVERVIEW
+══════════════════════════════════════════════ -->
+<div id="tab-tech" class="pnl">
+
+  <div class="part-banner">
+    <div class="pb-tag">Part 2 · Tech Status</div>
+    <div class="pb-h">Project Status Overview</div>
+    <div class="pb-s">Week of March 30 – April 5, 2026</div>
+  </div>
+
+  <div class="sub-t">Overall Status Distribution</div>
+  <div class="card">
+    <div class="bars">
+      <div class="br"><span class="b-lbl">Completed</span><div class="b-trk"><div class="b-fil bg" style="width:100%"></div></div><span class="b-val">121</span></div>
+      <div class="br"><span class="b-lbl">In Progress</span><div class="b-trk"><div class="b-fil bs" style="width:14%"></div></div><span class="b-val">17</span></div>
+      <div class="br"><span class="b-lbl">Prod / Pre-Prod</span><div class="b-trk"><div class="b-fil bm" style="width:6%"></div></div><span class="b-val">8</span></div>
+      <div class="br"><span class="b-lbl">Not Started</span><div class="b-trk"><div class="b-fil br2" style="width:3%"></div></div><span class="b-val">4</span></div>
+      <div class="br"><span class="b-lbl">On Hold</span><div class="b-trk"><div class="b-fil br2" style="width:2%"></div></div><span class="b-val">3</span></div>
+    </div>
+  </div>
+
+  <div class="sub-t">In-Progress Items (17)</div>
+  <div class="sh">← scroll →</div>
+  <div class="tw">
+    <table>
+      <tr><th>Build</th><th>Item</th><th>Priority</th><th>Deadline</th></tr>
+      <tr><td>greytt.ai</td><td>Voice Concierge Integration</td><td>Moderate</td><td style="color:var(--orange)">Apr 8 ⚠</td></tr>
+      <tr><td>greytt.ai</td><td>Greytt Hotel Finder Tool</td><td>Moderate</td><td style="color:var(--red)">Mar 25 🔴</td></tr>
+      <tr><td>greytt.ai</td><td>Greytt Score Automation</td><td>High</td><td style="color:var(--red)">Mar 25 🔴</td></tr>
+      <tr><td>greytt.ai</td><td>Klook Experiences Integration</td><td>Moderate</td><td>—</td></tr>
+      <tr><td>greytt.ai</td><td>Sanity Test Cases</td><td>High</td><td>—</td></tr>
+      <tr><td>greytt.ai</td><td>Defect Triage</td><td>High</td><td>—</td></tr>
+      <tr><td>greytt.ai</td><td>Campaign Automated Tracker</td><td>Moderate</td><td style="color:var(--orange)">Apr 8 ⚠</td></tr>
+      <tr><td>greytt.ai</td><td>Chat Enhancement</td><td>—</td><td>—</td></tr>
+      <tr><td>greytt.ai</td><td>URL Thumbnails</td><td>—</td><td>—</td></tr>
+      <tr><td>Moves</td><td>Automated Session Emails</td><td>High</td><td>—</td></tr>
+      <tr><td>greytt.ai</td><td>Itinerary / Premium Limit Setting</td><td>—</td><td>—</td></tr>
+      <tr><td>greytt.ai</td><td>Pop Quiz Implementation</td><td>Moderate</td><td style="color:var(--red)">Apr 3 🔴</td></tr>
+      <tr><td>greytt.ai</td><td>SuperGryd Integration</td><td>High</td><td style="color:var(--red)">Apr 1 🔴</td></tr>
+      <tr><td>Others</td><td>Monthly Partner Pack</td><td>High</td><td style="color:var(--red)">Apr 2 🔴</td></tr>
+      <tr><td>Others</td><td>Preprod Access (Karthik S.)</td><td>Critical</td><td style="color:var(--red)">Mar 27 🔴</td></tr>
+      <tr><td>greytt.ai</td><td>Access Matrix / Pricing Impact Analysis</td><td>High</td><td style="color:var(--orange)">Apr 8 ⚠</td></tr>
+      <tr><td>greytt.ai</td><td>Cross-Channel Personalisation Testing</td><td>Moderate</td><td style="color:var(--orange)">Apr 8 ⚠</td></tr>
+    </table>
+  </div>
+
+  <div class="al al-r">
+    <div class="al-tt">🔴 6 Items Past Deadline</div>
+    <div class="al-bd">Hotel Finder (Mar 25), Greytt Score Automation (Mar 25), Pop Quiz (Apr 3), SuperGryd (Apr 1), Partner Pack (Apr 2), and Preprod Access (Mar 27) are all overdue. Preprod Access is marked Critical — blocking Karthik's environment.</div>
+  </div>
+
+  <div class="sub-t">New Items Added This Week (vs prior tracker)</div>
+  <div class="tw">
+    <table>
+      <tr><th>Build</th><th>New Item</th><th>Priority</th></tr>
+      <tr><td>greytt.ai</td><td>Itinerary / Premium Limit Setting</td><td>—</td></tr>
+      <tr><td>greytt.ai</td><td>Pop Quiz Implementation</td><td>Moderate</td></tr>
+      <tr><td>Others</td><td>Preprod Access Restoration</td><td>Critical</td></tr>
+      <tr><td>greytt.ai</td><td>Access Matrix / User Pricing</td><td>High</td></tr>
+      <tr><td>greytt.ai</td><td>Cross-Channel Personalisation Testing</td><td>Moderate</td></tr>
+      <tr><td>greytt.ai</td><td>B2B API Access V1</td><td>High (Not Started)</td></tr>
+      <tr><td>greytt.ai</td><td>Marketplace (Products &amp; Experiences)</td><td>High (Not Started)</td></tr>
+      <tr><td>greytt.ai</td><td>On-Platform Booking Engine</td><td>Moderate (Not Started)</td></tr>
+      <tr><td>greytt.ai</td><td>Storyblok Visibility Fix</td><td>— (Not Started)</td></tr>
+      <tr><td>Journeys</td><td>Site Monitoring → moved to Staging</td><td>High</td></tr>
+      <tr><td>greytt.ai</td><td>Hourglass Loading Indicator → Pre-Prod</td><td>—</td></tr>
+    </table>
+  </div>
+
+  <div class="sub-t">Recently Deployed</div>
+  <div class="tw">
+    <table>
+      <tr><th>Item</th><th>Status</th></tr>
+      <tr><td>SEO Optimisation</td><td><span class="badge bpr">Production</span></td></tr>
+      <tr><td>Aqua Expeditions Page</td><td><span class="badge bpr">Production</span></td></tr>
+      <tr><td>Greytt.com Content Porting</td><td><span class="badge bpr">Production</span></td></tr>
+      <tr><td>Auto Email — Transactions</td><td><span class="badge bpr">Production</span></td></tr>
+      <tr><td>Show Hourglass on Loading</td><td><span class="badge bpp">Pre-Prod</span></td></tr>
+      <tr><td>DB Setup (Reduce API Calls)</td><td><span class="badge bpp">Pre-Prod</span></td></tr>
+      <tr><td>Google Image API Fix</td><td><span class="badge bpp">Pre-Prod</span></td></tr>
+      <tr><td>Site Monitoring Tool</td><td><span class="badge bst">Staging</span></td></tr>
+    </table>
+  </div>
+
+  <div class="sub-t">Foundational Backlog — Still Unstarted</div>
+  <div class="tw">
+    <table>
+      <tr><th>Item</th><th>Priority</th><th>Was Due</th></tr>
+      <tr><td>Security Infrastructure</td><td>High</td><td style="color:var(--red)">Aug 2025</td></tr>
+      <tr><td>AI Model &amp; Redundancies</td><td>High</td><td style="color:var(--red)">Aug 2025</td></tr>
+      <tr><td>Automated Sentiment Module</td><td>High</td><td style="color:var(--red)">Aug 2025</td></tr>
+      <tr><td>Agentic AI Logic Framework</td><td>Moderate</td><td style="color:var(--red)">Aug 2025</td></tr>
+      <tr><td>AWS Account Merging</td><td>Low</td><td style="color:var(--red)">Aug 2025</td></tr>
+      <tr><td>Greytt Score for Sights</td><td>High</td><td style="color:var(--red)">Oct 2025</td></tr>
+    </table>
+  </div>
+  <p style="color:var(--muted);font-size:11.5px">No change from prior week. All 6 foundational items remain unstarted — now 7–8 months past due.</p>
+
+  <div class="sub-t">Not Started (New This Week)</div>
+  <div class="tw">
+    <table>
+      <tr><th>Build</th><th>Item</th><th>Priority</th></tr>
+      <tr><td>greytt.ai</td><td>B2B API Access V1</td><td>High</td></tr>
+      <tr><td>greytt.ai</td><td>Marketplace (Products &amp; Experiences)</td><td>High</td></tr>
+      <tr><td>greytt.ai</td><td>On-Platform Booking Engine</td><td>Moderate</td></tr>
+      <tr><td>greytt.ai</td><td>Storyblok Description Visibility</td><td>—</td></tr>
+    </table>
+  </div>
+  <div class="ins"><strong>Strategic items added but not started:</strong> B2B API and Marketplace are high-priority revenue-enabling items. Adding them to the tracker without an owner or deadline is a planning risk — they need immediate scoping and assignment.</div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════
+     BUGS
+══════════════════════════════════════════════ -->
+<div id="tab-bugs" class="pnl">
+
+  <div class="sec-t">Bug Queue Status</div>
+  <div class="sec-div"></div>
+
+  <div class="kg kg4">
+    <div class="kc"><div class="n c-navy">60</div><div class="l">Total Logged</div><div class="delta delta-dn">↑ 7 new</div></div>
+    <div class="kc"><div class="n c-green" style="font-size:32px">4</div><div class="l">Open</div><div class="delta delta-up">↓ 13 resolved!</div></div>
+    <div class="kc"><div class="n c-green">55</div><div class="l">Resolved (Done/Close)</div><div class="delta delta-up">↑ from 31</div></div>
+    <div class="kc"><div class="n c-red">1</div><div class="l">Critical Open</div><div class="delta delta-up">↓ from 7</div></div>
+  </div>
+
+  <div class="al al-g">
+    <div class="al-tt">🏆 Exceptional Bug Clearance This Week</div>
+    <div class="al-bd">13 bugs resolved in one week — the team cleared the Hotels module cluster, Chatbot, Itinerary Generation duplicates, Viator External link, and Image generation bugs. All 7 prior critical bugs have been resolved except BUG_058.</div>
+  </div>
+
+  <div class="sub-t">4 Remaining Open Bugs</div>
+  <div class="tw">
+    <table>
+      <tr><th>Bug ID</th><th>Module</th><th>Issue</th><th>Priority</th><th>Severity</th></tr>
+      <tr>
+        <td style="color:var(--red);font-weight:600">BUG_058</td>
+        <td>Personalization</td>
+        <td>Personalization Sections Not Clickable</td>
+        <td>High</td>
+        <td><span class="badge bc">Critical</span></td>
+      </tr>
+      <tr>
+        <td style="color:var(--orange);font-weight:600">BUG_060</td>
+        <td>Traveler / Hotels</td>
+        <td>Traveler Change Not Affecting Hotel Recommendations</td>
+        <td>Medium</td>
+        <td><span class="badge bo">Major</span></td>
+      </tr>
+      <tr>
+        <td>BUG_038</td>
+        <td>Greytt Score</td>
+        <td>Every Place Should Show Score During Itinerary Generation</td>
+        <td>Medium</td>
+        <td>Minor</td>
+      </tr>
+      <tr>
+        <td>BUG_017</td>
+        <td>Hotels</td>
+        <td>Pagination Visible for ≤3 Hotels</td>
+        <td>Low</td>
+        <td>Minor</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="al al-r">
+    <div class="al-tt">🔴 BUG_058 — Personalization Sections Not Clickable</div>
+    <div class="al-bd">Critical severity. The entire Personalization section of the UI is non-interactive. This blocks cross-source/cross-channel personalisation — a key feature in staging. Assigned to Rithick &amp; Bharath. Needs immediate resolution given it is blocking a staged feature from going to production.</div>
+  </div>
+
+  <div class="al al-o">
+    <div class="al-tt">⚠ BUG_060 — Traveler Change Not Reflecting in Hotels</div>
+    <div class="al-bd">A re-occurrence of a previously resolved pattern (BUG_028 was closed). Traveler count edits are not propagating to hotel recommendations. Indicates the prior fix may not have been complete or a regression was introduced.</div>
+  </div>
+
+  <div class="sub-t">Bug Resolution Progress</div>
+  <div class="tw">
+    <table>
+      <tr><th>Status</th><th>This Week</th><th>Prior Week</th></tr>
+      <tr><td>Open</td><td style="color:var(--green);font-weight:600">4</td><td style="color:var(--red)">17</td></tr>
+      <tr><td>Done + Close</td><td>55</td><td>31</td></tr>
+      <tr><td>Hold</td><td>1</td><td>2</td></tr>
+      <tr><td>Total Logged</td><td>60</td><td>53</td></tr>
+      <tr><td>Critical Open</td><td style="color:var(--green);font-weight:600">1</td><td style="color:var(--red)">7</td></tr>
+    </table>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════
+     RISKS
+══════════════════════════════════════════════ -->
+<div id="tab-risks" class="pnl">
+
+  <div class="sec-t">Risk Summary &amp; Recommendations</div>
+  <div class="sec-div"></div>
+
+  <div class="al al-r">
+    <div class="al-tt">🔴 BUG_058 — Personalization UI Fully Blocked</div>
+    <div class="al-bd">Critical-severity bug: the entire Personalization section is non-clickable. This is blocking Cross-Channel Personalisation from moving out of staging. Resolve before the Apr 8 personalisation testing deadline.</div>
+  </div>
+
+  <div class="al al-r">
+    <div class="al-tt">🔴 Preprod Access Blocked (Critical Priority)</div>
+    <div class="al-bd">Preprod access for Karthik Swaminathan was removed and is marked Critical with a March 27 deadline — already overdue. This blocks internal stakeholder review of pre-production features. Requires same-day resolution.</div>
+  </div>
+
+  <div class="al al-r">
+    <div class="al-tt">🔴 Foundational Items: Now 7–8 Months Overdue</div>
+    <div class="al-bd">Security Infra, AI Model Redundancies, Automated Sentiment Module, Agentic AI Framework, and Greytt Score for Sights — all still unstarted. The platform has no LLM failover, no security hardening, and no observability. These require immediate re-scheduling with named owners and a board-level commitment.</div>
+  </div>
+
+  <div class="al al-o">
+    <div class="al-tt">🟠 6 In-Progress Items Past Deadline</div>
+    <div class="al-bd">Hotel Finder (Mar 25), Greytt Score Automation (Mar 25), Pop Quiz (Apr 3), SuperGryd Integration (Apr 1), Partner Pack (Apr 2), and Preprod Access (Mar 27) are all overdue with no completion in sight. 4 more items (Voice Concierge, Campaign Tracker, Access Matrix, Personalisation Testing) are due Apr 8.</div>
+  </div>
+
+  <div class="al al-o">
+    <div class="al-tt">🟠 Strategic Items Added Without Owners or Dates</div>
+    <div class="al-bd">B2B API Access V1, Marketplace, and On-Platform Booking Engine are now in the tracker as "Not Started" with no assignee, no deadline, and no scope defined. These are potentially the highest-revenue items on the roadmap. They need to be formally scoped in the next sprint planning session.</div>
+  </div>
+
+  <div class="al al-o">
+    <div class="al-tt">🟠 LLM Pipeline — Unchanged from Last Week</div>
+    <div class="al-bd">LLM Output Stability (failover), Governance Dashboard, and Site Status Monitoring remain entirely stalled — now 4–5 months overdue. No progress recorded in this tracker update.</div>
+  </div>
+
+  <div class="al al-b">
+    <div class="al-tt">🟡 Volume Decline Warrants Monitoring</div>
+    <div class="al-bd">Itinerary volume fell 31% week-on-week (434 → 301). If this is an Easter / end-of-month effect, next week should rebound. If not, it signals a demand or funnel issue requiring urgent investigation.</div>
+  </div>
+
+  <div class="al al-b">
+    <div class="al-tt">🟡 BUG_060 — Possible Regression on Hotel-Traveler Sync</div>
+    <div class="al-bd">The traveler count → hotel recommendation bug reappeared (BUG_028 was previously resolved). This suggests an incomplete fix or a regression introduced in a recent deploy. Regression testing on this flow should be added to the QA checklist.</div>
+  </div>
+
+  <div class="al al-t">
+    <div class="al-tt">✅ Positive: Chat Mode Growing</div>
+    <div class="al-bd">Chat mode share rose from 22% → 31% in one week. If sustained, this validates the conversational UX investment. Monitor next week to confirm the trend.</div>
+  </div>
+
+  <div class="al al-t">
+    <div class="al-tt">✅ Positive: Registration Rate Up</div>
+    <div class="al-bd">Registered user share rose to 24% (highest recorded). The anonymous-to-registered conversion funnel appears to be improving. Formalising a post-itinerary registration prompt would accelerate this further.</div>
+  </div>
+
+  <div class="sub-t" style="margin-top:18px">Itinerary Insights</div>
+  <div class="ins"><strong>Tokyo Rising:</strong> Tokyo jumped from 5.3% → 13% share in one week (+70%). Watch next week to confirm trend — if sustained, Tokyo-specific hotel curation and a SuperGryd activities feed should be prioritised.</div>
+  <div class="ins"><strong>Portfolio Diversification:</strong> Top destination concentration fell from 37% to 21%. This is healthy for platform resilience, though it also means Bali-specific inventory advantages are diluting.</div>
+  <div class="ins"><strong>April–May Conversion Window:</strong> Still 66% of near-term demand. With 117 itineraries planned for April alone, this week is peak for hotel partnership upsell and Greytt Score activation outreach.</div>
+  <div class="ins"><strong>SE Asia Growing:</strong> Indonesia is now the #2 user country (11% share, up from 3%). Combined with Malaysia (8%), the SE Asian user base outside India now represents 20%+ of traffic.</div>
+
+</div>
+
+<footer>
+  <div>Greytt · Internal Analytics · Confidential</div>
+  <div style="margin-top:4px;opacity:.6">Generated April 6, 2026 &nbsp;·&nbsp; Data: Mar 30 – Apr 5, 2026 &nbsp;·&nbsp; Compared to: Mar 16–22, 2026</div>
+</footer>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.pnl').forEach(p => p.classList.remove('on'));
+  document.querySelectorAll('.tb').forEach(b => b.classList.remove('on'));
+  document.getElementById('tab-' + id).classList.add('on');
+  event.currentTarget.classList.add('on');
+  animateBars(document.getElementById('tab-' + id));
+  const nav = document.querySelector('.tabs');
+  window.scrollTo({ top: nav.offsetTop - 2, behavior: 'smooth' });
+}
+
+function animateBars(panel) {
+  panel.querySelectorAll('.b-fil').forEach(b => {
+    const w = b.style.width;
+    b.style.width = '0';
+    requestAnimationFrame(() => setTimeout(() => { b.style.width = w; }, 60));
+  });
+}
+
+// Animate initial panel
+animateBars(document.querySelector('.pnl.on'));
+</script>
+</body>
+</html>
