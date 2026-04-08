@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Greytt.ai — AI Infrastructure Q2 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0D0D0B;
+    --surface: #141412;
+    --surface2: #1C1C19;
+    --border: rgba(255,255,255,0.08);
+    --border-hover: rgba(255,255,255,0.15);
+    --text-primary: #F0EDE6;
+    --text-secondary: #8A8880;
+    --text-tertiary: #5A5956;
+    --accent-coral: #E85D30;
+    --accent-green: #2DB87A;
+    --accent-amber: #D4930A;
+    --accent-coral-dim: rgba(232,93,48,0.12);
+    --accent-green-dim: rgba(45,184,122,0.10);
+    --accent-amber-dim: rgba(212,147,10,0.10);
+    --mono: 'DM Mono', monospace;
+    --serif: 'Instrument Serif', serif;
+    --sans: 'DM Sans', sans-serif;
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Subtle grain texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
+  }
+
+  .wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+  }
+
+  /* Header */
+  .header {
+    padding: 44px 0 36px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 32px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .header-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .logo-mark {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    background: var(--accent-coral);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .logo-mark span {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    color: #fff;
+    letter-spacing: -0.02em;
+  }
+
+  .eyebrow-text {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-tertiary);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .header h1 {
+    font-family: var(--serif);
+    font-size: clamp(26px, 6vw, 36px);
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+  }
+
+  .header h1 em {
+    font-style: italic;
+    color: var(--accent-coral);
+  }
+
+  .header-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+  }
+
+  .meta-chip {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-secondary);
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 4px 10px;
+    letter-spacing: 0.04em;
+  }
+
+  /* Context banner */
+  .context-banner {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent-coral);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    margin-bottom: 28px;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  .context-banner p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .context-banner strong {
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+
+  /* Legend */
+  .legend {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+    animation: fadeUp 0.6s 0.15s ease both;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-tertiary);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .legend-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* Cards */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 10px;
+    overflow: hidden;
+    transition: border-color 0.2s ease;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .card:hover { border-color: var(--border-hover); }
+  .card.is-open { border-color: rgba(255,255,255,0.18); }
+
+  .card:nth-child(1) { animation-delay: 0.2s; }
+  .card:nth-child(2) { animation-delay: 0.28s; }
+  .card:nth-child(3) { animation-delay: 0.36s; }
+  .card:nth-child(4) { animation-delay: 0.44s; }
+  .card:nth-child(5) { animation-delay: 0.52s; }
+
+  .card-trigger {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 18px 18px 16px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+
+  .card-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-tertiary);
+    min-width: 20px;
+    padding-top: 3px;
+    flex-shrink: 0;
+  }
+
+  .card-main { flex: 1; min-width: 0; }
+
+  .card-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.4;
+    margin-bottom: 3px;
+  }
+
+  .card-sub {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+
+  .status-pill {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 20px;
+  }
+
+  .status-gap {
+    background: var(--accent-coral-dim);
+    color: var(--accent-coral);
+    border: 1px solid rgba(232,93,48,0.2);
+  }
+
+  .status-emerging {
+    background: var(--accent-green-dim);
+    color: var(--accent-green);
+    border: 1px solid rgba(45,184,122,0.2);
+  }
+
+  .status-partial {
+    background: var(--accent-amber-dim);
+    color: var(--accent-amber);
+    border: 1px solid rgba(212,147,10,0.2);
+  }
+
+  .effort-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-tertiary);
+    letter-spacing: 0.04em;
+  }
+
+  .card-chevron {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+    color: var(--text-tertiary);
+    transition: transform 0.25s ease, color 0.2s;
+  }
+
+  .card-chevron svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .is-open .card-chevron {
+    transform: rotate(90deg);
+    color: var(--text-secondary);
+  }
+
+  /* Detail panel */
+  .card-detail {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .card-detail-inner {
+    padding: 0 18px 18px 52px;
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+  }
+
+  @media (max-width: 480px) {
+    .card-detail-inner { padding-left: 18px; }
+  }
+
+  .detail-points { list-style: none; }
+
+  .detail-points li {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 10px;
+  }
+
+  .detail-points li:last-child { border-bottom: none; }
+
+  .detail-points li::before {
+    content: '—';
+    color: var(--text-tertiary);
+    flex-shrink: 0;
+    font-family: var(--mono);
+    font-size: 11px;
+    padding-top: 2px;
+  }
+
+  .detail-points li strong {
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+
+  .detail-output {
+    margin-top: 14px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .detail-output-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent-green);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+
+  .detail-output-text {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 36px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    animation: fadeUp 0.6s 0.6s ease both;
+  }
+
+  .footer-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-tertiary);
+    margin-bottom: 12px;
+  }
+
+  .footer-note {
+    font-family: var(--serif);
+    font-size: 16px;
+    font-style: italic;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .footer-note strong {
+    font-style: normal;
+    color: var(--text-primary);
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  /* Animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Responsive */
+  @media (max-width: 480px) {
+    .header { padding: 32px 0 28px; }
+    .card-trigger { padding: 16px 14px; }
+    .card-meta { gap: 6px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <header class="header">
+    <div class="header-eyebrow">
+      <div class="logo-mark"><span>G</span></div>
+      <span class="eyebrow-text">Greytt.ai — Confidential</span>
+    </div>
+    <h1>Closing the <em>AI gap</em><br>this quarter.</h1>
+    <div class="header-meta">
+      <span class="meta-chip">Q2 2026</span>
+      <span class="meta-chip">AI Infrastructure Sprint</span>
+      <span class="meta-chip">CTO Brief</span>
+    </div>
+  </header>
+
+  <div class="context-banner">
+    <p>The tech assessment flags <strong>no observable AI infrastructure</strong> as a credibility risk. The stack shows no LLM, no vector DB, no ML fingerprints. These 5 initiatives close the gap — fast movers first, structural bets in parallel.</p>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><span class="legend-dot" style="background:var(--accent-coral)"></span> Closes gap</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--accent-green)"></span> Flywheel</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--accent-amber)"></span> Partial → full</div>
+  </div>
+
+  <div id="card-list"></div>
+
+  <footer class="footer">
+    <p class="footer-label">Bottom line</p>
+    <p class="footer-note">The positional lead is real but perishable. <strong>01 and 03 ship first</strong> — they make the AI fingerprint visible in a single quarter. 02 starts the proprietary data clock immediately. 04 and 05 run parallel as the structural bet.</p>
+  </footer>
+
+</div>
+
+<script>
+const data = [
+  {
+    num: "01",
+    title: "Ship a conversational itinerary planner via LLM API",
+    sub: "Replace filter-only UI with a visible AI planning surface",
+    status: "gap",
+    statusLabel: "Closes credibility gap",
+    effort: "4–6 weeks",
+    points: [
+      { text: "Pick one LLM provider (Anthropic or OpenAI) and wire it to the Journeys product — a chat-style input that generates structured itinerary JSON." },
+      { text: "Expose it publicly so partners and investors see a real AI fingerprint in the stack, not just server-side filters." },
+      { text: "<strong>Scope constraint:</strong> v1 doesn't need to be perfect — it needs to be real. A working conversational flow beats a polished filter UI on the AI-native positioning claim." }
+    ],
+    output: "Publicly reachable endpoint; appears in browser network calls. Kills the 'no visible AI' finding in one sprint."
+  },
+  {
+    num: "02",
+    title: "Instrument every Greytt Score interaction into a training dataset",
+    sub: "Turn clicks into ground truth — start the proprietary model clock",
+    status: "emerging",
+    statusLabel: "Flywheel accelerator",
+    effort: "2–3 weeks",
+    points: [
+      { text: "Log every itinerary view, scroll depth, save, and booking event alongside the Greytt Score lenses that were active." },
+      { text: "<strong>Schema matters now:</strong> design the event schema so it can feed a ranking model later — user_id, score_lens, hotel_id, outcome, timestamp at minimum." },
+      { text: "No ML required yet. The goal this quarter is structured data accumulation. The model trains on Q3 data." }
+    ],
+    output: "A growing proprietary preference dataset that no Viator-connected competitor can replicate — this is the moat being poured."
+  },
+  {
+    num: "03",
+    title: "Add a vector store and semantic hotel search",
+    sub: "Replace keyword matching with embedding-based retrieval",
+    status: "gap",
+    statusLabel: "Closes credibility gap",
+    effort: "3–4 weeks",
+    points: [
+      { text: "Embed hotel descriptions and Greytt Score metadata using a text embedding model; store in Pinecone, Weaviate, or pgvector." },
+      { text: "Replace (or augment) current filter logic with similarity search — 'slow-paced coastal town for a couple in their 60s' returns semantically relevant results, not just filtered ones." },
+      { text: "<strong>Most visible technical signal for investors:</strong> vector DB calls are easily detectable and strongly associated with production AI stacks." }
+    ],
+    output: "Semantic search live in Journeys; vector DB calls visible in the stack."
+  },
+  {
+    num: "04",
+    title: "Integrate SuperGryd and deprecate the Viator dependency",
+    sub: "Turn a third-party data gap into a proprietary multi-vertical layer",
+    status: "partial",
+    statusLabel: "Partial → structural",
+    effort: "6–8 weeks · parallel",
+    points: [
+      { text: "Start the SuperGryd API integration in Q2 even if full launch is Q3 — inventory enrichment data feeds the Greytt Score model from day one." },
+      { text: "Map SuperGryd activity and transport data to Greytt Score lenses (easy transport, pace, accessibility) so the score deepens with richer inputs." },
+      { text: "Contractually, explore exclusivity on the 50+ angle with SuperGryd — a co-marketing position here extends the first-mover window." }
+    ],
+    output: "Viator dependency reduced; multi-vertical inventory feeding the score engine."
+  },
+  {
+    num: "05",
+    title: "Ship a React Native MVP — app store presence and push notifications",
+    sub: "Close the mobile gap before a well-resourced competitor does",
+    status: "gap",
+    statusLabel: "Closes credibility gap",
+    effort: "6–8 weeks · parallel",
+    points: [
+      { text: "A thin wrapper of the Journeys web product is sufficient for Q2. The goal is app store listing, push notification capability, and offline itinerary access." },
+      { text: "The 50+ demographic's mobile adoption is rising fast — this is the least defensible gap because any competitor closes it in a sprint." },
+      { text: "<strong>Prioritise push notifications for trip reminders</strong> — highest-engagement touchpoint for travel and creates a retention loop the web-only product can't." }
+    ],
+    output: "iOS + Android listings live; push notification infrastructure in place."
+  }
+];
+
+const statusClasses = {
+  gap: 'status-gap',
+  emerging: 'status-emerging',
+  partial: 'status-partial'
+};
+
+const list = document.getElementById('card-list');
+
+data.forEach((item, i) => {
+  const card = document.createElement('div');
+  card.className = 'card';
+
+  card.innerHTML = `
+    <div class="card-trigger" role="button" aria-expanded="false" tabindex="0">
+      <span class="card-num">${item.num}</span>
+      <div class="card-main">
+        <div class="card-title">${item.title}</div>
+        <div class="card-sub">${item.sub}</div>
+        <div class="card-meta">
+          <span class="status-pill ${statusClasses[item.status]}">${item.statusLabel}</span>
+          <span class="effort-tag">${item.effort}</span>
+        </div>
+      </div>
+      <span class="card-chevron">
+        <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+    </div>
+    <div class="card-detail" aria-hidden="true">
+      <div class="card-detail-inner">
+        <ul class="detail-points">
+          ${item.points.map(p => `<li><span>${p.text}</span></li>`).join('')}
+        </ul>
+        <div class="detail-output">
+          <span class="detail-output-label">Output</span>
+          <span class="detail-output-text">${item.output}</span>
+        </div>
+      </div>
+    </div>
+  `;
+
+  const trigger = card.querySelector('.card-trigger');
+  const detail = card.querySelector('.card-detail');
+  const detailInner = card.querySelector('.card-detail-inner');
+
+  trigger.addEventListener('click', () => {
+    const isOpen = card.classList.contains('is-open');
+
+    // Close all
+    document.querySelectorAll('.card.is-open').forEach(c => {
+      c.classList.remove('is-open');
+      c.querySelector('.card-detail').style.maxHeight = '0';
+      c.querySelector('.card-trigger').setAttribute('aria-expanded', 'false');
+      c.querySelector('.card-detail').setAttribute('aria-hidden', 'true');
+    });
+
+    if (!isOpen) {
+      card.classList.add('is-open');
+      detail.style.maxHeight = detailInner.scrollHeight + 32 + 'px';
+      trigger.setAttribute('aria-expanded', 'true');
+      detail.setAttribute('aria-hidden', 'false');
+    }
+  });
+
+  trigger.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); trigger.click(); }
+  });
+
+  list.appendChild(card);
+});
+</script>
+</body>
+</html>
