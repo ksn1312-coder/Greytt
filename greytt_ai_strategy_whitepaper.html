@@ -1,0 +1,1805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="description" content="Strategic analysis of Booking.com's AI evolution and comprehensive adaptation framework for Greytt.ai to capitalize on AI-native travel tech opportunities for 50+ travelers.">
+    <meta name="keywords" content="AI travel, Booking.com strategy, Greytt.ai, senior travel, travel tech, AI strategy">
+    <title>AI-Native Travel Platforms: Strategic Analysis & Adaptation Framework</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600;700&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-dark: #0a1628;
+            --primary-blue: #1e3a5f;
+            --accent-gold: #d4a574;
+            --accent-teal: #2d7d8e;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --text-primary: #1a2332;
+            --text-secondary: #5a6c7d;
+            --border-color: #e1e8ed;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.12);
+            --shadow-lg: 0 8px 32px rgba(0,0,0,0.16);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, #f5f7fa 0%, #ffffff 100%);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Crimson Pro', serif;
+            font-weight: 600;
+            line-height: 1.3;
+            color: var(--primary-dark);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-blue) 100%);
+            color: var(--white);
+            padding: 4rem 2rem 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header h1 {
+            color: var(--white);
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .header .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            font-weight: 300;
+            margin-bottom: 2rem;
+        }
+
+        .header-meta {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            font-size: 0.95rem;
+            opacity: 0.85;
+            align-items: center;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--accent-gold);
+            color: var(--white);
+            border: none;
+            border-radius: 6px;
+            font-family: 'Work Sans', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(212, 165, 116, 0.3);
+        }
+
+        .download-btn:hover {
+            background: #c99563;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(212, 165, 116, 0.4);
+        }
+
+        .download-btn:active {
+            transform: translateY(0);
+        }
+
+        .download-icon {
+            font-size: 1.2rem;
+        }
+
+        /* Navigation */
+        .nav-container {
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .nav-tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .nav-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: 'Work Sans', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+
+        .nav-tab:hover {
+            color: var(--primary-blue);
+            background: rgba(30, 58, 95, 0.05);
+        }
+
+        .nav-tab.active {
+            color: var(--primary-blue);
+            border-bottom-color: var(--accent-gold);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Executive Summary Banner */
+        .executive-banner {
+            background: linear-gradient(135deg, var(--accent-teal) 0%, #1e5f6f 100%);
+            color: var(--white);
+            padding: 2.5rem;
+            border-radius: 12px;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .executive-banner h2 {
+            color: var(--white);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .executive-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .executive-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+
+        .executive-card h3 {
+            color: var(--accent-gold);
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .executive-card p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Content Cards */
+        .card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .card h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-dark);
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--accent-gold);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem;
+            color: var(--primary-blue);
+        }
+
+        .card h4 {
+            font-size: 1.2rem;
+            margin: 1.5rem 0 0.75rem;
+            color: var(--accent-teal);
+        }
+
+        .card p {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .card ul, .card ol {
+            margin: 1rem 0 1.5rem 1.5rem;
+        }
+
+        .card li {
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        /* Comparison Tables */
+        .table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 2rem 0;
+        }
+
+        .comparison-table {
+            width: 100%;
+            min-width: 600px;
+            border-collapse: collapse;
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .comparison-table thead {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-blue) 100%);
+            color: var(--white);
+        }
+
+        .comparison-table th {
+            padding: 1.25rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .comparison-table td {
+            padding: 1.25rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .comparison-table tbody tr:hover {
+            background: rgba(30, 58, 95, 0.03);
+        }
+
+        /* Highlight Boxes */
+        .highlight-box {
+            background: linear-gradient(135deg, #fff8f0 0%, #fff 100%);
+            border-left: 4px solid var(--accent-gold);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .highlight-box.info {
+            background: linear-gradient(135deg, #f0f8ff 0%, #fff 100%);
+            border-left-color: var(--accent-teal);
+        }
+
+        .highlight-box.warning {
+            background: linear-gradient(135deg, #fff5f0 0%, #fff 100%);
+            border-left-color: #d97848;
+        }
+
+        .highlight-box h4 {
+            margin-top: 0;
+            color: var(--primary-dark);
+        }
+
+        /* Strategy Grid */
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .strategy-card {
+            background: var(--white);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .strategy-card:hover {
+            border-color: var(--accent-gold);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-4px);
+        }
+
+        .strategy-card .number {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #c99563 100%);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .strategy-card h3 {
+            margin-top: 0;
+            font-size: 1.3rem;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+            margin: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0.75rem;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--accent-gold) 0%, var(--accent-teal) 100%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 1rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.25rem;
+            top: 0.5rem;
+            width: 15px;
+            height: 15px;
+            background: var(--accent-gold);
+            border: 3px solid var(--white);
+            border-radius: 50%;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .timeline-item h4 {
+            margin-top: 0;
+        }
+
+        /* Metric Cards */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, var(--white) 0%, var(--light-bg) 100%);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-teal);
+            font-family: 'Crimson Pro', serif;
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+            font-weight: 500;
+        }
+
+        /* Visual Diagrams */
+        .diagram-container {
+            margin: 2rem 0;
+            padding: 2rem;
+            background: var(--light-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .flow-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .flow-box {
+            flex: 1;
+            min-width: 150px;
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            border: 2px solid var(--primary-blue);
+        }
+
+        .flow-box.highlight {
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #c99563 100%);
+            color: var(--white);
+            border-color: var(--accent-gold);
+        }
+
+        .flow-arrow {
+            font-size: 1.5rem;
+            color: var(--accent-teal);
+            font-weight: 700;
+        }
+
+        /* Key Takeaway */
+        .key-takeaway {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-blue) 100%);
+            color: var(--white);
+            padding: 2.5rem;
+            border-radius: 12px;
+            margin: 3rem 0;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .key-takeaway h3 {
+            color: var(--accent-gold);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .key-takeaway p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-dark);
+            color: var(--white);
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer p {
+            opacity: 0.8;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .header .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .header-meta {
+                gap: 1rem;
+            }
+
+            .download-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .nav-tabs {
+                gap: 0;
+            }
+
+            .nav-tab {
+                font-size: 0.85rem;
+                padding: 1rem;
+            }
+
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            .card {
+                padding: 1.5rem;
+            }
+
+            .card h2 {
+                font-size: 1.5rem;
+            }
+
+            .card h3 {
+                font-size: 1.2rem;
+            }
+
+            .executive-banner {
+                padding: 1.5rem;
+            }
+
+            .executive-banner h2 {
+                font-size: 1.5rem;
+            }
+
+            .executive-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .strategy-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .flow-diagram {
+                flex-direction: column;
+            }
+
+            .flow-arrow {
+                transform: rotate(90deg);
+            }
+
+            .comparison-table {
+                font-size: 0.85rem;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 0.75rem 0.5rem;
+            }
+
+            /* Make tables scrollable on mobile */
+            .table-wrapper {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.75rem;
+            }
+
+            .header .subtitle {
+                font-size: 1rem;
+            }
+
+            .nav-tab {
+                font-size: 0.8rem;
+                padding: 0.875rem 0.75rem;
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .metric-value {
+                font-size: 2rem;
+            }
+
+            .executive-card h3 {
+                font-size: 1rem;
+            }
+
+            .strategy-card .number {
+                width: 40px;
+                height: 40px;
+                font-size: 1.25rem;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .nav-container {
+                display: none;
+            }
+
+            .section {
+                display: block !important;
+                page-break-after: always;
+            }
+
+            .card {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <h1>AI-Native Travel Platforms</h1>
+            <p class="subtitle">Strategic Analysis of Booking.com's AI Evolution & Adaptation Framework for Greytt.ai</p>
+            <div class="header-meta">
+                <div class="meta-item">
+                    <strong>Document Type:</strong> Strategic White Paper
+                </div>
+                <div class="meta-item">
+                    <strong>Date:</strong> April 2026
+                </div>
+                <div class="meta-item">
+                    <strong>Focus:</strong> AI-Powered Travel Tech Strategy
+                </div>
+                <a href="greytt_ai_strategy_whitepaper.pdf" class="download-btn" download>
+                    <span class="download-icon">📄</span>
+                    Download PDF
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav-container">
+        <div class="nav">
+            <div class="nav-tabs">
+                <button class="nav-tab active" onclick="showSection(0)">Executive Summary</button>
+                <button class="nav-tab" onclick="showSection(1)">Booking.com Analysis</button>
+                <button class="nav-tab" onclick="showSection(2)">Glenn AI Strategy</button>
+                <button class="nav-tab" onclick="showSection(3)">Competitive Landscape</button>
+                <button class="nav-tab" onclick="showSection(4)">Greytt.ai Adaptation</button>
+                <button class="nav-tab" onclick="showSection(5)">Implementation Roadmap</button>
+                <button class="nav-tab" onclick="showSection(6)">Strategic Recommendations</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Section 0: Executive Summary -->
+        <section class="section active" id="section-0">
+            <div class="executive-banner">
+                <h2>Executive Summary</h2>
+                <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 0;">This white paper analyzes Booking.com's strategic pivot toward AI-native travel services under CEO Glenn Fogel's "Connected Trip" vision, identifies the structural advantages and vulnerabilities of this approach, and provides a comprehensive adaptation framework for Greytt.ai to capitalize on the untapped "AI-native + 50+ focused" market positioning.</p>
+            </div>
+
+            <div class="executive-grid">
+                <div class="executive-card">
+                    <h3>🎯 Core Finding</h3>
+                    <p>Booking.com is retrofitting AI onto a legacy marketplace platform, creating technical debt and trust deficits that AI-native competitors can exploit.</p>
+                </div>
+                <div class="executive-card">
+                    <h3>⚡ Strategic Window</h3>
+                    <p>12-18 month window before well-funded OTAs add demographic filters. Greytt.ai must establish structural moats during this period.</p>
+                </div>
+                <div class="executive-card">
+                    <h3>🔒 Defensibility Mechanism</h3>
+                    <p>Preference data flywheel (Greytt Score) creates switching costs that pure inventory aggregation cannot replicate.</p>
+                </div>
+                <div class="executive-card">
+                    <h3>💰 Revenue Evolution</h3>
+                    <p>Path from performance-based partnerships (Phase 1) → AI concierge subscription (Phase 2) → B2B white-label (Phase 3).</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Key Strategic Insights</h2>
+                
+                <h3>1. The AI-Native Advantage</h3>
+                <p>Booking.com faces a fundamental constraint: it must retrofit AI onto a user base trained to search-and-filter. This creates:</p>
+                <ul>
+                    <li><strong>UX Friction:</strong> Users skeptical AI isn't optimizing for commission over fit</li>
+                    <li><strong>Technical Debt:</strong> Legacy systems incompatible with real-time personalization</li>
+                    <li><strong>Organizational Resistance:</strong> Business units protecting existing revenue streams</li>
+                </ul>
+                <p>Greytt.ai faces none of these constraints. AI-as-interface is the default expectation, not a behavioral shift.</p>
+
+                <h3>2. The 50+ Opportunity</h3>
+                <p>While Booking.com targets mass market efficiency, the 50+ segment values:</p>
+                <ul>
+                    <li><strong>Guidance over choice:</strong> 10 curated options > 1,000 search results</li>
+                    <li><strong>Peace of mind over price:</strong> Willingness to pay for verified quality and support</li>
+                    <li><strong>Convenience over control:</strong> End-to-end trip management vs. piecemeal booking</li>
+                </ul>
+
+                <h3>3. Data Moat Priority</h3>
+                <p>SuperGryd integration without preference data = "Agoda with a different API" (no moat). The strategic sequence must be:</p>
+                <ol>
+                    <li><strong>Build Greytt Score v1</strong> (preference engine) — 2-3 months</li>
+                    <li><strong>Collect baseline user data</strong> — 100-200 users minimum</li>
+                    <li><strong>Activate SuperGryd inventory</strong> — personalized from day 1</li>
+                </ol>
+            </div>
+
+            <div class="key-takeaway">
+                <h3>Bottom Line</h3>
+                <p>Booking.com's "Connected Trip" vision validates the market for AI-powered trip orchestration. But their execution is constrained by legacy infrastructure and mass-market economics. Greytt.ai can leapfrog by building AI-native for a demographic-specific audience willing to pay for intelligence, not just access. The window to establish this position is 12-18 months before well-funded competitors pivot.</p>
+            </div>
+        </section>
+
+        <!-- Section 1: Booking.com Analysis -->
+        <section class="section" id="section-1">
+            <div class="card">
+                <h2>Booking.com: Business Model Deep Dive</h2>
+                
+                <h3>Overview</h3>
+                <p>Booking.com operates as a global online travel agency (OTA) with presence in 220+ countries, connecting travelers with 3.4M+ properties, flights, experiences, and transportation options.</p>
+
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value">3.4M+</div>
+                        <div class="metric-label">Properties Globally</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">220+</div>
+                        <div class="metric-label">Countries & Territories</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">15-25%</div>
+                        <div class="metric-label">Commission Rate</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">$17B+</div>
+                        <div class="metric-label">Annual Revenue (2023)</div>
+                    </div>
+                </div>
+
+                <h3>Core Business Model Components</h3>
+
+                <h4>1. Two-Sided Marketplace Platform</h4>
+                <div class="diagram-container">
+                    <div class="flow-diagram">
+                        <div class="flow-box">
+                            <strong>Supply Side</strong>
+                            <p>Hotels, Apartments, Resorts, Hosts</p>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-box highlight">
+                            <strong>Booking.com</strong>
+                            <p>Discovery + Intermediary</p>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-box">
+                            <strong>Demand Side</strong>
+                            <p>Travelers & Businesses</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h4>2. Revenue Stream Evolution</h4>
+                <div class="table-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Era</th>
+                            <th>Primary Model</th>
+                            <th>Strategic Goal</th>
+                            <th>Limitation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>1.0 (2000s)</strong></td>
+                            <td>Pure commission (15-25%)</td>
+                            <td>Marketplace liquidity</td>
+                            <td>Supplier margin squeeze</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2.0 (2010s)</strong></td>
+                            <td>Merchant model + ads</td>
+                            <td>Margin expansion + control</td>
+                            <td>Working capital requirements</td>
+                        </tr>
+                        <tr>
+                            <td><strong>3.0 (2020s)</strong></td>
+                            <td>Bundling + Genius loyalty</td>
+                            <td>Lock-in + repeat bookings</td>
+                            <td>Incremental, not transformative</td>
+                        </tr>
+                        <tr>
+                            <td><strong>4.0 (Current)</strong></td>
+                            <td>AI concierge layer</td>
+                            <td>Charge for intelligence, not just access</td>
+                            <td>Retrofitting challenges</td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+
+                <h4>3. Competitive Moats (Traditional)</h4>
+                <div class="strategy-grid">
+                    <div class="strategy-card">
+                        <div class="number">1</div>
+                        <h3>Supply Density</h3>
+                        <p>3.4M+ properties create network effects — more supply attracts more demand, which attracts more supply.</p>
+                    </div>
+                    <div class="strategy-card">
+                        <div class="number">2</div>
+                        <h3>Brand Recognition</h3>
+                        <p>Top-of-mind awareness in 220+ markets. "Booking.com" = category synonym in many regions.</p>
+                    </div>
+                    <div class="strategy-card">
+                        <div class="number">3</div>
+                        <h3>Data Advantage</h3>
+                        <p>Billions of searches, bookings, and reviews create pricing/ranking intelligence competitors can't replicate.</p>
+                    </div>
+                </div>
+
+                <h3>Strategic Vulnerabilities</h3>
+                <div class="highlight-box warning">
+                    <h4>⚠️ Disruption Vectors</h4>
+                    <ul>
+                        <li><strong>Commoditization:</strong> Inventory increasingly available via API (e.g., SuperGryd, Agoda API) — reduces supply moat</li>
+                        <li><strong>Commission Pressure:</strong> Hotels building direct booking channels to bypass 15-25% fees</li>
+                        <li><strong>AI Disintermediation:</strong> ChatGPT plugins, Google Travel AI could own discovery layer</li>
+                        <li><strong>Trust Deficit:</strong> Users skeptical of AI recommendations optimized for commission, not fit</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Glenn AI Strategy -->
+        <section class="section" id="section-2">
+            <div class="card">
+                <h2>Glenn AI: The "Connected Trip" Vision</h2>
+                
+                <div class="highlight-box info">
+                    <h4>ℹ️ Important Clarification</h4>
+                    <p>"Glenn AI" is not a standalone product name. It refers to the AI strategy direction championed by CEO Glenn Fogel, who has repositioned Booking.com from "hotel search engine" to "AI-powered travel operating system."</p>
+                </div>
+
+                <h3>Core Strategic Thesis</h3>
+                <p>Transform Booking.com from a <strong>transactional booking platform</strong> into an <strong>intelligent travel agent</strong> that handles the entire trip lifecycle — from inspiration and planning through execution, real-time adjustments, and post-trip optimization.</p>
+
+                <h3>The "Connected Trip" Framework</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4>Phase 1: Discovery & Planning (Pre-Trip)</h4>
+                        <p><strong>AI Role:</strong> Conversational trip architect</p>
+                        <ul>
+                            <li>Natural language input: "Plan a Goa trip under ₹50K with beach view and yoga"</li>
+                            <li>AI generates: Hotels + flights + activities + itinerary</li>
+                            <li>Personalization based on: past bookings, stated preferences, budget constraints</li>
+                        </ul>
+                        <p><strong>Strategic Goal:</strong> Own the discovery phase (move up the funnel before users land on Google)</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h4>Phase 2: Booking & Orchestration</h4>
+                        <p><strong>AI Role:</strong> Intelligent bundler</p>
+                        <ul>
+                            <li>One-click booking across fragmented inventory (flights, hotels, transfers, tours)</li>
+                            <li>Dynamic packaging with optimized pricing</li>
+                            <li>Upsell contextually relevant add-ons (insurance, eSIM, airport lounge access)</li>
+                        </ul>
+                        <p><strong>Strategic Goal:</strong> Increase average order value (AOV) and lock-in</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h4>Phase 3: Real-Time Trip Management (During Trip)</h4>
+                        <p><strong>AI Role:</strong> Proactive concierge</p>
+                        <ul>
+                            <li>Flight delay detected → auto-reschedule hotel check-in + notify property</li>
+                            <li>Weather forecast rain → suggest indoor alternative activities</li>
+                            <li>Restaurant closed → recommend backup with instant reservation</li>
+                        </ul>
+                        <p><strong>Strategic Goal:</strong> Create emotional lock-in ("Booking saved my trip") + differentiation vs. static competitors</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h4>Phase 4: Post-Trip Learning (After Trip)</h4>
+                        <p><strong>AI Role:</strong> Preference refiner</p>
+                        <ul>
+                            <li>Collect feedback: ratings, reviews, behavioral signals (what was used vs. skipped)</li>
+                            <li>Update user profile: "Prefers boutique hotels, avoids touristy restaurants, books spa add-ons"</li>
+                            <li>Feed forward into next trip recommendations</li>
+                        </ul>
+                        <p><strong>Strategic Goal:</strong> Build preference moat — switching cost = starting personalization from zero</p>
+                    </div>
+                </div>
+
+                <h3>AI Capabilities Breakdown</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Capability</th>
+                            <th>Technology</th>
+                            <th>User-Facing Value</th>
+                            <th>Strategic Moat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Conversational Planning</strong></td>
+                            <td>LLMs (likely partnerships with OpenAI, Anthropic, or in-house)</td>
+                            <td>Chat instead of search/filter</td>
+                            <td>Lowers friction for non-tech users</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Personalized Recommendations</strong></td>
+                            <td>ML ranking models trained on booking history + preferences</td>
+                            <td>Curated suggestions > overwhelming choice</td>
+                            <td>Data advantage (billions of trips)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Real-Time Trip Intelligence</strong></td>
+                            <td>Event stream processing (flight APIs, weather, traffic)</td>
+                            <td>Proactive adjustments</td>
+                            <td>High switching cost (competitor = manual rebooking)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Dynamic Pricing & Bundling</strong></td>
+                            <td>Optimization algorithms (merchant model enabler)</td>
+                            <td>Better deals via packaging</td>
+                            <td>Margin expansion</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Operational AI</strong></td>
+                            <td>NLP chatbots, fraud detection, support automation</td>
+                            <td>Faster customer service</td>
+                            <td>Cost efficiency (scales with volume)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Implementation Challenges</h3>
+                <div class="strategy-grid">
+                    <div class="strategy-card">
+                        <div class="number">1</div>
+                        <h3>UX Redesign Constraint</h3>
+                        <p>Cannot replace familiar search interface without alienating existing users. Must run parallel experiences (search + AI chat), fragmenting development resources.</p>
+                    </div>
+                    <div class="strategy-card">
+                        <div class="number">2</div>
+                        <h3>Trust Deficit</h3>
+                        <p>Users skeptical AI recommendations optimize for Booking's commission, not traveler fit. Requires transparency mechanisms (show ranking logic, commission disclosure).</p>
+                    </div>
+                    <div class="strategy-card">
+                        <div class="number">3</div>
+                        <h3>Supplier Resistance</h3>
+                        <p>Hotels fear losing visibility in AI-curated lists. May demand higher commissions for "AI placement" or threaten to pull inventory.</p>
+                    </div>
+                    <div class="strategy-card">
+                        <div class="number">4</div>
+                        <h3>Technical Debt</h3>
+                        <p>Legacy monolith architecture incompatible with real-time personalization. Requires microservices migration — multi-year, high-risk project.</p>
+                    </div>
+                </div>
+
+                <div class="key-takeaway">
+                    <h3>Critical Insight</h3>
+                    <p>Booking.com's "Connected Trip" vision is strategically sound — trip orchestration with AI is the future of travel tech. But execution is hamstrung by legacy constraints. This creates a window for AI-native competitors to build what Booking.com cannot: a trust-first, AI-as-default travel experience unburdened by commission optimization skepticism.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Competitive Landscape -->
+        <section class="section" id="section-3">
+            <div class="card">
+                <h2>Competitive Landscape Analysis</h2>
+                
+                <h3>Market Segmentation Matrix</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Player</th>
+                            <th>Positioning</th>
+                            <th>AI Capability</th>
+                            <th>50+ Focus</th>
+                            <th>Threat Level to Greytt</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Booking.com</strong></td>
+                            <td>Mass market OTA</td>
+                            <td>Retrofitting AI (Connected Trip)</td>
+                            <td>None (demographic agnostic)</td>
+                            <td>🟡 Medium (could add age filters)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Expedia</strong></td>
+                            <td>Mass market OTA + loyalty</td>
+                            <td>AI search, limited personalization</td>
+                            <td>None</td>
+                            <td>🟡 Medium (slow innovation cycle)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Airbnb</strong></td>
+                            <td>Alternative accommodations</td>
+                            <td>AI-powered categories, search</td>
+                            <td>None (skews younger)</td>
+                            <td>🟢 Low (different inventory focus)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>MakeMyTrip (India)</strong></td>
+                            <td>Full-service OTA (flights, hotels, holidays)</td>
+                            <td>Limited AI (chatbot support)</td>
+                            <td>None</td>
+                            <td>🔴 High (domestic market leader)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Agoda</strong></td>
+                            <td>Asia-focused OTA</td>
+                            <td>Price prediction AI</td>
+                            <td>None</td>
+                            <td>🟡 Medium (API partner for Greytt)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>TripAdvisor</strong></td>
+                            <td>Reviews + metasearch</td>
+                            <td>AI review summaries</td>
+                            <td>None</td>
+                            <td>🟢 Low (not booking-focused)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>ChatGPT Plugins</strong></td>
+                            <td>Conversational discovery</td>
+                            <td>Native AI, limited booking</td>
+                            <td>None</td>
+                            <td>🟡 Medium (discovery threat)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Senior Travel Agencies</strong></td>
+                            <td>50+ focused, human-assisted</td>
+                            <td>Zero (phone-based)</td>
+                            <td>🎯 Core market</td>
+                            <td>🟢 Low (offline, high cost)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Greytt.ai</strong></td>
+                            <td>AI-native + 50+ focused</td>
+                            <td>Native (planned Greytt Score)</td>
+                            <td>🎯 Exclusive focus</td>
+                            <td>— (us)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>White Space Identification</h3>
+                <div class="diagram-container">
+                    <h4 style="margin-top: 0;">AI Capability × Demographic Focus Matrix</h4>
+                    <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Axes -->
+                        <line x1="50" y1="350" x2="550" y2="350" stroke="#1e3a5f" stroke-width="2"/>
+                        <line x1="50" y1="350" x2="50" y2="50" stroke="#1e3a5f" stroke-width="2"/>
+                        
+                        <!-- Axis labels -->
+                        <text x="300" y="385" text-anchor="middle" font-size="14" fill="#1a2332" font-weight="600">AI Capability →</text>
+                        <text x="20" y="200" text-anchor="middle" font-size="14" fill="#1a2332" font-weight="600" transform="rotate(-90 20 200)">50+ Focus →</text>
+                        
+                        <!-- Quadrants -->
+                        <rect x="50" y="50" width="250" height="150" fill="#f0f8ff" opacity="0.3"/>
+                        <rect x="300" y="50" width="250" height="150" fill="#fff8f0" opacity="0.5"/>
+                        <rect x="50" y="200" width="250" height="150" fill="#f5f5f5" opacity="0.3"/>
+                        <rect x="300" y="200" width="250" height="150" fill="#f0f8ff" opacity="0.3"/>
+                        
+                        <!-- Quadrant labels -->
+                        <text x="175" y="130" text-anchor="middle" font-size="12" fill="#5a6c7d" font-weight="500">Niche AI</text>
+                        <text x="175" y="145" text-anchor="middle" font-size="12" fill="#5a6c7d">(Limited market)</text>
+                        
+                        <text x="425" y="110" text-anchor="middle" font-size="13" fill="#d4a574" font-weight="700">★ WHITE SPACE ★</text>
+                        <text x="425" y="128" text-anchor="middle" font-size="12" fill="#2d7d8e" font-weight="600">AI-Native +</text>
+                        <text x="425" y="143" text-anchor="middle" font-size="12" fill="#2d7d8e" font-weight="600">50+ Focused</text>
+                        
+                        <text x="175" y="280" text-anchor="middle" font-size="12" fill="#5a6c7d" font-weight="500">Traditional</text>
+                        <text x="175" y="295" text-anchor="middle" font-size="12" fill="#5a6c7d">(Senior agencies)</text>
+                        
+                        <text x="425" y="280" text-anchor="middle" font-size="12" fill="#5a6c7d" font-weight="500">Mass Market AI</text>
+                        <text x="425" y="295" text-anchor="middle" font-size="12" fill="#5a6c7d">(Booking, Expedia)</text>
+                        
+                        <!-- Competitors -->
+                        <circle cx="400" cy="300" r="8" fill="#1e3a5f"/>
+                        <text x="400" y="325" text-anchor="middle" font-size="11" fill="#1a2332">Booking.com</text>
+                        
+                        <circle cx="380" cy="310" r="7" fill="#1e3a5f"/>
+                        <text x="380" y="335" text-anchor="middle" font-size="11" fill="#1a2332">Expedia</text>
+                        
+                        <circle cx="350" cy="315" r="7" fill="#1e3a5f"/>
+                        <text x="350" y="340" text-anchor="middle" font-size="11" fill="#1a2332">MakeMyTrip</text>
+                        
+                        <circle cx="150" cy="270" r="6" fill="#5a6c7d"/>
+                        <text x="150" y="290" text-anchor="middle" font-size="10" fill="#5a6c7d">Senior Travel</text>
+                        
+                        <!-- Greytt.ai -->
+                        <circle cx="480" cy="120" r="12" fill="#d4a574" stroke="#2d7d8e" stroke-width="3"/>
+                        <text x="480" y="95" text-anchor="middle" font-size="13" fill="#d4a574" font-weight="700">Greytt.ai</text>
+                        <text x="480" y="108" text-anchor="middle" font-size="11" fill="#2d7d8e" font-weight="600">(Target Position)</text>
+                    </svg>
+                </div>
+
+                <div class="highlight-box">
+                    <h4>🎯 Strategic Positioning Thesis</h4>
+                    <p><strong>Greytt.ai occupies the uncontested "AI-Native × 50+ Focused" quadrant.</strong> This positioning is defensible for 12-18 months because:</p>
+                    <ul>
+                        <li><strong>Mass market OTAs:</strong> Optimizing for volume, not demographic specificity (adding age filters = marginal feature, not core differentiation)</li>
+                        <li><strong>Traditional senior agencies:</strong> Human-intensive, high-cost model incompatible with AI-first UX</li>
+                        <li><strong>ChatGPT/LLM plugins:</strong> Generic travel planning, no 50+ context (visa complexity, health considerations, pace preferences)</li>
+                    </ul>
+                </div>
+
+                <h3>Competitive Timeline Analysis</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4>Months 0-6 (Immediate Window)</h4>
+                        <p><strong>Threat Level: 🟢 Low</strong></p>
+                        <p>No direct competitors in "AI-native + 50+ focused" space. Mass market OTAs still rolling out AI features to general audience. Senior travel agencies haven't pivoted to digital.</p>
+                        <p><strong>Greytt Action:</strong> Ship Greytt Score v1, lock SuperGryd partnership, build 100-user cohort for data flywheel.</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h4>Months 6-12 (Rising Competition)</h4>
+                        <p><strong>Threat Level: 🟡 Medium</strong></p>
+                        <p>MakeMyTrip/Agoda likely to add "age-appropriate filters" to AI search. Well-funded startups may enter "senior travel tech" space post-fundraising announcements.</p>
+                        <p><strong>Greytt Action:</strong> Establish content moat (50+ visa guides, health travel resources), launch Greytt Circle loyalty, onboard 500-1,000 users.</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h4>Months 12-18 (Window Closing)</h4>
+                        <p><strong>Threat Level: 🔴 High</strong></p>
+                        <p>Booking.com/Expedia likely to launch "senior traveler mode" as part of Connected Trip rollout. Niche competitors (RetireHappy.com, SilverTravelAdvisor) may pivot to AI-native.</p>
+                        <p><strong>Greytt Action:</strong> Transition to B2B white-label (RWAs, community groups), leverage 1,000+ user preference dataset as structural moat, explore M&A opportunities with traditional agencies.</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h4>Months 18+ (Defensive Position)</h4>
+                        <p><strong>Threat Level: 🔴 High (crowded market)</strong></p>
+                        <p>Multiple AI-powered travel platforms targeting 50+. Competitive advantage = preference data moat + community network effects (B2B partnerships).</p>
+                        <p><strong>Greytt Defense:</strong> Greytt Score with 2+ years of trip data creates switching cost. B2B contracts lock in distribution. Content library (SEO) drives organic discovery.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Greytt.ai Adaptation -->
+        <section class="section" id="section-4">
+            <div class="card">
+                <h2>Greytt.ai Strategic Adaptation Framework</h2>
+                
+                <h3>Core Thesis: AI-Native Architecture as Competitive Moat</h3>
+                <p>Booking.com's largest constraint is not technology — it's organizational. Legacy systems, existing user expectations, and commission-dependent revenue models create structural friction that AI-native competitors don't face.</p>
+
+                <div class="highlight-box info">
+                    <h4>🎯 Greytt's Structural Advantages</h4>
+                    <ul>
+                        <li><strong>No UX migration required:</strong> AI chat is the default interface, not a bolt-on</li>
+                        <li><strong>Trust from day 1:</strong> 50+ users expect guidance, not suspicion of commission optimization</li>
+                        <li><strong>Demographic specificity:</strong> Personalization includes health, mobility, pace — not just "beach vs. mountain"</li>
+                        <li><strong>Revenue model flexibility:</strong> Can charge for intelligence (subscription) vs. transactional commissions</li>
+                    </ul>
+                </div>
+
+                <h3>Strategic Adaptation Model</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Booking.com Capability</th>
+                            <th>Implementation Challenge</th>
+                            <th>Greytt.ai Adaptation</th>
+                            <th>Competitive Advantage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Conversational Planning</strong></td>
+                            <td>Must maintain parallel search UI for existing users</td>
+                            <td>AI chat = only interface (Next.js + LLM)</td>
+                            <td>Simpler UX, faster iteration</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Personalized Recommendations</strong></td>
+                            <td>Training data biased toward commission optimization</td>
+                            <td>Greytt Score (preference engine independent of booking data)</td>
+                            <td>Trust advantage ("optimized for you, not margin")</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Real-Time Trip Intelligence</strong></td>
+                            <td>Legacy systems can't handle event streams</td>
+                            <td>Companion app (React Native) with push notifications</td>
+                            <td>Mobile-first = higher engagement</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Inventory Access</strong></td>
+                            <td>Owns relationships with 3.4M properties</td>
+                            <td>SuperGryd API (130+ countries) + Agoda affiliate</td>
+                            <td>Faster time-to-market (no direct supplier negotiations)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Loyalty Program</strong></td>
+                            <td>Genius (tier-based discounts)</td>
+                            <td>Greytt Circle (50+ perks: support, insurance, recognition)</td>
+                            <td>Demographic-specific value (not just discounts)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Detailed Feature Mapping</h3>
+
+                <h4>1. Greytt Score: The Preference Data Moat</h4>
+                <div class="strategy-grid">
+                    <div class="strategy-card">
+                        <div class="number">📝</div>
+                        <h3>Onboarding Quiz</h3>
+                        <p>15-20 questions capturing: travel style (relaxed vs. packed), accommodation preferences (luxury vs. authentic), activity interests (cultural, adventure, wellness), mobility considerations, dietary restrictions</p>
+                    </div>
+                    <div class="strategy-card">
+                        <div class="number">🧳</div>
+                        <h3>Trip Feedback Loop</h3>
+                        <p>Companion app prompts: hotel quality ratings, activity enjoyment scores, pace comfort (too rushed / just right / too slow), health/accessibility notes</p>
+                    </div>
+                    <div class="strategy-card">
+                        <div class="number">🎯</div>
+                        <h3>Preference Refinement</h3>
+                        <p>ML model updates user profile: "Prefers boutique hotels (4.2★+), books morning activities (pre-11am), avoids group tours >10 people, requests ground-floor rooms"</p>
+                    </div>
+                    <div class="strategy-card">
+                        <div class="number">🔒</div>
+                        <h3>Switching Cost</h3>
+                        <p>After 3-5 trips, Greytt Score accuracy >> generic AI. Competitor switch = starting personalization from zero (high friction for 50+)</p>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <h4>⚡ Critical Sequencing Decision</h4>
+                    <p><strong>Launch Greytt Score v1 BEFORE SuperGryd integration goes live.</strong> Here's why:</p>
+                    <ol>
+                        <li><strong>Narrative control:</strong> "We know you better" establishes before inventory availability</li>
+                        <li><strong>Data cleanliness:</strong> Preference data collected before booking behavior (booking ≠ preference)</li>
+                        <li><strong>Differentiation:</strong> SuperGryd inventory without personalization = "Agoda with different UI" (no moat)</li>
+                    </ol>
+                    <p><strong>Recommended timeline:</strong> 2-3 months Greytt Score beta → 100-200 user cohort → SuperGryd integration (personalized from day 1)</p>
+                </div>
+
+                <h4>2. Companion App: Real-Time Trip Intelligence</h4>
+                <p>Booking.com's "Connected Trip" vision validated real-time trip management as a killer feature. Greytt.ai can leapfrog with mobile-first execution:</p>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>User Benefit</th>
+                            <th>Technical Implementation</th>
+                            <th>Differentiation vs. Booking</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Flight Delay Alerts</strong></td>
+                            <td>Proactive hotel check-in adjustment</td>
+                            <td>Flight status API + push notifications</td>
+                            <td>50+ travelers value peace-of-mind > DIY rebooking</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Weather-Based Suggestions</strong></td>
+                            <td>Rain forecast → indoor activity alternatives</td>
+                            <td>OpenWeather API + itinerary re-ranking</td>
+                            <td>Proactive (not reactive) — reduces trip stress</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Health/Pharmacy Locator</strong></td>
+                            <td>Nearest 24/7 pharmacy, English-speaking doctors</td>
+                            <td>Google Places API + verified listings</td>
+                            <td>50+ specific (not generic "points of interest")</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Offline Itinerary Access</strong></td>
+                            <td>No roaming required for trip details</td>
+                            <td>React Native offline storage</td>
+                            <td>Critical for international travel (roaming anxiety)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Concierge SOS Button</strong></td>
+                            <td>One-tap access to human support</td>
+                            <td>WhatsApp Business API integration</td>
+                            <td>50+ value = human backup option (AI + human hybrid)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>3. Content Moat: 50+ Travel Intelligence Library</h4>
+                <p>Booking.com has scale. Greytt.ai has specificity. Build a content library that becomes the AI's knowledge base:</p>
+
+                <ul>
+                    <li><strong>Visa complexity guides:</strong> "India tourist visa for US citizens over 60: expedited options, required documents, health insurance requirements"</li>
+                    <li><strong>Health travel resources:</strong> "Bringing prescription medication to Thailand: customs rules, doctor's note templates"</li>
+                    <li><strong>Accessibility deep-dives:</strong> "Wheelchair-friendly hotels in Kyoto: verified entrance ramps, elevator access, roll-in showers"</li>
+                    <li><strong>Pace-appropriate itineraries:</strong> "3-day Rome itinerary (relaxed pace): max 2 activities/day, mid-day rest breaks"</li>
+                </ul>
+
+                <p><strong>SEO benefit:</strong> These long-tail keywords ("senior travel visa India") drive organic discovery. <strong>AI benefit:</strong> Greytt's LLM retrieves proprietary content vs. generic web scraping.</p>
+
+                <h3>Revenue Model Evolution</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4>Phase 1 (Months 0-6): Performance-Based Partnership</h4>
+                        <p><strong>Model:</strong> SuperGryd revenue share (2% of order value post-margin)</p>
+                        <p><strong>Strategic Goal:</strong> Risk-free inventory access, align partner incentives with growth</p>
+                        <p><strong>Limitation:</strong> Low margin, dependent on booking volume</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h4>Phase 2 (Months 6-12): Greytt Score Subscription</h4>
+                        <p><strong>Model:</strong> ₹299-499/month for AI trip planning + Greytt Score personalization</p>
+                        <p><strong>Strategic Goal:</strong> Charge for intelligence, not just bookings (decouples revenue from transaction volume)</p>
+                        <p><strong>50+ willingness-to-pay:</strong> Peace-of-mind > price (annual subscription = ₹3,600-6,000 comparable to 1-2 premium hotel nights)</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h4>Phase 3 (Months 12-24): B2B White-Label</h4>
+                        <p><strong>Model:</strong> Platform licensing to RWAs, community groups, corporate retiree programs</p>
+                        <p><strong>Strategic Goal:</strong> Distribution at scale without marketing spend (RWA = pre-qualified 50+ audience)</p>
+                        <p><strong>Example:</strong> "Prestige Shantiniketan Residents Travel Club powered by Greytt.ai" (300 families, ₹500/family/month = ₹1.5L MRR per RWA)</p>
+                    </div>
+                </div>
+
+                <div class="key-takeaway">
+                    <h3>Strategic Synthesis</h3>
+                    <p>Greytt.ai's adaptation strategy is not to clone Booking.com's "Connected Trip" — it's to build what Booking.com *cannot* due to legacy constraints: an AI-native, trust-first, 50+ specific platform where intelligence is the product, not an add-on. The moat is preference data (Greytt Score) + demographic specificity (content + UX) + distribution (B2B white-label), not inventory aggregation.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Implementation Roadmap -->
+        <section class="section" id="section-5">
+            <div class="card">
+                <h2>90-Day Implementation Roadmap</h2>
+                
+                <h3>Phase 1: Foundation (Days 1-30)</h3>
+                <div class="strategy-grid">
+                    <div class="strategy-card">
+                        <div class="number">1</div>
+                        <h3>Greytt Score v1 Design</h3>
+                        <p><strong>Deliverable:</strong> Onboarding quiz (15-20 questions) + scoring algorithm</p>
+                        <p><strong>Tech stack:</strong> Next.js form → PostgreSQL storage → Python ML model (basic collaborative filtering)</p>
+                        <p><strong>Success metric:</strong> Quiz completion rate >70%</p>
+                    </div>
+                    <div class="strategy-card">
+                        <div class="number">2</div>
+                        <h3>SuperGryd Contract Execution</h3>
+                        <p><strong>Action:</strong> Finalize counter-proposal (zero subscription, 2% revenue share)</p>
+                        <p><strong>Legal review:</strong> Revenue share cap clause (₹50K cumulative / 6 months transition)</p>
+                        <p><strong>Timeline:</strong> Signed agreement by Day 30</p>
+                    </div>
+                    <div class="strategy-card">
+                        <div class="number">3</div>
+                        <h3>Content Sprint: 50+ Guides</h3>
+                        <p><strong>Output:</strong> 10-15 long-form guides (visa complexity, health travel, accessibility)</p>
+                        <p><strong>SEO strategy:</strong> Target long-tail keywords ("senior travel India visa requirements")</p>
+                        <p><strong>AI integration:</strong> Store in Storyblok for LLM retrieval (RAG pattern)</p>
+                    </div>
+                </div>
+
+                <h3>Phase 2: Beta Launch (Days 31-60)</h3>
+                <div class="strategy-grid">
+                    <div class="strategy-card">
+                        <div class="number">4</div>
+                        <h3>Beta User Recruitment</h3>
+                        <p><strong>Target:</strong> 100 users (50+ demographic)</p>
+                        <p><strong>Channels:</strong> LinkedIn (targeted ads), community groups (RWAs), referrals</p>
+                        <p><strong>Incentive:</strong> Free Greytt Score profile + ₹500 booking credit</p>
+                    </div>
+                    <div class="strategy-card">
+                        <div class="number">5</div>
+                        <h3>Greytt Score v1 Launch</h3>
+                        <p><strong>Feature set:</strong> Onboarding quiz → preference profile → manual trip recommendations (human-in-loop)</p>
+                        <p><strong>Data collection:</strong> Track quiz responses, trip feedback (qualitative)</p>
+                        <p><strong>Iteration:</strong> Weekly A/B tests on question phrasing, scoring weights</p>
+                    </div>
+                    <div class="strategy-card">
+                        <div class="number">6</div>
+                        <h3>Companion App MVP</h3>
+                        <p><strong>Scope:</strong> React Native app with offline itinerary, flight status alerts, SOS button (WhatsApp integration)</p>
+                        <p><strong>Platform:</strong> Android first (50+ Indian users = Android-dominant)</p>
+                        <p><strong>Beta rollout:</strong> 20-30 users for in-trip feedback</p>
+                    </div>
+                </div>
+
+                <h3>Phase 3: Integration & Scale (Days 61-90)</h3>
+                <div class="strategy-grid">
+                    <div class="strategy-card">
+                        <div class="number">7</div>
+                        <h3>SuperGryd API Integration</h3>
+                        <p><strong>Services:</strong> Airport transfers, eSIM, activities, tours (hotels deferred to Month 4-6)</p>
+                        <p><strong>Personalization layer:</strong> Greytt Score filters inventory (e.g., "skip group tours >10 people")</p>
+                        <p><strong>Testing:</strong> 10-15 test bookings across categories</p>
+                    </div>
+                    <div class="strategy-card">
+                        <div class="number">8</div>
+                        <h3>Case Study Development</h3>
+                        <p><strong>Target:</strong> 3-5 beta users → full trip planning stories</p>
+                        <p><strong>Format:</strong> Video testimonials + written case studies</p>
+                        <p><strong>Usage:</strong> Marketing collateral, B2B pitch deck, website social proof</p>
+                    </div>
+                    <div class="strategy-card">
+                        <div class="number">9</div>
+                        <h3>B2B Pilot Outreach</h3>
+                        <p><strong>Targets:</strong> 2-3 RWAs (Prestige, Purva, Sobha resident groups)</p>
+                        <p><strong>Offer:</strong> Free white-label trial (3 months) → "Resident Travel Club powered by Greytt.ai"</p>
+                        <p><strong>Validation:</strong> Conversion rate (residents → users), NPS score</p>
+                    </div>
+                </div>
+
+                <div class="highlight-box warning">
+                    <h4>⚠️ Critical Path Dependencies</h4>
+                    <ul>
+                        <li><strong>Greytt Score → SuperGryd integration:</strong> Cannot personalize inventory without preference data (2-week minimum data collection)</li>
+                        <li><strong>Beta users → case studies:</strong> Need 30-45 days post-trip for testimonial quality</li>
+                        <li><strong>Content guides → AI retrieval:</strong> Must be indexed in Storyblok before LLM can reference (parallel workstream)</li>
+                    </ul>
+                </div>
+
+                <h3>Success Metrics (90-Day Targets)</h3>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value">100+</div>
+                        <div class="metric-label">Beta Users (Greytt Score profiles)</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">15+</div>
+                        <div class="metric-label">SuperGryd Test Bookings</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">3-5</div>
+                        <div class="metric-label">Video Case Studies</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">2-3</div>
+                        <div class="metric-label">B2B Pilot Partnerships (RWAs)</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">70%+</div>
+                        <div class="metric-label">Quiz Completion Rate</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">4.5/5</div>
+                        <div class="metric-label">NPS Score (Beta Users)</div>
+                    </div>
+                </div>
+
+                <h3>Risk Mitigation</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Risk</th>
+                            <th>Impact</th>
+                            <th>Probability</th>
+                            <th>Mitigation Strategy</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>SuperGryd contract delay</strong></td>
+                            <td>High (blocks inventory access)</td>
+                            <td>Medium</td>
+                            <td>Parallel: Agoda API activation, manual curation of tour operators</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Low beta user sign-ups</strong></td>
+                            <td>High (insufficient preference data)</td>
+                            <td>Medium</td>
+                            <td>Incentive increase (₹1,000 credit), LinkedIn micro-influencer partnerships</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Greytt Score inaccuracy</strong></td>
+                            <td>Medium (trust erosion)</td>
+                            <td>Low</td>
+                            <td>Human-in-loop review for first 50 users, weekly calibration based on feedback</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Companion app bugs</strong></td>
+                            <td>Medium (user frustration)</td>
+                            <td>High (new codebase)</td>
+                            <td>Phased rollout (20 users → 50 → 100), daily crash monitoring (Sentry)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Content production lag</strong></td>
+                            <td>Low (SEO delayed, not critical path)</td>
+                            <td>Medium</td>
+                            <td>Hire freelance travel writers (₹500/guide), prioritize top 5 high-volume keywords</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Section 6: Strategic Recommendations -->
+        <section class="section" id="section-6">
+            <div class="card">
+                <h2>Strategic Recommendations & Decision Framework</h2>
+                
+                <h3>1. Prioritize Data Moat Over Feature Parity</h3>
+                <div class="highlight-box">
+                    <h4>🎯 Core Principle</h4>
+                    <p>Greytt.ai cannot compete with Booking.com on inventory breadth (3.4M properties) or brand recognition. The defensible moat is <strong>preference data specificity</strong> — knowing the 50+ traveler better than any competitor.</p>
+                </div>
+
+                <p><strong>Implication:</strong> Greytt Score v1 is the highest-priority deliverable, above SuperGryd integration, companion app, or marketing spend. Without preference data:</p>
+                <ul>
+                    <li>AI recommendations = generic (no differentiation)</li>
+                    <li>Personalization claims = unverifiable (trust deficit)</li>
+                    <li>Switching cost = zero (competitor offers same inventory)</li>
+                </ul>
+
+                <p><strong>Recommended action:</strong> Allocate 60% of engineering resources to Greytt Score for first 90 days. Defer companion app feature expansion until preference model validates (quiz completion >70%, feedback correlation >0.6).</p>
+
+                <h3>2. Leverage SuperGryd as Infrastructure, Not Differentiator</h3>
+                <p>The SuperGryd partnership solves inventory access (130+ countries, 5 service categories), but inventory access alone is not a moat — Agoda API, Booking.com API, Expedia Affiliate all provide similar coverage.</p>
+
+                <div class="strategy-grid">
+                    <div class="strategy-card">
+                        <div class="number">✅</div>
+                        <h3>Correct Framing</h3>
+                        <p>"SuperGryd = infrastructure layer that enables global reach without direct supplier negotiations."</p>
+                        <p><strong>User value:</strong> Convenience (one platform for transfers + eSIM + tours)</p>
+                    </div>
+                    <div class="strategy-card">
+                        <div class="number">❌</div>
+                        <h3>Incorrect Framing</h3>
+                        <p>"SuperGryd partnership = competitive moat."</p>
+                        <p><strong>Why wrong:</strong> API access is replicable. MakeMyTrip can integrate SuperGryd in 60-90 days if validated.</p>
+                    </div>
+                </div>
+
+                <p><strong>Strategic implication:</strong> Do NOT market "we use SuperGryd" as a differentiation point. Market "we personalize SuperGryd inventory for 50+ travelers" (differentiation = personalization layer, not inventory source).</p>
+
+                <h3>3. B2B White-Label as Distribution Moat</h3>
+                <p>The 50+ demographic has low digital discovery behavior (organic search, app store browsing). Distribution must go to where they already gather: RWAs, community groups, corporate retiree programs.</p>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Channel</th>
+                            <th>CAC (Customer Acquisition Cost)</th>
+                            <th>Trust Level</th>
+                            <th>Scalability</th>
+                            <th>Recommended Priority</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Google Ads</strong></td>
+                            <td>₹3,000-5,000/user</td>
+                            <td>Low (ad skepticism)</td>
+                            <td>High</td>
+                            <td>🟡 Phase 2 (once LTV validated)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>LinkedIn Ads</strong></td>
+                            <td>₹2,000-3,000/user</td>
+                            <td>Medium</td>
+                            <td>Medium</td>
+                            <td>🟢 Phase 1 (beta recruitment)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>RWA Partnerships (B2B)</strong></td>
+                            <td>₹200-500/user (amortized)</td>
+                            <td>High (community endorsement)</td>
+                            <td>Medium</td>
+                            <td>✅ Highest Priority</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Referrals</strong></td>
+                            <td>₹500-1,000/user</td>
+                            <td>Very High (word-of-mouth)</td>
+                            <td>Low-Medium</td>
+                            <td>🟢 Phase 1 (incentivized program)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>SEO (Content)</strong></td>
+                            <td>₹100-300/user (long-term)</td>
+                            <td>Medium-High (organic authority)</td>
+                            <td>High (compounding)</td>
+                            <td>🟢 Phase 1 (content sprint)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p><strong>Recommended strategy:</strong> Pilot 2-3 RWA partnerships (300-500 families each) as primary distribution channel. If conversion rate >10% (residents → active users), prioritize B2B white-label over D2C marketing spend.</p>
+
+                <h3>4. Revenue Model Sequencing</h3>
+                <p>Booking.com's revenue model evolution (commission → merchant → bundling → AI concierge) validates that <strong>charging for intelligence is viable</strong> — but requires trust establishment first.</p>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4>Phase 1 (Months 0-6): Build Trust via Performance-Based Model</h4>
+                        <p><strong>Revenue:</strong> SuperGryd commission share (2% post-margin)</p>
+                        <p><strong>User pricing:</strong> Free (subsidized by bookings)</p>
+                        <p><strong>Goal:</strong> Prove personalization works (case studies, NPS >4.5)</p>
+                        <p><strong>Risk:</strong> Low margin, cash flow dependent on booking volume</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h4>Phase 2 (Months 6-12): Introduce Subscription (Willingness-to-Pay Validation)</h4>
+                        <p><strong>Revenue:</strong> Greytt Score subscription (₹299-499/month) + booking commissions</p>
+                        <p><strong>User pricing:</strong> Freemium (basic AI chat free, Greytt Score personalization = paid)</p>
+                        <p><strong>Goal:</strong> Validate 50+ willingness to pay for intelligence (target: 30% conversion free → paid)</p>
+                        <p><strong>Trigger:</strong> Only launch subscription after 100+ users, 50+ trips planned, NPS >4.5</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h4>Phase 3 (Months 12-24): B2B White-Label (Margin Expansion)</h4>
+                        <p><strong>Revenue:</strong> Platform licensing (₹500/user/month from RWAs) + booking commissions</p>
+                        <p><strong>User pricing:</strong> Bundled into RWA membership (invisible to end-user)</p>
+                        <p><strong>Goal:</strong> Distribution at scale without marketing spend (RWA = pre-qualified audience)</p>
+                        <p><strong>Margin:</strong> 70-80% (software licensing), vs. 10-15% (booking commissions)</p>
+                    </div>
+                </div>
+
+                <div class="highlight-box warning">
+                    <h4>⚠️ Premature Subscription Risk</h4>
+                    <p>Launching Greytt Score subscription before trust establishment (100+ users, proven personalization) = high churn risk. 50+ users are price-sensitive to <em>unproven</em> value, but willing to pay premium for <em>validated</em> peace-of-mind.</p>
+                    <p><strong>Decision trigger:</strong> Do NOT launch subscription until NPS >4.5 and >30% of beta users explicitly request "I'd pay for this."</p>
+                </div>
+
+                <h3>5. Competitive Positioning: Niche Depth > Horizontal Breadth</h3>
+                <p>Booking.com optimizes for horizontal breadth (every traveler type, every destination). Greytt.ai must resist expansion temptation and double-down on niche depth.</p>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Expansion Opportunity</th>
+                            <th>Revenue Potential</th>
+                            <th>Strategic Risk</th>
+                            <th>Recommendation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Add 30-40 demographic</strong></td>
+                            <td>High (2x addressable market)</td>
+                            <td>🔴 Critical: Dilutes 50+ positioning, fragments product development</td>
+                            <td>❌ Avoid until 50+ moat established (18+ months)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Launch corporate travel (B2B)</strong></td>
+                            <td>High (enterprise contracts)</td>
+                            <td>🟡 Medium: Different buyer persona, sales cycle</td>
+                            <td>⏳ Defer to Phase 3 (RWA white-label validates B2B first)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Add luxury travel tier</strong></td>
+                            <td>Medium (higher AOV)</td>
+                            <td>🟢 Low: 50+ overlap, compatible positioning</td>
+                            <td>✅ Explore in Phase 2 (luxury = subset of 50+, not separate segment)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>International expansion (US/EU markets)</strong></td>
+                            <td>Very High (10x+ market size)</td>
+                            <td>🟡 Medium: Localization, compliance complexity</td>
+                            <td>⏳ Phase 3 priority (after India validation, 12-18 months)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p><strong>Strategic principle:</strong> Resist "total addressable market expansion" pressure from investors/stakeholders until core 50+ India positioning is defensible (1,000+ users, 6-month data flywheel, B2B contracts signed).</p>
+
+                <h3>Decision Framework Summary</h3>
+                <div class="key-takeaway">
+                    <h3>Five Strategic Priorities (Rank-Ordered)</h3>
+                    <ol style="margin-top: 1rem; font-size: 1.05rem; line-height: 1.9;">
+                        <li><strong>Greytt Score preference data moat</strong> → Without this, Greytt = commodity aggregator (no defensibility)</li>
+                        <li><strong>B2B white-label distribution</strong> → CAC advantage + community trust beats D2C marketing in 50+ segment</li>
+                        <li><strong>50+ content depth</strong> → SEO + AI knowledge base compounds over time (vs. fleeting paid ads)</li>
+                        <li><strong>SuperGryd partnership execution</strong> → Inventory access enables operations, but not differentiation</li>
+                        <li><strong>Companion app feature expansion</strong> → Nice-to-have, not critical path (mobile web adequate for Phase 1)</li>
+                    </ol>
+                    <p style="margin-top: 1.5rem;"><strong>Resource allocation rule:</strong> If forced to choose, prioritize #1-3 over #4-5. Data moat + distribution + content create compounding advantages; inventory + app features are replicable.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p><strong>Greytt.ai Strategic White Paper</strong></p>
+            <p>Prepared: April 2026 | Document Version: 1.0</p>
+            <p style="margin-top: 1rem; font-size: 0.9rem;">This document contains proprietary strategic analysis. Distribution restricted to Greytt.ai leadership and authorized partners.</p>
+        </div>
+    </footer>
+
+    <script>
+        function showSection(index) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Show selected section and activate tab
+            sections[index].classList.add('active');
+            tabs[index].classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
